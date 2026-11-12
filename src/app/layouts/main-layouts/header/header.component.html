@@ -1,0 +1,426 @@
+<!--==================== Overlay Start ====================-->
+<div class="overlay"></div>
+<!--==================== Overlay End ====================-->
+
+<!--==================== Sidebar Overlay Start ====================-->
+<div class="side-overlay" [ngClass]="{ 'show': isMobileMenuActive }" (click)="closeMobileMenu()"></div>
+<!--==================== Sidebar Overlay End ====================-->
+
+<!-- ==================== Scroll to Top Start ==================== -->
+<div class="progress-wrap" [class.active-progress]="isActiveProgress" (click)="scrollToTop($event)">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+</div>
+<!-- ==================== Scroll to Top End ==================== -->
+
+<!-- ==================== Mobile Menu Drawer Start ==================== -->
+<div class="mobile-menu scroll-sm d-lg-none d-block" [ngClass]="{ 'active': isMobileMenuActive }">
+    <button type="button" class="close-button" (click)="closeMobileMenu()" aria-label="Close menu"> <i class="ph ph-x"></i> </button>
+    <div class="mobile-menu__inner">
+        <a [routerLink]="['/']" class="mobile-menu__logo mb-24 d-inline-block" (click)="closeMobileMenu()">
+            <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 48px; object-fit: contain;">
+        </a>
+        <div class="mobile-menu__menu">
+            <ul class="nav-menu flex-align nav-menu--mobile">
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/']" [routerLinkActive]="'activePage'" [routerLinkActiveOptions]="{ exact: true }" class="nav-menu__link text-heading-two">Home</a>
+                </li>
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/shop']" class="nav-menu__link text-heading-two">All Departments</a>
+                </li>
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'offers' }" class="nav-menu__link text-heading-two d-flex align-items-center justify-content-between">
+                        <span>Special Offers</span>
+                        <span class="badge bg-main-two-600 text-white text-xs px-8 py-2 rounded-pill">Hot Deals</span>
+                    </a>
+                </li>
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'fresh' }" class="nav-menu__link text-heading-two">Fresh Guarantee</a>
+                </li>
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/about-us']" class="nav-menu__link text-heading-two">About Us</a>
+                </li>
+                <li class="nav-menu__item" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/contact']" class="nav-menu__link text-heading-two">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ==================== Mobile Menu Drawer End ==================== -->
+
+<!-- ==================== Header ==================== -->
+<header #mainHeader [class.is-pinned]="isHeaderPinned" class="header bg-white border-bottom border-gray-100 position-relative z-9">
+    
+    <!-- 1. Top Announcement Bar (Smooth Infinite Moving Marquee in Brand Dark Plum #53174D) -->
+    <div #announcementBar class="top-announcement-bar py-8 overflow-hidden" style="background-color: #53174D;">
+        <div class="container-fluid px-0">
+            <div class="marquee-wrapper">
+                <div class="marquee-track">
+                    <div class="marquee-group">
+                        <span>Due to high demand, fresh orders are delivered daily.</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>Minimum order Rs. 3,000 for fresh doorstep delivery</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>100% Farm-Fresh Produce & Halal Butchery Guaranteed</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>Save up to 40% on Weekly Smile Deals</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                    </div>
+                    <div class="marquee-group" aria-hidden="true">
+                        <span>Due to high demand, fresh orders are delivered daily.</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>Minimum order Rs. 3,000 for fresh doorstep delivery</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>100% Farm-Fresh Produce & Halal Butchery Guaranteed</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                        <span>Save up to 40% on Weekly Smile Deals</span>
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" style="width: 18px; height: 18px; vertical-align: middle; display: inline-block;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Main Header Row: Logo | Centered Navigation | 4 Circular Action Icons -->
+    <div class="py-14 bg-white border-bottom border-gray-100">
+        <div class="container container-lg">
+            <div class="d-flex align-items-center justify-content-between gap-24">
+
+                <!-- Left: Brand Logo & Mobile Toggle -->
+                <div class="d-flex align-items-center gap-12 flex-shrink-0">
+                    <button type="button" class="toggle-mobileMenu d-lg-none text-main-600 text-3xl border-0 bg-transparent p-0 flex-center"
+                        (click)="openMobileMenu()" aria-label="Toggle Navigation">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <a [routerLink]="['/']" class="d-inline-flex align-items-center">
+                        <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 48px; max-width: 220px; object-fit: contain;">
+                    </a>
+                </div>
+
+                <!-- Center: Clean Desktop Navigation Menu -->
+                <nav class="d-none d-lg-flex align-items-center gap-28">
+                    <a [routerLink]="['/']" [routerLinkActive]="'text-main-600 fw-bold'" [routerLinkActiveOptions]="{ exact: true }"
+                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
+                        Home
+                    </a>
+
+                    <!-- All Departments Dropdown -->
+                    <div class="position-relative category-dropdown-wrapper">
+                        <button type="button" (click)="toggleCategoryDropdown()"
+                            class="d-flex align-items-center gap-6 text-sm fw-semibold text-heading hover-text-main-600 bg-transparent border-0 p-0 transition-1">
+                            <span>All Departments</span>
+                            <i class="ph-bold ph-caret-down text-xs transition-2" [class.rotate-180]="categoryDropdownVisible"></i>
+                        </button>
+
+                        <div *ngIf="categoryDropdownVisible"
+                            class="category-dropdown active border border-main-100 shadow-lg bg-white p-16 rounded-12 position-absolute inset-block-start-100 inset-inline-start-0 mt-12 z-99 transition-2"
+                            style="min-width: 440px;">
+                            <div class="d-grid grid-cols-2-repeat gap-8 max-h-350 overflow-y-auto scroll-sm">
+                                <a *ngFor="let cat of categorie" [routerLink]="cat.route" [queryParams]="{category: cat.id}" (click)="categoryDropdownVisible = false"
+                                    class="py-10 px-12 rounded-8 hover-bg-main-50 d-flex align-items-center gap-12 text-heading hover-text-main-600 border border-white hover-border-main-100 transition-1">
+                                    <img [src]="cat.icon" [alt]="cat.name" style="width: 28px; height: 28px; object-fit: contain;">
+                                    <span class="fw-semibold text-xs">{{ cat.name }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'offers' }"
+                        class="d-flex align-items-center gap-6 text-sm fw-semibold text-main-two-600 hover-text-main-two-700 transition-1">
+                        <span>Special Offers</span>
+                        <span class="badge bg-main-two-600 text-white text-xs px-8 py-2 rounded-pill">Hot Deals</span>
+                    </a>
+
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'fresh' }"
+                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
+                        Fresh Guarantee
+                    </a>
+
+                    <a [routerLink]="['/about-us']"
+                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
+                        About Us
+                    </a>
+
+                    <a [routerLink]="['/contact']"
+                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
+                        Contact Us
+                    </a>
+                </nav>
+
+                <!-- Right: 4 Circular Action Buttons -->
+                <div class="d-flex align-items-center gap-12 flex-shrink-0">
+
+                    <!-- 1. Search Circle Button (Opens Full Search Overlay) -->
+                    <button type="button" (click)="openSearchModal()"
+                        class="w-44 h-44 rounded-circle bg-main-50 border border-main-100 text-main-600 hover-bg-main-600 hover-text-white flex-center transition-1"
+                        aria-label="Search Products">
+                        <i class="ph-bold ph-magnifying-glass text-lg"></i>
+                    </button>
+
+                    <!-- Signed-in account navigation is available from every shopping page. -->
+                    @if (account.user(); as user) {
+                        <details class="header-account" #accountMenu>
+                            <summary aria-label="Open account menu"><span>{{ user.name.charAt(0).toUpperCase() }}</span></summary>
+                            <nav aria-label="Account menu">
+                                <div class="header-account__identity"><strong>Hello, {{ user.name.split(' ')[0] }}</strong><small>{{ user.email }}</small></div>
+                                <a routerLink="/account" (click)="accountMenu.open = false"><i class="ph ph-squares-four" aria-hidden="true"></i> Account overview</a>
+                                <a routerLink="/account/orders" (click)="accountMenu.open = false"><i class="ph ph-package" aria-hidden="true"></i> Orders & reorder</a>
+                                <a routerLink="/account/details" (click)="accountMenu.open = false"><i class="ph ph-user-circle" aria-hidden="true"></i> Account settings</a>
+                                <button type="button" (click)="accountMenu.open = false; signOut()"><i class="ph ph-sign-out" aria-hidden="true"></i> Sign out</button>
+                            </nav>
+                        </details>
+                    } @else {
+                        <a routerLink="/login" class="w-44 h-44 rounded-circle bg-main-50 border border-main-100 text-main-600 hover-bg-main-600 hover-text-white flex-center transition-1" aria-label="Sign in"><i class="ph-bold ph-user text-lg"></i></a>
+                    }
+                    <!-- 3. Wishlist Circle Button -->
+                    <a [routerLink]="['/wishlist']"
+                        class="w-44 h-44 rounded-circle bg-main-50 border border-main-100 text-main-600 hover-bg-main-600 hover-text-white flex-center transition-1"
+                        aria-label="Wishlist">
+                        <i class="ph-bold ph-heart text-lg"></i>
+                    </a>
+
+                    <!-- 4. Cart Circle Button (Opens Slide-out Cart Drawer) -->
+                    <button type="button" data-cart-animation-target (click)="openCartSlider()"
+                        class="w-44 h-44 rounded-circle bg-main-two-50 border border-main-two-100 text-main-two-600 hover-bg-main-two-600 hover-text-white flex-center transition-1 position-relative"
+                        aria-label="Shopping Cart">
+                        <i class="ph-bold ph-shopping-cart-simple text-xl"></i>
+                        <span class="position-absolute top-0 end-0 translate-middle-y bg-main-600 text-white rounded-circle flex-center fw-bold shadow-sm"
+                            style="width: 18px; height: 18px; font-size: 10px; right: -2px;">{{ cartCount }}</span>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<!-- ==================== Full Search Overlay with Suggestions ==================== -->
+<div class="search-overlay-modal" *ngIf="isSearchModalOpen">
+    <!-- Backdrop Blur -->
+    <div class="search-overlay-backdrop" (click)="closeSearchModal()"></div>
+    
+    <!-- White Dropdown Search Canvas -->
+    <div class="search-overlay-content bg-white shadow-2xl py-40 px-24 position-relative">
+        <div class="container container-lg position-relative">
+            
+            <!-- Close ✕ Button (Top-Right) -->
+            <button type="button" class="btn-close-overlay position-absolute top-0 end-0 border-0 bg-transparent text-heading hover-text-main-600 text-2xl p-8 flex-center transition-1"
+                (click)="closeSearchModal()" aria-label="Close search">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <!-- Centered Heading: WHAT ARE YOU LOOKING FOR? -->
+            <h4 class="text-uppercase fw-bold text-main-600 mb-24 text-center letter-spacing-1 font-heading" style="font-size: 19px;">
+                WHAT ARE YOU LOOKING FOR?
+            </h4>
+
+            <!-- Centered Search Form with Input & Icon inside -->
+            <form (ngSubmit)="onSearchSubmit()" class="max-w-720 mx-auto position-relative mb-24">
+                <div class="position-relative">
+                    <input type="text" [(ngModel)]="searchTerm" name="searchTerm"
+                        class="form-control bg-white border border-gray-300 py-14 ps-24 pe-56 rounded-8 text-md text-heading placeholder-text-sm shadow-sm"
+                        placeholder="Search Product..." autofocus>
+                    <button type="submit"
+                        class="position-absolute top-50 translate-middle-y end-0 me-8 w-40 h-40 bg-transparent text-heading hover-text-main-600 border-0 flex-center transition-1"
+                        aria-label="Submit Search">
+                        <i class="ph-bold ph-magnifying-glass text-xl"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Live Matching Products (when typing) -->
+            <div *ngIf="searchTerm.trim().length > 0" class="max-w-720 mx-auto mb-24 animate-fade-in">
+                <div class="text-xs fw-bold text-gray-500 text-uppercase mb-10 letter-spacing-1">Matching Products</div>
+                <div *ngIf="filteredProducts.length > 0; else noResults" class="d-flex flex-column gap-8 max-h-260 overflow-y-auto scroll-sm">
+                    <a *ngFor="let prod of filteredProducts" [routerLink]="['/shop']" [queryParams]="{ q: prod.name }" (click)="closeSearchModal()"
+                        class="p-10 rounded-8 hover-bg-main-50 d-flex align-items-center justify-content-between border border-gray-100 hover-border-main-100 transition-1">
+                        <div class="d-flex align-items-center gap-12">
+                            <img [src]="prod.image" [alt]="prod.name" class="w-40 h-40 rounded-6 object-fit-contain bg-gray-50 p-2">
+                            <div>
+                                <div class="text-sm fw-semibold text-heading">{{ prod.name }}</div>
+                                <div class="text-xs text-gray-500">{{ prod.category }}</div>
+                            </div>
+                        </div>
+                        <div class="fw-bold text-main-two-600 text-sm">{{ prod.price }}</div>
+                    </a>
+                </div>
+                <ng-template #noResults>
+                    <div class="text-sm text-gray-500 py-12 text-center bg-gray-50 rounded-8">
+                        No direct matches found. Press enter to search full hypermart catalog for "<span class="fw-bold text-heading">{{ searchTerm }}</span>".
+                    </div>
+                </ng-template>
+            </div>
+
+            <!-- Popular Suggestions & Quick Department Pills -->
+            <div class="max-w-720 mx-auto">
+                <div class="d-flex align-items-center gap-10 flex-wrap">
+                    <span class="text-xs fw-bold text-gray-500 text-uppercase letter-spacing-1 flex-shrink-0">Popular Suggestions:</span>
+                    <button *ngFor="let term of popularSearches" type="button"
+                        (click)="selectSearchTerm(term)"
+                        class="btn-search-tag py-6 px-14 rounded-pill bg-gray-50 border border-gray-200 text-xs text-heading fw-medium hover-bg-main-50 hover-text-main-600 hover-border-main-100 transition-1">
+                        {{ term }}
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center gap-10 flex-wrap mt-16 pt-16 border-top border-gray-100">
+                    <span class="text-xs fw-bold text-gray-500 text-uppercase letter-spacing-1 flex-shrink-0">Browse Departments:</span>
+                    <a *ngFor="let cat of categorie.slice(0, 5)" [routerLink]="cat.route" [queryParams]="{category: cat.id}" (click)="closeSearchModal()"
+                        class="badge bg-main-50 text-main-600 hover-bg-main-600 hover-text-white border border-main-100 rounded-pill px-12 py-6 text-xs fw-semibold transition-1">
+                        {{ cat.name }}
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ==================== Full Search Overlay End ==================== -->
+
+
+<!-- ==================== Slide-Out Cart Slider (Drawer) ==================== -->
+<div class="cart-slider-modal" *ngIf="isCartSliderOpen">
+    <!-- Backdrop Blur -->
+    <div class="cart-slider-backdrop" (click)="closeCartSlider()"></div>
+    
+    <!-- Right Drawer Sheet -->
+    <div class="cart-slider-drawer bg-white shadow-2xl position-fixed top-0 end-0 h-100 z-999 d-flex flex-column">
+        
+        <!-- Drawer Header -->
+        <div class="cart-slider-header p-20 border-bottom border-gray-100 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-10">
+                <div>
+                    <h5 class="fw-bold text-heading text-base mb-0">Your Shopping Cart</h5>
+                    <span class="text-xs text-gray-500">{{ cartCount }} items in basket</span>
+                </div>
+            </div>
+            <button type="button" class="btn-close-cart border-0 bg-transparent text-heading hover-text-main-600 text-2xl p-4 flex-center transition-1"
+                (click)="closeCartSlider()" aria-label="Close cart">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+
+        <!-- Rs. 3,000 Minimum Order Progress Bar -->
+        <div class="p-16 border-bottom border-gray-100">
+            <app-min-order-progress [compact]="true"></app-min-order-progress>
+        </div>
+
+        <!-- Drawer Body (Items List) -->
+        <div class="cart-slider-body flex-grow-1 overflow-y-auto scroll-sm p-20 d-flex flex-column gap-16">
+            <div *ngIf="cartItems.length === 0" class="text-center py-60">
+                <i class="ph-thin ph-shopping-cart text-6xl text-gray-400 mb-12 d-block"></i>
+                <div class="fw-bold text-heading text-md mb-4">Your cart is empty</div>
+                <p class="text-xs text-gray-500 mb-16">Stock up on farm-fresh produce and hypermart savings!</p>
+                <button type="button" (click)="closeCartSlider()" [routerLink]="['/shop']" class="btn btn-main btn-sm rounded-pill px-20">
+                    Start Shopping
+                </button>
+            </div>
+
+            <div *ngFor="let item of cartItems" class="cart-item-card p-12 rounded-12 border border-gray-100 hover-border-main-100 transition-1">
+                <img [src]="item.image" [alt]="item.name" class="w-60 h-60 rounded-8 object-fit-contain bg-gray-50 p-4 flex-shrink-0">
+                <div class="cart-item-card__details">
+                    <h6 class="cart-item-card__name text-sm fw-semibold text-heading mb-2">{{ item.name }}</h6>
+                    <div class="cart-item-card__meta text-xs text-gray-500 mb-8">{{ item.category }} · {{ cartService.formatRs(item.unitPrice) }} each</div>
+                    <div class="cart-item-card__actions">
+                        <div class="fw-bold text-main-two-600 text-sm">{{ cartService.formatRs(item.unitPrice * item.quantity) }}</div>
+                        <div class="quantity-controller simple-qty-control">
+                            <button type="button" (click)="decreaseQuantity(item)" class="simple-qty-control__btn" aria-label="Decrease quantity">-</button>
+                            <span class="simple-qty-control__count">{{ item.quantity }}</span>
+                            <button type="button" (click)="increaseQuantity(item)" class="simple-qty-control__btn" aria-label="Increase quantity">+</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" (click)="removeItem(item)" class="cart-item-card__remove border-0 bg-transparent text-gray-400 hover-text-danger p-4" [attr.aria-label]="'Remove ' + item.name">
+                    <i class="ph ph-trash text-md"></i>
+                </button>
+            </div>
+
+            <div *ngIf="cartItems.length > 0 && !cartService.isMinimumMet()" class="cart-quick-boost p-12 rounded-12 border border-main-100 bg-main-50">
+                <div class="d-flex align-items-center justify-content-between mb-8">
+                    <span class="text-xs fw-bold text-main-600">Quick Top-Up Essentials</span>
+                    <span class="text-2xs fw-semibold text-main-two-600">Need {{ cartService.formatRs(cartService.remainingAmount()) }}</span>
+                </div>
+                <div class="d-flex flex-column gap-8">
+                    <div *ngFor="let quick of cartService.QUICK_ADD_ESSENTIALS" class="d-flex align-items-center justify-content-between gap-8 bg-white rounded-8 p-8 border border-gray-100">
+                        <div class="min-w-0">
+                            <div class="text-xs fw-semibold text-heading text-truncate">{{ quick.name }}</div>
+                            <div class="text-2xs fw-bold text-main-two-600">{{ cartService.formatRs(quick.unitPrice) }}</div>
+                        </div>
+                        <button type="button"
+                            (click)="cartService.addItem({ id: quick.id, name: quick.name, category: quick.category, price: quick.unitPrice, image: quick.image })"
+                            class="btn btn-main btn-sm rounded-pill px-12 py-4 text-2xs fw-semibold flex-shrink-0">
+                            + Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drawer Footer (Subtotal & CTAs) -->
+        <div *ngIf="cartItems.length > 0" class="cart-slider-footer p-20 border-top border-gray-100 bg-white">
+            <div class="d-flex align-items-center justify-content-between mb-8">
+                <span class="text-xs text-gray-600">Subtotal ({{ cartCount }} items):</span>
+                <span class="fw-bold text-heading text-base">{{ cartService.formatRs(cartSubtotal) }}</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-16">
+                <span class="text-xs text-gray-600">Minimum Order (Rs. 3,000):</span>
+                <span class="text-xs fw-bold" [ngClass]="cartService.isMinimumMet() ? 'text-success-600' : 'text-main-two-600'">
+                    {{ cartService.isMinimumMet() ? 'Reached — Ready!' : cartService.formatRs(cartService.remainingAmount()) + ' more needed' }}
+                </span>
+            </div>
+            <div class="d-grid grid-cols-2 gap-10">
+                <a [routerLink]="['/cart']" (click)="closeCartSlider()"
+                    class="btn btn-main-two text-xs fw-semibold py-12 rounded-8 text-center flex-center">
+                    View Cart
+                </a>
+                <a *ngIf="cartService.isMinimumMet()" [routerLink]="['/checkout']" (click)="closeCartSlider()"
+                    class="btn btn-main text-xs fw-semibold py-12 rounded-8 text-center flex-center shadow-sm">
+                    Checkout Now
+                </a>
+                <button *ngIf="!cartService.isMinimumMet()" type="button" disabled
+                    [title]="'Spend ' + cartService.formatRs(cartService.remainingAmount()) + ' more to reach the Rs. 3,000 minimum order'"
+                    class="btn btn-main text-xs fw-semibold py-12 rounded-8 text-center flex-center opacity-50">
+                    Min. Rs. 3,000
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ==================== Slide-Out Cart Slider End ==================== -->
+
+<!-- ==================== Live Add-To-Cart Smile Toast ==================== -->
+<div class="cart-live-toast" *ngIf="cartService.toast() as toast" role="status" aria-live="polite" aria-atomic="true">
+    <div class="cart-live-toast__card">
+        <div class="cart-live-toast__top">
+            <img [src]="toast.image" [alt]="toast.title" class="cart-live-toast__thumb" />
+            <div class="flex-grow-1 min-w-0">
+                <div class="d-flex align-items-center justify-content-between gap-8 mb-2">
+                    <span class="cart-live-toast__tag">Added to Basket</span>
+                    <button type="button" (click)="cartService.dismissToast()" class="cart-live-toast__close" aria-label="Dismiss notification">
+                        <i class="ph ph-x"></i>
+                    </button>
+                </div>
+                <div class="cart-live-toast__title text-truncate">{{ toast.title }}</div>
+                <div class="cart-live-toast__price">{{ cartService.formatRs(toast.unitPrice) }} · Cart: {{ cartService.formatRs(cartService.subtotal()) }}</div>
+            </div>
+        </div>
+        <div class="cart-live-toast__progress">
+            <img src="assets/images/logo/brand-smile.png" alt="Smile" class="cart-live-toast__smile" />
+            <span class="cart-live-toast__status">
+                @if (cartService.isMinimumMet()) {
+                    Rs. 3,000 minimum order reached!
+                } @else {
+                    Spend {{ cartService.formatRs(cartService.remainingAmount()) }} more for Rs. 3,000 minimum
+                }
+            </span>
+            <button type="button" (click)="openCartSlider(); cartService.dismissToast()" class="cart-live-toast__cta">
+                View Cart
+            </button>
+        </div>
+    </div>
+</div>
+

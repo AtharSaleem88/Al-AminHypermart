@@ -1,0 +1,7 @@
+@if (!authScreen()) { <app-header></app-header> }
+<main class="main-content-area"><router-outlet></router-outlet></main>
+@if (!authScreen()) {
+  <app-shipping></app-shipping>
+  <app-footer></app-footer>
+  <app-bottom-nav></app-bottom-nav>
+}

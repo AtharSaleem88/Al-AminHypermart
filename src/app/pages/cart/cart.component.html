@@ -1,0 +1,41 @@
+<section class="cart-page">
+  <div class="container container-lg">
+    <nav class="cart-breadcrumb" aria-label="Breadcrumb"><a routerLink="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Your basket</span></nav>
+    <div class="categories-heading-divider"><h1 class="categories-heading-divider__title">Your shopping basket</h1></div>
+    @if (cartService.items().length) {
+      <div class="cart-intro"><span>{{ cartService.itemCount() }} items, picked by you.</span><a routerLink="/shop">Continue shopping <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
+      <div class="basket-layout">
+        <div class="basket-content">
+          <app-min-order-progress [compact]="true" />
+          <section class="basket-items" aria-label="Basket items">
+            <div class="basket-items__heading"><h2>In your basket <span>{{ cartService.items().length }} products</span></h2><button type="button" class="basket-clear" (click)="cartService.clearCart()">Clear basket</button></div>
+            @for (product of cartService.items(); track product.id) {
+              <article class="basket-item">
+                <a class="basket-item__image" [routerLink]="productRoute(product.id)" [queryParams]="productQuery(product.id, product.name)" [attr.aria-label]="product.name"><img [src]="product.image" [alt]="product.name" /></a>
+                <div class="basket-item__details"><span class="basket-item__category">{{ product.category }}</span><h3><a [routerLink]="productRoute(product.id)" [queryParams]="productQuery(product.id, product.name)">{{ product.name }}</a></h3><span class="basket-item__unit">{{ cartService.formatRs(product.unitPrice) }} each</span></div>
+                <div class="basket-item__quantity"><span class="visually-hidden">Quantity for {{ product.name }}</span><app-smile-add-btn [itemId]="product.id" [itemName]="product.name" /></div>
+                <strong class="basket-item__total">{{ cartService.formatRs(product.unitPrice * product.quantity) }}</strong>
+                <button type="button" class="basket-item__remove" (click)="cartService.removeItem(product.id)" [attr.aria-label]="'Remove ' + product.name"><i class="ph ph-trash" aria-hidden="true"></i></button>
+              </article>
+            }
+          </section>
+          @if (!cartService.isMinimumMet() && suggestions.length) {
+            <section class="basket-suggestions" aria-labelledby="suggestions-title"><div class="basket-suggestions__heading"><div><h2 id="suggestions-title">A little more for your basket</h2><p>{{ cartService.formatRs(cartService.remainingAmount()) }} to reach the minimum order.</p></div><a routerLink="/shop">Explore the shop <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div><div class="basket-suggestions__grid">@for (product of suggestions; track product.id) { <app-product-card [product]="product" /> }</div></section>
+          }
+        </div>
+        <aside class="basket-summary" aria-labelledby="summary-title">
+          <h2 id="summary-title">Order summary</h2>
+          <div class="summary-line"><span>Subtotal · {{ cartService.itemCount() }} items</span><strong>{{ cartService.formatRs(cartService.subtotal()) }}</strong></div>
+          <div class="summary-line"><span>Minimum order</span><span>{{ cartService.formatRs(cartService.MINIMUM_ORDER_RS) }}</span></div>
+          <div class="summary-status" [class.is-ready]="cartService.isMinimumMet()" aria-live="polite"><img src="assets/images/logo/brand-smile.png" alt="" /><span>@if (cartService.isMinimumMet()) { Your basket is ready for checkout. } @else { Add {{ cartService.formatRs(cartService.remainingAmount()) }} more to checkout. }</span></div>
+          <div class="summary-total"><span>Items total</span><strong>{{ cartService.formatRs(cartService.subtotal()) }}</strong></div>
+          @if (cartService.isMinimumMet()) { <a class="basket-checkout" routerLink="/checkout">Proceed to checkout <i class="ph ph-arrow-right" aria-hidden="true"></i></a> } @else { <button class="basket-checkout" type="button" disabled>Minimum order not reached</button> }
+          <a class="basket-continue" routerLink="/shop">Continue shopping</a>
+          <p class="summary-note">Review your delivery details at checkout.</p>
+        </aside>
+      </div>
+    } @else {
+      <div class="basket-empty"><img src="assets/images/logo/brand-smile.png" alt="" /><h2>Your next great shop starts here.</h2><p>Your basket is empty. Explore fresh favourites and everyday essentials, all in one place.</p><a class="basket-checkout" routerLink="/shop">Explore the shop <i class="ph ph-arrow-right" aria-hidden="true"></i></a><span>Life. Stocked.</span></div>
+    }
+  </div>
+</section>

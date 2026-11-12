@@ -1,0 +1,139 @@
+<!--==================== Overlay Start ====================-->
+<div class="overlay"></div>
+<!--==================== Overlay End ====================-->
+
+<!--==================== Sidebar Overlay Start ====================-->
+<div class="side-overlay" [ngClass]="{ 'show': isMobileMenuActive }" (click)="closeMobileMenu()"></div>
+<!--==================== Sidebar Overlay End ====================-->
+
+<!-- ==================== Scroll to Top Start ==================== -->
+<div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+</div>
+<!-- ==================== Scroll to Top End ==================== -->
+
+<!-- ==================== Mobile Menu Start ==================== -->
+<div class="mobile-menu scroll-sm d-lg-none d-block" [ngClass]="{ 'active': isMobileMenuActive }">
+    <button type="button" class="close-button" (click)="closeMobileMenu()"> <i class="ph ph-x"></i> </button>
+    <div class="mobile-menu__inner">
+        <a [routerLink]="['/']" class="mobile-menu__logo mb-24 d-inline-block" (click)="closeMobileMenu()">
+            <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 44px; object-fit: contain;">
+        </a>
+        <div class="mobile-menu__menu">
+            <ul class="nav-menu flex-align nav-menu--mobile">
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/']" class="nav-menu__link text-heading-two">Home</a>
+                </li>
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/shop']" class="nav-menu__link text-heading-two">Shop</a>
+                </li>
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/cart']" class="nav-menu__link text-heading-two">Cart</a>
+                </li>
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/wishlist']" class="nav-menu__link text-heading-two">Wishlist</a>
+                </li>
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/account']" class="nav-menu__link text-heading-two">Account</a>
+                </li>
+                <li class="nav-menu__item" [routerLinkActive]="'activePage'" (click)="closeMobileMenu()">
+                    <a [routerLink]="['/contact']" class="nav-menu__link text-heading-two">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ==================== Mobile Menu End ==================== -->
+
+<!-- ==================== Main Ocado-Style Header ==================== -->
+<header class="header bg-white border-bottom border-gray-100 position-relative z-9">
+    <div class="py-12 border-bottom border-gray-100">
+        <div class="container container-lg">
+            <div class="d-flex align-items-center justify-content-between gap-16 flex-wrap flex-lg-nowrap">
+                
+                <div class="d-flex align-items-center gap-12 flex-shrink-0">
+                    <button type="button" class="toggle-mobileMenu d-lg-none text-heading text-3xl border-0 bg-transparent p-0 flex-center"
+                        (click)="openMobileMenu()" aria-label="Toggle Navigation">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <a [routerLink]="['/']" class="d-inline-flex align-items-center">
+                        <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 48px; max-width: 220px; object-fit: contain;">
+                    </a>
+                </div>
+
+                <form class="flex-grow-1 mx-lg-24 order-3 order-lg-2 w-100 w-lg-auto">
+                    <div class="position-relative">
+                        <input type="text"
+                            class="form-control bg-gray-50 border border-gray-200 py-12 ps-20 pe-48 rounded-8 text-sm text-heading placeholder-text-sm"
+                            placeholder="Find a product">
+                        <button type="button"
+                            class="position-absolute top-50 translate-middle-y inset-inline-end-0 me-12 border-0 bg-transparent text-xl text-gray-500 hover-text-main-600 flex-center"
+                            aria-label="Search">
+                            <i class="ph ph-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="d-flex align-items-center gap-12 order-2 order-lg-3 ms-auto ms-lg-0 flex-shrink-0">
+                    <a [routerLink]="['/account']"
+                        class="d-flex align-items-center gap-8 py-8 px-16 rounded-8 bg-main-50 hover-bg-main-100 text-heading text-sm fw-medium transition-1 text-nowrap">
+                        <span>Log in</span>
+                        <i class="ph ph-caret-down text-xs"></i>
+                    </a>
+
+                    <div class="d-none d-md-flex align-items-center gap-8 py-8 px-16 rounded-8 bg-main-50 hover-bg-main-100 text-heading text-sm fw-medium transition-1 text-nowrap cursor-pointer">
+                        <i class="ph-fill ph-map-pin text-main-600 text-lg"></i>
+                        <span>Choose your delivery location</span>
+                    </div>
+
+                    <a [routerLink]="['/cart']"
+                        class="d-flex align-items-center gap-10 py-6 px-16 rounded-8 bg-main-two-600 hover-bg-main-two-700 text-white transition-1 text-nowrap shadow-sm">
+                        <div class="position-relative flex-center">
+                            <i class="ph-fill ph-shopping-cart text-2xl text-white"></i>
+                            <span class="position-absolute top-n6 end-n6 bg-white text-main-two-600 rounded-circle text-xs fw-bold flex-center"
+                                style="width: 16px; height: 16px; font-size: 10px;">2</span>
+                        </div>
+                        <div class="d-flex flex-column text-start line-height-1">
+                            <span class="text-sm fw-bold text-white">£0.00</span>
+                            <span class="text-xs text-white opacity-75" style="font-size: 10px;">Minimum: £40.00</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none d-lg-block py-10 bg-white">
+        <div class="container container-lg">
+            <div class="d-flex align-items-center gap-24">
+                <a [routerLink]="['/shop']" class="d-flex align-items-center gap-8 text-heading fw-bold text-sm hover-text-main-600 transition-1">
+                    <span>Browse Categories</span>
+                    <i class="ph ph-caret-down text-xs"></i>
+                </a>
+                <nav class="d-flex align-items-center gap-20 flex-wrap">
+                    <a [routerLink]="['/']" routerLinkActive="text-main-600 fw-bold" [routerLinkActiveOptions]="{ exact: true }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Home</a>
+                    <a [routerLink]="['/shop']" routerLinkActive="text-main-600 fw-bold"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Shop</a>
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'recipes' }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Recipes</a>
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'offers' }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Offers</a>
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'coupons' }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Coupons</a>
+                    <a [routerLink]="['/wishlist']" routerLinkActive="text-main-600 fw-bold"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Favourites</a>
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'shopping-lists' }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Shopping Lists</a>
+                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'regulars' }"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Regulars</a>
+                    <a [routerLink]="['/contact']" routerLinkActive="text-main-600 fw-bold"
+                        class="text-heading text-sm fw-medium hover-text-main-600 transition-1">Contact Us</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

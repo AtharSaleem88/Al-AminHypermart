@@ -1,0 +1,46 @@
+<section class="shop-page">
+  <div class="container container-lg">
+    <nav class="shop-breadcrumb" aria-label="Breadcrumb"><a routerLink="/">Home</a><span aria-hidden="true">/</span><a routerLink="/shop">Shop</a>@if (category) { <span aria-hidden="true">/</span><span aria-current="page">{{ title }}</span> }</nav>
+    <div class="categories-heading-divider"><h1 class="categories-heading-divider__title">Shop by department</h1></div>
+    <div class="department-browser">
+      <button type="button" class="rail-arrow" aria-label="Previous departments" (click)="departmentRail.scrollBy({left: -420, behavior: 'smooth'})"><i class="ph ph-caret-left"></i></button>
+      <div class="department-rail" #departmentRail>
+        <button class="department" type="button" [class.is-active]="!category" (click)="chooseDepartment('')" [attr.aria-pressed]="!category"><span class="department__image department__all"><img src="assets/images/logo/brand-smile.png" alt="" /></span><strong>All departments</strong><small>{{ products.length }} products</small></button>
+        @for (dept of departments; track dept.id; let i = $index) {
+          <button class="department" type="button" [class.is-active]="category === dept.id" [class.is-amber]="i % 2 === 0" (click)="chooseDepartment(dept.id)" [attr.aria-pressed]="category === dept.id"><span class="department__image"><img [src]="'assets/images/thumbs/' + dept.image" alt="" /></span><strong>{{ dept.name }}</strong><small>{{ countDepartment(dept.id) }} products</small></button>
+        }
+      </div>
+      <button type="button" class="rail-arrow" aria-label="Next departments" (click)="departmentRail.scrollBy({left: 420, behavior: 'smooth'})"><i class="ph ph-caret-right"></i></button>
+    </div>
+    <div class="shop-layout">
+      <aside>
+        <details class="shop-filters" open>
+          <summary>Refine your shop <i class="ph ph-sliders-horizontal" aria-hidden="true"></i></summary>
+          <div class="shop-filters__content">
+            <div class="filter-heading"><span>Filters</span><button type="button" (click)="clear()" [disabled]="!hasFilters">Clear all</button></div>
+            <fieldset><legend>Brand</legend>
+              @for (brand of brands; track brand) { <label class="filter-option"><input type="checkbox" [checked]="selectedBrands.includes(brand)" (change)="toggleBrand(brand)" [disabled]="!countBrand(brand) && !selectedBrands.includes(brand)" /><span>{{ brand }}</span><small>{{ countBrand(brand) }}</small></label> }
+            </fieldset>
+            <fieldset><legend>Price range</legend><form (ngSubmit)="applyPrice()"><div class="price-inputs"><label>Min (Rs.)<input type="number" name="min" min="0" [(ngModel)]="draftMin" /></label><span>–</span><label>Max (Rs.)<input type="number" name="max" min="0" [(ngModel)]="draftMax" /></label></div><button class="price-apply" type="submit">Apply price</button></form></fieldset>
+            <fieldset><legend>Offers</legend><label class="filter-option"><input type="checkbox" [checked]="offers" (change)="update({ offers: offers ? null : '1', filter: null })" /><span>Smile deals only</span></label></fieldset>
+          </div>
+        </details>
+      </aside>
+      <div class="shop-results">
+        <div class="results-heading"><div><h2>{{ title }}</h2><p aria-live="polite">Showing {{ resultStart }}–{{ resultEnd }} of {{ filteredProducts.length }} products</p></div><label class="sort-label">Sort by<select aria-label="Sort products" [ngModel]="sort" (ngModelChange)="update({sort: $event})"><option value="popular">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div>
+        <form class="catalog-search" (ngSubmit)="update({ q: searchDraft.trim() || null })"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" name="search" [(ngModel)]="searchDraft" placeholder="Search your everyday favourites" aria-label="Search products" /><button type="submit">Search</button></form>
+        @if (hasFilters) { <div class="active-filters" aria-label="Active filters">
+          @if (category) { <button type="button" (click)="chooseDepartment('')">{{ title }} <span aria-hidden="true">×</span><span class="visually-hidden">Remove department filter</span></button> }
+          @for (brand of selectedBrands; track brand) { <button type="button" (click)="toggleBrand(brand)">{{ brand }} <span aria-hidden="true">×</span><span class="visually-hidden">Remove brand filter</span></button> }
+          @if (min || max !== 3000) { <button type="button" (click)="update({min: null, max: null})">Rs. {{ min }}–{{ max }} ×<span class="visually-hidden">Remove price filter</span></button> }
+          @if (search) { <button type="button" (click)="update({q: null})">“{{ search }}” ×<span class="visually-hidden">Remove search</span></button> }
+          @if (offers) { <button type="button" (click)="update({offers: null, filter: null})">Smile deals ×<span class="visually-hidden">Remove offers filter</span></button> }
+        </div> }
+        @if (visibleProducts.length) {
+          <div class="catalog-grid">@for (product of visibleProducts; track product.id) { <app-product-card [product]="product" /> }</div>
+        } @else { <div class="catalog-empty"><img src="assets/images/logo/brand-smile.png" alt="" /><h3>No products match just yet</h3><p>Try another department or clear a filter to find your favourites.</p><button type="button" (click)="clear()">Clear filters</button></div> }
+        @if (totalPages > 1) { <nav class="catalog-pagination" aria-label="Product pages"><button type="button" [disabled]="page === 1" (click)="changePage(page - 1)" aria-label="Previous page">‹</button>@for (unused of [].constructor(totalPages); track $index) { <button type="button" [class.is-active]="page === $index + 1" [attr.aria-current]="page === $index + 1 ? 'page' : null" (click)="changePage($index + 1)">{{ $index + 1 }}</button> }<button type="button" [disabled]="page === totalPages" (click)="changePage(page + 1)" aria-label="Next page">›</button></nav> }
+      </div>
+    </div>
+  </div>
+</section>

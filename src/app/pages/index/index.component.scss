@@ -1,0 +1,378 @@
+/* Hero Banner Slider Custom Controls */
+:host {
+    display: block;
+}
+
+.beverages-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #FEF8F0;
+    color: #53174D;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.app-download__banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+    padding: 36px clamp(24px, 4vw, 64px) 0;
+    background: #53174D;
+    border-radius: 24px;
+    overflow: hidden;
+}
+.app-download__copy {
+    padding-bottom: 36px;
+    h2 { color: #fff; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.1; margin: 20px 0; }
+    h2 span { color: #F89C24; }
+    p { color: #F0E5EE; font-size: 16px; line-height: 1.65; max-width: 610px; margin-bottom: 24px; }
+}
+.app-download__brand {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: clamp(26px, 2.3vw, 36px);
+    font-weight: 700;
+    letter-spacing: -.04em;
+
+    img {
+        width: 100px;
+        height: 86px;
+        margin: -20px -18px -20px -24px;
+        object-fit: contain;
+        clip-path: circle(26% at 48% 41%);
+    }
+}
+.app-download__eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: .09em; color: #fff;
+    img { width: 28px; height: 28px; }
+}
+.app-download__stores { display: flex; flex-wrap: wrap; gap: 12px; }
+.app-store-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff; color: #290E28; border-radius: 8px; padding: 10px 18px; min-width: 170px;
+    > i { font-size: 30px; }
+    > img { width: 28px; height: 30px; object-fit: contain; }
+    span { display: flex; flex-direction: column; }
+    small { font-size: 10px; line-height: 1.3; }
+    strong { font-size: 20px; line-height: 1.2; }
+}
+.app-download__platforms { color: #E3D1DF; font-size: 12px; margin-top: 14px; }
+.app-download__visual { position: relative; display: flex; justify-content: center; align-self: end; padding-top: 12px; }
+.app-download__smile {
+    position: absolute; right: 0; top: 12%; width: 90px; height: 90px; transform: rotate(14deg);
+    img { width: 100%; height: 100%; object-fit: contain; clip-path: circle(26% at 48% 41%); }
+}
+.app-phone {
+    position: relative; width: 310px; max-width: 90%; padding: 24px 14px 12px; margin-bottom: -20px;
+    background: #fff; border: 7px solid #290E28; border-radius: 36px;
+    transform: rotate(-6deg); color: #290E28;
+}
+.app-phone__camera { position: absolute; width: 65px; height: 12px; border-radius: 0 0 10px 10px; background: #290E28; top: 0; left: calc(50% - 32px); }
+.app-phone__logo { width: 108px; height: 32px; object-fit: contain; margin-bottom: 12px; }
+.app-phone__search { background: #F6F0F5; border-radius: 8px; padding: 10px 8px; font-size: 9px; color: #72596F; }
+.app-phone__feature {
+    position: relative; margin-top: 12px; background: #F89C24; border-radius: 10px; padding: 16px 10px; height: 116px; overflow: hidden;
+    strong { display: block; font-size: 19px; }
+    span { display: block; font-size: 9px; max-width: 100px; margin-top: 4px; }
+    img { position: absolute; width: 83px; height: 64px; object-fit: cover; right: 0; bottom: 0; border-radius: 28px 0 0; }
+}
+.app-phone__heading { display: flex; justify-content: space-between; font-weight: 600; font-size: 11px; margin: 16px 0 10px; }
+.app-phone__products {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    > div { border: 1px solid #EDE1EC; border-radius: 9px; padding: 8px; }
+    img { width: 100%; height: 68px; object-fit: contain; }
+    span { display: block; font-size: 10px; margin: 6px 0; }
+    b { display: block; background: #F6F0F5; border-radius: 12px; text-align: center; font-size: 10px; color: #53174D; padding: 4px; }
+}
+.app-phone__nav { display: flex; justify-content: space-around; border-top: 1px solid #EDE1EC; padding: 12px 0 28px; margin-top: 16px; color: #53174D; }
+@media (max-width: 767px) {
+    .app-download__banner { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 28px 24px 0; }
+    .app-download__copy { padding-bottom: 24px; }
+    .app-download__visual { width: 100%; }
+    .app-download__eyebrow { font-size: 10px; letter-spacing: .04em; }
+}
+
+.finds-heading {
+    color: #53174D;
+}
+
+.deals-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.deals-layout__products {
+    min-width: 0;
+
+    .product-card {
+        height: 444px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card__thumb {
+        height: 210px;
+        min-height: 210px;
+        flex-shrink: 0;
+    }
+
+    .product-card__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+
+        > .mt-14 {
+            margin-top: auto !important;
+            padding-top: 12px;
+        }
+    }
+
+    .product-card__price {
+        flex-wrap: wrap;
+    }
+}
+
+.all-in-one-promo {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 444px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 14px;
+}
+
+.all-in-one-promo__poster {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+    clip-path: inset(1px round 14px);
+    box-shadow: none;
+    border: 0;
+}
+
+@media (max-width: 767px) {
+    .deals-layout {
+        grid-template-columns: 164px minmax(0, 1fr);
+        gap: 12px;
+    }
+    .all-in-one-promo { height: 280px; }
+}
+
+@media (max-width: 479px) {
+    .deals-layout { grid-template-columns: minmax(0, 1fr); }
+}
+#feature-item-wrapper-prev,
+#feature-item-wrapper-next {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    top: 54px;
+    width: 36px;
+    height: 36px;
+    z-index: 3;
+    color: #53174D;
+    background: #fff;
+    border: 1px solid #EDE1EC;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+#feature-item-wrapper-prev { inset-inline-start: 0; }
+#feature-item-wrapper-next { inset-inline-end: 0; }
+
+/* Eliminate Slick default font arrows */
+.slick-prev:before,
+.slick-prev::before,
+.slick-next:before,
+.slick-next::before,
+::ng-deep .slick-prev:before,
+::ng-deep .slick-prev::before,
+::ng-deep .slick-next:before,
+::ng-deep .slick-next::before {
+    display: none !important;
+    content: '' !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.banner {
+    position: relative;
+
+    .slick-prev,
+    .slick-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) scale(0.92);
+        width: 44px;
+        height: 44px;
+        z-index: 10;
+        cursor: pointer;
+        background-color: #ffffff;
+        color: #53174D;
+        box-shadow: 0 4px 16px rgba(41, 14, 40, 0.14);
+        border: 1.5px solid rgba(83, 23, 77, 0.12);
+        border-radius: 50%;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        
+        /* Hidden by default, revealed on banner hover */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.28s ease,
+                    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                    background-color 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease,
+                    left 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                    right 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+        i {
+            font-size: 20px;
+            color: #53174D;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        &:hover {
+            background-color: #53174D !important;
+            border-color: #53174D !important;
+            box-shadow: 0 6px 20px rgba(83, 23, 77, 0.32) !important;
+            transform: translateY(-50%) scale(1.08) !important;
+
+            i {
+                color: #ffffff !important;
+            }
+        }
+
+        &:active {
+            transform: translateY(-50%) scale(0.98) !important;
+        }
+    }
+
+    .slick-prev {
+        left: 6px;
+    }
+
+    .slick-next {
+        right: 6px;
+    }
+
+    /* Reveal arrows smoothly when user hovers over the banner */
+    &:hover,
+    .banner-item:hover {
+        .slick-prev,
+        .slick-next {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        .slick-prev {
+            left: 20px !important;
+            transform: translateY(-50%) scale(1) !important;
+
+            &:hover {
+                transform: translateY(-50%) scale(1.08) !important;
+            }
+        }
+
+        .slick-next {
+            right: 20px !important;
+            transform: translateY(-50%) scale(1) !important;
+
+            &:hover {
+                transform: translateY(-50%) scale(1.08) !important;
+            }
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .slick-prev,
+        .slick-next {
+            width: 36px;
+            height: 36px;
+            opacity: 0.9 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+
+            i {
+                font-size: 16px;
+            }
+        }
+
+        .slick-prev {
+            left: 8px !important;
+        }
+
+        .slick-next {
+            right: 8px !important;
+        }
+    }
+
+    /* Slick Dots Pagination */
+    ::ng-deep .slick-dots {
+        position: absolute;
+        bottom: 32px;
+        left: 0;
+        right: 0;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        z-index: 4;
+
+        li {
+            display: inline-flex;
+            margin: 0;
+
+            button {
+                width: 10px;
+                height: 10px;
+                padding: 0;
+                border: none;
+                border-radius: 50%;
+                background-color: rgba(83, 23, 77, 0.2);
+                text-indent: -9999px;
+                cursor: pointer;
+                transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+                &:hover {
+                    background-color: rgba(83, 23, 77, 0.45);
+                }
+            }
+
+            &.slick-active button {
+                width: 28px;
+                border-radius: 999px;
+                background-color: #F89C24 !important;
+                box-shadow: 0 2px 8px rgba(248, 156, 36, 0.4);
+            }
+        }
+    }
+}

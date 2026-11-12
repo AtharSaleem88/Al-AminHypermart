@@ -1,0 +1,169 @@
+<!-- ==================== Minimal Premium Brand Footer Start Here ==================== -->
+<footer class="footer-alamin">
+    <div class="footer-main">
+        <div class="container container-lg">
+            <div class="footer-item-wrapper">
+                <!-- Brand Column: Life. Stocked. with Smile Icon -->
+                <div class="footer-item footer-item--brand">
+                    <a [routerLink]="['/']" class="footer-life-brand">
+                        <img src="assets/images/logo/brand-smile.png" alt="Al-Amin Smile" class="footer-life-brand__icon">
+                        <span class="footer-life-brand__text">Life. Stocked.</span>
+                    </a>
+
+                    <p class="footer-brand-desc">
+                        Your trusted hypermart for fresh farm groceries, 100% halal butcher cuts, chilled dairy, and everyday family savings.
+                    </p>
+
+                    <div class="footer-contact-list">
+                        <div class="footer-contact-item">
+                            <span class="footer-contact-icon"><i class="ph-fill ph-map-pin"></i></span>
+                            <span>2972 Westheimer Rd. Santa Ana, IL 85486</span>
+                        </div>
+                        <a href="mailto:support&#64;alaminhypermart.com" class="footer-contact-item">
+                            <span class="footer-contact-icon"><i class="ph-fill ph-envelope-simple"></i></span>
+                            <span>support&#64;alaminhypermart.com</span>
+                        </a>
+                        <a href="tel:+2871382023" class="footer-contact-item">
+                            <span class="footer-contact-icon"><i class="ph-fill ph-phone-call"></i></span>
+                            <span>+ (2) 871 382 023</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Link Columns -->
+                <div *ngFor="let section of footerSections" class="footer-item">
+                    <h6 class="footer-item__title">{{ section.title }}</h6>
+                    <ul class="footer-menu">
+                        <li *ngFor="let link of section.links; let j = index"
+                            [ngClass]="{ 'mb-10': j < section.links.length - 1 }">
+                            <a [routerLink]="link.route" class="footer-menu__link">
+                                {{ link.label }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Shop on The Go Card with Categories Icons Smile -->
+                <div class="footer-item footer-item--app">
+                    <div class="footer-go-card">
+                        <h6 class="footer-item__title">Shop on The Go</h6>
+                        <p class="footer-app-sub">Scan or get the Al-Amin Hypermart App.</p>
+
+                        <div class="footer-app-row">
+                            <div class="footer-qr-card" aria-label="Download App QR Code">
+                                <svg viewBox="0 0 64 64" width="52" height="52" fill="#290E28" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR Code">
+                                    <rect x="4" y="4" width="20" height="20" rx="3" fill="none" stroke="#290E28" stroke-width="4" />
+                                    <rect x="10" y="10" width="8" height="8" rx="1.5" />
+                                    <rect x="40" y="4" width="20" height="20" rx="3" fill="none" stroke="#290E28" stroke-width="4" />
+                                    <rect x="46" y="10" width="8" height="8" rx="1.5" />
+                                    <rect x="4" y="40" width="20" height="20" rx="3" fill="none" stroke="#290E28" stroke-width="4" />
+                                    <rect x="10" y="46" width="8" height="8" rx="1.5" />
+                                    <rect x="30" y="6" width="4" height="8" />
+                                    <rect x="30" y="20" width="4" height="6" />
+                                    <rect x="4" y="29" width="8" height="5" />
+                                    <rect x="18" y="29" width="12" height="5" />
+                                    <rect x="29" y="29" width="8" height="8" rx="1.5" fill="#F89C24" />
+                                    <rect x="42" y="29" width="6" height="5" />
+                                    <rect x="52" y="29" width="8" height="8" />
+                                    <rect x="30" y="42" width="6" height="6" />
+                                    <rect x="40" y="42" width="10" height="4" />
+                                    <rect x="54" y="42" width="6" height="10" />
+                                    <rect x="30" y="52" width="14" height="8" />
+                                    <rect x="48" y="54" width="12" height="6" />
+                                </svg>
+                            </div>
+
+                            <div class="footer-store-buttons">
+                                <a href="https://www.apple.com/app-store" target="_blank" rel="noopener noreferrer" class="footer-store-btn">
+                                    <i class="ph-fill ph-apple-logo"></i>
+                                    <span>App Store</span>
+                                </a>
+                                <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" class="footer-store-btn">
+                                    <img src="assets/images/icon/google-play.svg" alt="Google Play">
+                                    <span>Google Play</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Categories Icons Smile in Original Aspect Ratio within Shop on The Go -->
+                        <a [routerLink]="['/shop']" class="footer-go-smile" aria-label="Browse All Al-Amin Departments">
+                            <svg viewBox="0 0 320 206" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer-go-smile__svg" role="img" aria-label="Al-Amin Smile Curve featuring Cart, Milk Bottle, Donut, Carrot, and Bakery Bread">
+                                <!-- Original Proportion Sweeping Plum Smile Curve (#53174D) -->
+                                <path d="M 32 95 C 85 98, 165 82, 240 14 C 247 8, 255 9, 260 16 L 297 65 C 302 72, 300 81, 293 88 C 210 172, 118 193, 30 189 C 21 188, 16 182, 16 173 L 16 110 C 16 101, 22 94, 32 95 Z"
+                                      fill="#53174D" />
+
+                                <!-- 1. Shopping Cart (#F89C24) -->
+                                <g fill="#F89C24" transform="translate(30, 108) scale(0.82)">
+                                    <path d="M 2 6 C 2 3 4.5 0.5 7.5 0.5 L 16 0.5 C 19 0.5 21 2.5 22 5.5 L 25 16 L 74 22 C 78 22.8 80.5 26.8 79.2 31 L 72.5 53 C 71.2 56.5 68 58.5 64 58 L 28 54 L 26.2 60 L 66 64.5 C 69 65 71 67.5 70.5 70.5 C 70 73.5 67.5 75.5 64.5 75 L 21.5 70 C 16.5 69.5 13.5 64.8 15.2 59.5 L 18 51.5 L 11.5 10.5 L 7.5 10.5 C 4.5 10.5 2 8.5 2 6 Z" />
+                                    <circle cx="29" cy="84" r="6.8" />
+                                    <circle cx="62" cy="87" r="6.8" />
+                                </g>
+
+                                <!-- 2. Milk / Drink Bottle (#F89C24) -->
+                                <g fill="#F89C24" transform="translate(106, 101) scale(0.84)">
+                                    <rect x="13" y="1" width="18" height="7" rx="3" />
+                                    <path d="M 15 10 L 29 10 L 31.2 19 C 37.5 25 41.5 34 41.5 43 L 41.5 84 C 41.5 88.4 38 92 33.6 92 L 10.4 92 C 6 92 2.5 88.4 2.5 84 L 2.5 43 C 2.5 34 6.5 25 12.8 19 Z" />
+                                </g>
+
+                                <!-- 3. Donut (#F89C24) -->
+                                <path fill="#F89C24" fill-rule="evenodd"
+                                      d="M 169 80.5 A 17.5 17.5 0 1 0 169.01 80.5 Z M 169 92 A 6 6 0 1 1 168.99 92 Z" />
+
+                                <!-- 4. Carrot (#F89C24) angled along the smile curve -->
+                                <g fill="#F89C24" transform="translate(185, 142) rotate(-28) scale(0.86)">
+                                    <path d="M -38 2 C -38 -6 -22 -13 6 -13 C 16 -13 21 -8 21 2 C 21 12 16 17 6 17 C -22 17 -38 10 -38 2 Z" />
+                                    <path d="M 22 -2 L 38 -15 C 41 -17 45 -13 42 -9 L 30 0 L 46 -2 C 50 -2 50 4 46 5 L 30 5 L 42 13 C 45 16 41 21 37 18 L 22 6 Z" />
+                                </g>
+
+                                <!-- 5. Sliced Bread Loaf (#F89C24) tucked neatly into upper-right curve -->
+                                <g fill="#F89C24" transform="translate(248, 66) rotate(-32) scale(0.76)">
+                                    <path d="M -36 -10 C -36 -28 -18 -38 0 -38 C 18 -38 36 -28 36 -10 C 36 -4 32 1 28 4 L 28 32 C 28 36.4 24.4 40 20 40 L -20 40 C -24.4 40 -28 36.4 -28 32 L -28 4 C -32 1 -36 -4 -36 -10 Z" />
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Copyright & Social Bar -->
+    <div class="bottom-footer bottom-footer-alamin">
+        <div class="container container-lg">
+            <div class="bottom-footer__inner flex-between flex-wrap gap-16">
+                <p class="bottom-footer__text mb-0">
+                    Copyright &copy; <span class="bottom-footer__year">2026</span> Al-Amin Hypermart. All Rights Reserved.
+                </p>
+                <div class="flex-align gap-12 flex-wrap">
+                    <ul class="flex-align gap-12 mb-0">
+                        <li>
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                               class="footer-social-btn" aria-label="Al-Amin on Facebook">
+                                <i class="ph-fill ph-facebook-logo"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"
+                               class="footer-social-btn" aria-label="Al-Amin on Twitter">
+                                <i class="ph-fill ph-twitter-logo"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
+                               class="footer-social-btn" aria-label="Al-Amin on Instagram">
+                                <i class="ph-fill ph-instagram-logo"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+                               class="footer-social-btn" aria-label="Al-Amin on LinkedIn">
+                                <i class="ph-fill ph-linkedin-logo"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- ==================== Minimal Premium Brand Footer End Here ==================== -->

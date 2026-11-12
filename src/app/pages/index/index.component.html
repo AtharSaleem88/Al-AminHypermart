@@ -1,0 +1,665 @@
+<div class="banner banner--campaign">
+    <div class="container container-lg">
+        <div class="banner-item rounded-24 overflow-hidden position-relative arrow-center">
+
+            <div class="flex-align">
+                <button type="button" id="banner-prev"
+                    class="slick-prev slick-arrow flex-center rounded-circle"
+                    aria-label="Previous Slide">
+                    <i class="ph-bold ph-caret-left"></i>
+                </button>
+                <button type="button" id="banner-next"
+                    class="slick-next slick-arrow flex-center rounded-circle"
+                    aria-label="Next Slide">
+                    <i class="ph-bold ph-caret-right"></i>
+                </button>
+            </div>
+
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+                (beforeChange)="beforeChange($event)">
+
+                <!-- First slide: full-bleed branded fresh produce campaign. -->
+                <div ngxSlickItem class="slide campaign-slide">
+                    <a class="campaign-banner" [routerLink]="['/shop']" [queryParams]="{category: 'vegetables'}" aria-label="Shop fresh fruits and vegetables — Farm Fresh. Handpicked for You.">
+                                                <img src="assets/images/thumbs/hero-fresh-campaign-full.png" width="2172" height="724" alt="Fresh fruits and vegetables. Farm Fresh. Handpicked for You. Al-Amin Life. Stocked!" fetchpriority="high" decoding="async" />
+                    </a>
+                </div>
+                <!-- Slide 1: Al-Amin Brand Palette Grocery Showcase (First) -->
+                <div ngxSlickItem class="slide">
+                    <div class="banner-slider">
+                        <div class="banner-slider__item banner-slider__item--brand-palette">
+                            <div class="banner-slider__inner flex-between position-relative">
+                                <div class="banner-item__content">
+                                    <div class="d-inline-flex align-items-center gap-8 py-6 px-16 rounded-pill banner-palette-pill shadow-sm mb-16 animate-left-right animation-delay-08">
+                                        <img src="assets/images/logo/brand-smile.png" style="width: 14px; height: 14px; object-fit: contain;" alt="">
+                                        <span class="fw-bold text-xs letter-spacing-1">AL-AMIN SIGNATURE</span>
+                                    </div>
+                                    <h1 class="banner-item__title max-w-700 mb-16 animate-left-right animation-delay-1">
+                                        Signature Grocery Picks, <span class="banner-palette-accent">Curated For Your Home</span>
+                                    </h1>
+                                    <p class="text-md max-w-500 mb-28 animate-left-right animation-delay-1">
+                                        From crisp farm produce and artisan loaves to pure raw honey and pantry staples — vibrant everyday essentials crafted with care.
+                                    </p>
+                                    <div class="d-flex align-items-center gap-16 animate-left-right animation-delay-12 flex-wrap">
+                                        <a [routerLink]="['/shop']"
+                                            class="btn banner-palette-btn d-inline-flex align-items-center rounded-8 px-28 py-12 gap-8 shadow-sm">
+                                            Shop Grocery Edit
+                                            <span class="icon text-xl d-flex">
+                                                <i class="ph-bold ph-basket"></i>
+                                            </span>
+                                        </a>
+                                        <div class="d-flex align-items-center gap-8 banner-palette-chip py-8 px-16 rounded-8">
+                                            <i class="ph-bold ph-sparkle"></i>
+                                            <span class="fw-bold text-sm">Signature Brand Selection</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-item__thumb hero-image-frame animate-scale animation-delay-12">
+                                    <img src="assets/images/thumbs/hero-slide5.jpg" alt="Al-Amin Signature Grocery Showcase" class="banner-hero-img" decoding="async" fetchpriority="high" (load)="onHeroImageLoad($event)" (error)="onHeroImageError($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Secondary Color (#F89C24) Banner -->
+                <div ngxSlickItem class="slide">
+                    <div class="banner-slider">
+                        <div class="banner-slider__item banner-slider__item--secondary-palette">
+                            <div class="banner-slider__inner flex-between position-relative">
+                                <div class="banner-item__content">
+                                    <div class="d-inline-flex align-items-center gap-8 py-6 px-16 rounded-pill banner-secondary-pill shadow-sm mb-16 animate-left-right animation-delay-08">
+                                        <img src="assets/images/logo/brand-smile.png" style="width: 14px; height: 14px; object-fit: contain;" alt="">
+                                        <span class="fw-bold text-xs letter-spacing-1">FRESH GUARANTEE</span>
+                                    </div>
+                                    <h2 class="banner-item__title max-w-700 mb-16 animate-left-right animation-delay-1">
+                                        Everyday Value, <span class="banner-secondary-accent">Guaranteed Fresh</span>
+                                    </h2>
+                                    <p class="text-md max-w-500 mb-28 animate-left-right animation-delay-1">
+                                        From bakery mornings to family dinners — get 100% halal butcher cuts and farm-fresh greens guaranteed to make you smile.
+                                    </p>
+                                    <div class="d-flex align-items-center gap-16 animate-left-right animation-delay-12 flex-wrap">
+                                        <a [routerLink]="['/shop']" [queryParams]="{ filter: 'offers' }"
+                                            class="btn banner-secondary-btn d-inline-flex align-items-center rounded-8 px-28 py-12 gap-8 shadow-sm">
+                                            Explore Smile Deals
+                                            <span class="icon text-xl d-flex">
+                                                <i class="ph-bold ph-tag"></i>
+                                            </span>
+                                        </a>
+                                        <div class="d-flex align-items-center gap-8 banner-secondary-chip py-8 px-16 rounded-8">
+                                            <i class="ph-bold ph-seal-check"></i>
+                                            <span class="fw-bold text-sm">100% Quality Guaranteed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-item__thumb hero-image-frame animate-scale animation-delay-12">
+                                    <img src="assets/images/thumbs/hero-slide2.jpg" alt="Fresh Organic Fruits & Produce" class="banner-hero-img" decoding="async" fetchpriority="high" (load)="onHeroImageLoad($event)" (error)="onHeroImageError($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: White Light Banner (Life. Stocked.) -->
+                <div ngxSlickItem class="slide">
+                    <div class="banner-slider">
+                        <div class="banner-slider__item">
+                            <div class="banner-slider__inner flex-between position-relative">
+                                <div class="banner-item__content">
+                                    <div class="d-inline-flex align-items-center gap-8 py-6 px-16 rounded-pill bg-white shadow-sm mb-16 animate-left-right animation-delay-08">
+                                        <img src="assets/images/logo/brand-smile.png" alt="" style="width: 16px; height: 16px; object-fit: contain;">
+                                        <span class="fw-bold text-main-600 text-xs letter-spacing-1">AL-AMIN HYPERMART</span>
+                                    </div>
+                                    <h2 class="banner-item__title max-w-700 mb-16 animate-left-right animation-delay-1 text-heading">
+                                        Life. <span class="text-main-600">Stocked.</span>
+                                    </h2>
+                                    <p class="text-gray-600 text-md max-w-500 mb-28 animate-left-right animation-delay-1">
+                                        Everything for your home and pantry, delivered fresh with a smile. Farm-fresh produce, premium butcher cuts, and hypermart value every single day.
+                                    </p>
+                                    <div class="d-flex align-items-center gap-16 animate-left-right animation-delay-12 flex-wrap">
+                                        <a [routerLink]="['/shop']"
+                                            class="btn btn-main d-inline-flex align-items-center rounded-8 px-28 py-12 gap-8 shadow-sm">
+                                            Stock Your Pantry
+                                            <span class="icon text-xl d-flex">
+                                                <i class="ph-bold ph-shopping-cart-simple"></i>
+                                            </span>
+                                        </a>
+                                        <div class="d-flex align-items-center gap-8 bg-main-two-50 py-8 px-16 rounded-8 border border-main-two-100">
+                                            <img src="assets/images/logo/brand-smile.png" style="width: 14px; height: 14px; object-fit: contain;" alt="">
+                                            <span class="text-main-two-600 fw-bold text-sm">Save up to 40% Today</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner-item__thumb hero-image-frame animate-scale animation-delay-12">
+                                    <img src="assets/images/thumbs/hero-slide1.jpg" alt="Fresh Produce & Groceries" class="banner-hero-img" decoding="async" fetchpriority="high" (load)="onHeroImageLoad($event)" (error)="onHeroImageError($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ngx-slick-carousel>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- ============================ Banner Section End =============================== -->
+
+<!-- ==================== Brand Vision Bar: Life. Stocked. ==================== -->
+
+
+<!-- ============================ Feature Section start =============================== -->
+
+<div class="feature" id="featureSection" data-aos="fade-up" data-aos-duration="600">
+    <div class="container container-lg">
+        <div class="categories-heading-divider">
+            <h2 class="categories-heading-divider__title">Shop By Categories</h2>
+        </div>
+        <div class="position-relative arrow-center gradient-shadow">
+            <div class="flex-align">
+                <button type="button" id="feature-item-wrapper-prev"
+                    aria-label="Previous categories"
+                    class="slick-prev slick-arrow flex-center rounded-circle bg-white text-xl hover-bg-main-600 hover-text-white transition-1">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <button type="button" id="feature-item-wrapper-next"
+                    aria-label="Next categories"
+                    class="slick-next slick-arrow flex-center rounded-circle bg-white text-xl hover-bg-main-600 hover-text-white transition-1">
+                    <i class="ph ph-caret-right"></i>
+                </button>
+            </div>
+
+            <ngx-slick-carousel class="feature-item-wrapper" #slickModal="slick-carousel" [config]="featureSlideConfig">
+                <div ngxSlickItem *ngFor="let item of featureItems; let i = index" class="feature-item text-center" [ngClass]="i % 2 === 0 ? 'feature-item--primary' : 'feature-item--secondary'">
+                    <div class="feature-item__thumb rounded-circle">
+                        <a [routerLink]="['/shop']" [queryParams]="{ category: item.id }" class="w-100 h-100 flex-center">
+                            <img [src]="item.img" [alt]="item.title">
+                        </a>
+                    </div>
+                    <div class="feature-item__content mt-16">
+                        <h6 class="text-lg mb-8"><a [routerLink]="['/shop']" [queryParams]="{ category: item.id }" class="text-inherit">{{ item.title }}</a>
+                        </h6>
+                        <span class="text-sm text-gray-400">{{ departmentCount(item.id) }} Products</span>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</div>
+
+<!-- ============================ Feature Section End =============================== -->
+<div class="product pt-60">
+    <div class="container container-lg">
+        <div class="categories-heading-divider">
+            <h2 class="categories-heading-divider__title">Flash Smile Deals</h2>
+        </div>
+
+        <div class="flash-deals-subbar">
+            <a [routerLink]="['/shop']" class="flash-deals-view-all">
+                View All Deals
+            </a>
+            <div class="flex-align gap-8">
+                <button type="button" (click)="slickModal.slickPrev()" class="slick-prev slick-arrow" aria-label="Previous flash deals">‹</button>
+                <button type="button" (click)="slickModal.slickNext()" class="slick-next slick-arrow" aria-label="Next flash deals">›</button>
+            </div>
+        </div>
+
+        <!-- Slick Carousel -->
+        <ngx-slick-carousel #slickModal="slick-carousel" class="product-one-slider g-12" [config]="productSlideConfig">
+            <div ngxSlickItem *ngFor="let product of products" class="slide">
+                <div class="" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="product.fadeDuration">
+                    <div
+                        class="product-card flash-deal-card border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2">
+
+                        <a [routerLink]="['/product-details']" class="product-card__thumb flex-center overflow-hidden">
+                            <img [src]="product.image" [alt]="product.name">
+                        </a>
+
+                        <div class="product-card__content mt-12 w-100">
+                            <div>
+                                <div class="product-card__price mb-8 d-flex align-items-baseline gap-8 flex-wrap">
+                                    <span class="flash-deal-card__price-now">Rs. {{ product.price | number:'1.0-0' }}</span>
+                                    <span class="flash-deal-card__price-old">Rs. {{ product.oldPrice | number:'1.0-0' }}</span>
+                                </div>
+
+                                <h6 class="title flash-deal-card__title mt-4 mb-0">
+                                    <a [routerLink]="['/product-details']" class="link text-line-2">{{ product.name }}</a>
+                                </h6>
+                            </div>
+
+                            <div class="mt-14 w-100">
+                                <app-smile-add-btn
+                                    label="Add"
+                                    [fullWidth]="true"
+                                    [itemId]="product.id"
+                                    [itemName]="product.name"
+                                    (add)="addProductToCart(product, product.category)">
+                                </app-smile-add-btn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ngx-slick-carousel>
+    </div>
+</div>
+
+<section class="promotional-banner pt-60 pb-20">
+    <div class="container container-lg">
+        <div class="promotional-social-showcase">
+            <div class="promo-social-grid">
+                <div class="promo-social-grid__item wow bounceIn" *ngFor="let banner of promotionalBanners"
+                    [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="banner.animationDelay">
+                    <article class="promo-social-card h-100">
+                        <h3 class="promo-social-card__headline">{{ banner.title }}</h3>
+
+                        <div class="promo-social-card__poster">
+                            <a [routerLink]="[banner.link]" class="promo-social-card__media">
+                                <img [src]="banner.image" [alt]="banner.title" class="w-100 h-100 object-fit-cover">
+                            </a>
+
+                            <div class="promo-social-card__banner">
+                                <div class="promo-social-card__banner-top">
+                                    <span class="promo-social-card__subtitle">{{ banner.subtitle }}</span>
+                                    <span class="promo-social-card__badge">{{ banner.badge }}</span>
+                                </div>
+
+                                <div class="promo-social-card__banner-bottom">
+                                    <div class="promo-social-card__price-wrap" *ngIf="banner.price; else noPriceBlock">
+                                        <span class="promo-social-card__starting">Starting at</span>
+                                        <span class="promo-social-card__price">{{ banner.price }}</span>
+                                    </div>
+                                    <ng-template #noPriceBlock>
+                                        <div class="promo-social-card__price-wrap">
+                                            <span class="promo-social-card__starting">Handpicked</span>
+                                            <span class="promo-social-card__price promo-social-card__price--label">Fresh Value</span>
+                                        </div>
+                                    </ng-template>
+
+                                    <a [routerLink]="[banner.link]" class="promo-social-card__cta">
+                                        Shop Now
+                                        <i class="ph-bold ph-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Beverages -->
+<section class="beverages-section pt-64" aria-labelledby="beverages-title">
+    <div class="container container-lg">
+        <div class="categories-heading-divider"><h2 id="beverages-title" class="categories-heading-divider__title">Beverages &amp; Refreshments</h2></div>
+        <div class="section-heading">
+            <div class="flex-between flex-wrap gap-8">
+                <span class="beverages-pill-tag"><i class="ph-bold ph-coffee" aria-hidden="true"></i> Sip. Smile. Repeat.</span>
+                <a [routerLink]="['/shop']" [queryParams]="{ category: 'drinks' }" class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View All Beverages <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="row g-12">
+            @for (product of beverageProducts; track product.id) {
+                <div class="col-xxl-2 col-lg-3 col-sm-4 col-6" data-aos="fade-up" data-aos-duration="250">
+                    <app-product-card [product]="product"></app-product-card>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- ========================= flash sales Start ================================ -->
+<section class="flash-sales pt-80 overflow-hidden">
+    <div class="container container-lg">
+        <div class="row gy-4 arrow-style-two">
+            <div class="col-lg-6" *ngFor="let sale of flashSales" [attr.data-aos]="'fade-up'"
+                [attr.data-aos-duration]="sale.aosDuration">
+                <div
+                    class="flash-sales-item rounded-16 overflow-hidden z-1 position-relative flex-align flex-0 justify-content-between gap-8"
+                    [ngClass]="sale.cardClass">
+                    <img [src]="sale.backgroundImage" [alt]="sale.title"
+                        class="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 object-fit-cover flash-sales-item__bg"
+                        [ngClass]="sale.bgPositionClass">
+
+                    <div class="flash-sales-item__content" [ngClass]="sale.contentClass">
+                        <span *ngIf="sale.badge" [ngClass]="sale.badgeClass">{{ sale.badge }}</span>
+                        <h6 class="flash-sales-item__title mb-8">{{ sale.title }}</h6>
+                        <p class="flash-sales-item__desc mb-14">{{ sale.description }}</p>
+                        <a [routerLink]="sale.routerLink" [ngClass]="sale.buttonClass">
+                            Shop Now
+                            <span class="icon text-xl d-flex"><i class="ph ph-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ========================= flash sales End ================================ -->
+
+<section class="recommended overflow-hidden pt-80">
+    <div class="container container-lg">
+        <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Recommended for you</h2></div>
+        <div class="section-heading flex-between flex-wrap gap-16">
+            
+            <ul class="nav common-tab nav-pills wow fadeInRight" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600 active"
+                        id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab"
+                        aria-controls="pills-all" aria-selected="true">All</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-grocery-tab" data-bs-toggle="pill" data-bs-target="#pills-grocery" type="button"
+                        role="tab" aria-controls="pills-grocery" aria-selected="false">Grocery</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-fruits-tab" data-bs-toggle="pill" data-bs-target="#pills-fruits" type="button"
+                        role="tab" aria-controls="pills-fruits" aria-selected="false">Fruits</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-juices-tab" data-bs-toggle="pill" data-bs-target="#pills-juices" type="button"
+                        role="tab" aria-controls="pills-juices" aria-selected="false">Juices</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-vegetables-tab" data-bs-toggle="pill" data-bs-target="#pills-vegetables" type="button"
+                        role="tab" aria-controls="pills-vegetables" aria-selected="false">Vegetables</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-snacks-tab" data-bs-toggle="pill" data-bs-target="#pills-snacks" type="button"
+                        role="tab" aria-controls="pills-snacks" aria-selected="false">Snacks</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-medium text-sm border border-white hover-border-main-600"
+                        id="pills-organic-tab" data-bs-toggle="pill" data-bs-target="#pills-organic" type="button"
+                        role="tab" aria-controls="pills-organic" aria-selected="false">Organic Foods</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+            <ng-template #recommendedCardGrid let-items>
+                <div class="row g-12">
+                    <div *ngFor="let product of items" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
+                        data-aos="fade-up" data-aos-duration="200">
+                        <div
+                            class="product-card h-100 p-12 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2 group-item">
+                            <button type="button" class="wishlist-btn-two">
+                                <i class="ph-bold ph-heart"></i>
+                            </button>
+                            <span *ngIf="product.badge"
+                                class="product-card__badge {{product.badgeClass}} px-8 py-4 text-sm text-white">
+                                {{ product.badge }}
+                            </span>
+                            <a [routerLink]="['product-details']"
+                                class="product-card__thumb flex-center overflow-hidden">
+                                <img [src]="product.image" [alt]="product.title">
+                            </a>
+                            <div class="product-card__content p-sm-2 w-100">
+                                <h6 class="title text-lg fw-semibold my-12 w-100">
+                                    <a [routerLink]="['product-details']" class="link text-line-2">{{ product.title }}</a>
+                                </h6>
+
+                                <div class="product-card__content mt-8 w-100">
+                                    <div class="product-card__price mb-8">
+                                        <span class="text-heading text-md fw-semibold">{{ product.price }}</span>
+                                        <span class="text-gray-400 text-md fw-semibold text-decoration-line-through ms-6">{{
+                                            product.originalPrice }}</span>
+                                    </div>
+                                    <div class="mt-16 w-100">
+                                        <app-smile-add-btn label="Add" [fullWidth]="true" [itemId]="product.id" [itemName]="product.title" (add)="addProductToCart(product)"></app-smile-add-btn>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('all') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-grocery" role="tabpanel" aria-labelledby="pills-grocery-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('grocery') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-fruits" role="tabpanel" aria-labelledby="pills-fruits-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('fruits') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-juices" role="tabpanel" aria-labelledby="pills-juices-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('juices') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-vegetables" role="tabpanel" aria-labelledby="pills-vegetables-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('vegetables') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="pills-snacks-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('snacks') }"></ng-container>
+            </div>
+            <div class="tab-pane fade" id="pills-organic" role="tabpanel" aria-labelledby="pills-organic-tab"
+                tabindex="0">
+                <ng-container *ngTemplateOutlet="recommendedCardGrid; context: { $implicit: getRecommendedProducts('organic') }"></ng-container>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- =========================== Offer Section Start =============================== -->
+<section class="offer pt-80">
+    <div class="container container-lg">
+        <div class="row gy-4">
+            <div class="col-sm-6" *ngFor="let offer of offers" [attr.data-aos]="'zoom-in'"
+                [attr.data-aos-duration]="offer.aosDuration">
+                <div class="offer-card position-relative rounded-16 overflow-hidden p-16 ps-56-px">
+                    <img [src]="offer.bgImage" alt=""
+                        class="position-absolute inset-block-start-0 inset-inline-start-0 z-n1 w-100 h-100">
+
+                    <div class="py-xl-4 max-w-392" [ngClass]="{'ms-auto': offer.aosDuration === 600}">
+                        <div class="offer-card__logo mb-16 w-80 h-80 flex-center bg-white rounded-circle">
+                            <img [src]="offer.logo" alt="">
+                        </div>
+                        <h5 class="mb-8">{{ offer.title }}</h5>
+                        <div class="flex-align gap-8">
+                            <span class="text-sm fw-medium text-heading">{{ offer.delivery }}</span>
+                            <span [ngClass]="offer.expireClass">{{ offer.expire }}</span>
+                        </div>
+                        <a [routerLink]="['shop']" [ngClass]="offer.btnClass" tabindex="0">
+                            Shop Now
+                            <span class="icon text-xl d-flex"><i class="ph ph-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- =========================== Offer Section End =============================== -->
+
+<!-- ========================= hot-deals Start ================================ -->
+<section class="hot-deals pt-80 overflow-hidden">
+    <div class="container container-lg">
+        <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Al-AMIN FINDS</h2></div>
+        <div class="section-heading">
+            <div class="flex-between flex-wrap gap-8">
+                
+                <div class="flex-align gap-16 wow fadeInRight">
+                    <a [routerLink]="['shop']"
+                        class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View
+                        All Deals</a>
+                    <div class="flex-align gap-8">
+                        <button type="button" id="deals-prev"
+                            class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
+                            <i class="ph ph-caret-left"></i>
+                        </button>
+                        <button type="button" id="deals-next"
+                            class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
+                            <i class="ph ph-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deals-layout">
+            <div class="deals-layout__promo" data-aos="zoom-in">
+                <a [routerLink]="['/shop']" class="all-in-one-promo" aria-label="Shop all departments: drinks, bakery, fresh vegetables and treats">
+                    <img class="all-in-one-promo__poster" src="assets/images/bg/life-stocked-poster.png" alt="Al-Amin Hypermart. Life. Stocked. Everything in One Place." loading="lazy" />
+                </a>
+            </div>
+            <div class="deals-layout__products">
+                <ngx-slick-carousel #slickModal="slick-carousel" class="product-one-slider g-12"
+                    [config]="hotDealsSlideConfig">
+                    <div ngxSlickItem *ngFor="let product of hotPoducts" class="slide">
+                        <app-product-card [product]="catalogProduct(product.id)"></app-product-card>
+                    </div>                </ngx-slick-carousel>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================= hot-deals End ================================ -->
+
+<!-- ========================== Frozen Section Start ================================== -->
+<section class="frozen-section pt-64">
+    <div class="container container-lg">
+        <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Frozen &amp; Ready to Cook</h2></div>
+        <div class="section-heading">
+            <div class="flex-between flex-wrap gap-8">
+                <div class="flex-align gap-12 flex-wrap">
+                    
+                    <span class="frozen-pill-tag"><i class="ph-bold ph-snowflake"></i> Chilled Fresh</span>
+                </div>
+                <div class="flex-align gap-16 wow fadeInRight">
+                    <a [routerLink]="['shop']"
+                        class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View All</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-12">
+            <div *ngFor="let product of frozenProducts" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
+                data-aos="fade-up" data-aos-duration="250">
+                <div
+                    class="product-card h-100 p-12 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2 group-item">
+                    <button type="button" class="wishlist-btn-two">
+                        <i class="ph-bold ph-heart"></i>
+                    </button>
+                    <span *ngIf="product.badge"
+                        class="product-card__badge {{product.badgeClass}} px-8 py-4 text-sm text-white">
+                        {{ product.badge }}
+                    </span>
+                    <a [routerLink]="['product-details']"
+                        class="product-card__thumb flex-center overflow-hidden">
+                        <img [src]="product.image" [alt]="product.title">
+                    </a>
+                    <div class="product-card__content p-sm-2 w-100">
+                        <h6 class="title text-lg fw-semibold my-12 w-100">
+                            <a [routerLink]="['product-details']" class="link text-line-2">{{ product.title }}</a>
+                        </h6>
+
+                        <div class="product-card__content mt-8 w-100">
+                            <div class="product-card__price mb-8">
+                                <span class="text-heading text-md fw-semibold">{{ product.price }}</span>
+                                <span class="text-gray-400 text-md fw-semibold text-decoration-line-through ms-6">{{
+                                    product.originalPrice }}</span>
+                            </div>
+                            <div class="mt-16 w-100">
+                                <app-smile-add-btn label="Add" [fullWidth]="true" [itemId]="product.id" [itemName]="product.title" (add)="addProductToCart(product, 'Al-Amin Frozen')"></app-smile-add-btn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================== Frozen Section End ==================================== -->
+
+<!-- ============================== Brand Section Start =============================== -->
+<div class="brand py-80 overflow-hidden">
+    <div class="container container-lg">
+        <div class="brand-inner p-24 rounded-16">
+            <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Shop by Brands</h2></div>
+        <div class="section-heading">
+                <div class="flex-between flex-wrap gap-8">
+                    
+                    <div class="flex-align gap-16 wow fadeInRight">
+                        <a [routerLink]="['shop']"
+                            class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View
+                            All Deals</a>
+                        <div class="flex-align gap-8">
+                            <button type="button" id="brand-prev"
+                                class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
+                                <i class="ph ph-caret-left"></i>
+                            </button>
+                            <button type="button" id="brand-next"
+                                class="slick-next slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
+                                <i class="ph ph-caret-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ngx-slick-carousel [config]="BrandSlideConfig" class="brand-slider arrow-style-two">
+                <div ngxSlickItem *ngFor="let slide of brandSlides[0].slides" class="brand-item"
+                    [attr.data-aos]="slide.dataAos" [attr.data-aos-duration]="slide.dataAosDuration">
+                    <img [src]="slide.imgSrc" [alt]="slide.imgAlt">
+                </div>
+            </ngx-slick-carousel>
+
+        </div>
+    </div>
+</div>
+<!-- ============================== Brand Section End =============================== -->
+
+
+<!-- Al-Amin app banner -->
+<section class="app-download pb-24" aria-labelledby="app-download-title">
+    <div class="container container-lg">
+        <div class="app-download__banner">
+            <div class="app-download__copy">
+                <div class="app-download__brand"><img src="assets/images/logo/app-brand-smile.png" alt="" /><span>Life. Stocked.</span></div><span class="app-download__eyebrow">YOUR EVERYDAY SHOP, IN YOUR POCKET</span>
+                <h2 id="app-download-title">Your Al-Amin.<br /><span>Always with you.</span></h2>
+                <p>Fresh groceries, household favourites and your next great find. Bring Al-Amin along and make your everyday shop a little easier.</p>
+                <div class="app-download__stores" aria-label="Available on the App Store and Google Play">
+                    <div class="app-store-badge"><i class="ph-fill ph-apple-logo" aria-hidden="true"></i><span><small>Download on the</small><strong>App Store</strong></span></div>
+                    <div class="app-store-badge"><img src="assets/images/icon/google-play.svg" alt="" /><span><small>GET IT ON</small><strong>Google Play</strong></span></div>
+                </div>
+                <div class="app-download__platforms">Available for iOS &amp; Android</div>
+            </div>
+            <div class="app-download__visual" aria-hidden="true">
+                <span class="app-download__smile"><img src="assets/images/logo/app-brand-smile.png" alt="" /></span>
+                <div class="app-phone">
+                    <div class="app-phone__camera"></div>
+                    <img class="app-phone__logo" src="assets/images/logo/logo-wordmark.png" alt="" />
+                    <div class="app-phone__search"><i class="ph ph-magnifying-glass"></i> Find your everyday favourites</div>
+                    <div class="app-phone__feature"><strong>Life. Stocked.</strong><span>A fresh start to your basket.</span><img src="assets/images/thumbs/cat-vegetables.jpg" alt="" /></div>
+                    <div class="app-phone__heading">Fresh picks for you <i class="ph ph-arrow-right"></i></div>
+                    <div class="app-phone__products">
+                        <div><img src="assets/images/thumbs/cat-dairy.jpg" alt="" /><span>Fresh dairy</span><b>+ Add</b></div>
+                        <div><img src="assets/images/thumbs/cat-bakery.jpg" alt="" /><span>Daily bakes</span><b>+ Add</b></div>
+                    </div>
+                    <div class="app-phone__nav"><i class="ph-fill ph-house"></i><i class="ph ph-squares-four"></i><i class="ph ph-shopping-cart"></i><i class="ph ph-user"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
