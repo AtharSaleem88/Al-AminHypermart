@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 112" fill="none">
+  <rect x="2" y="2" width="216" height="108" rx="18" fill="#FFFDF9" stroke="#EED9B7" stroke-width="2"/>
+  <rect x="14" y="14" width="192" height="84" rx="14" fill="#290E28"/>
+  <path d="M52 78 C90 78 135 67 168 46 C140 73 95 86 52 84 Z" fill="#F89C24"/>
+  <text x="110" y="57" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="900" fill="#F89C24" letter-spacing="3">TAPAL</text>
+  <text x="110" y="75" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" letter-spacing="2">DANEDAR TEA</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 112" fill="none">
+  <rect x="2" y="2" width="216" height="108" rx="18" fill="#FFFDF9" stroke="#F4CDCA" stroke-width="2"/>
+  <rect x="14" y="14" width="192" height="84" rx="14" fill="#C81E1E"/>
+  <ellipse cx="110" cy="48" rx="68" ry="22" fill="#FEF2F2" stroke="#F59E0B" stroke-width="2.5"/>
+  <text x="110" y="56" text-anchor="middle" font-family="'Georgia', serif" font-size="27" font-weight="900" fill="#991B1B" letter-spacing="1">K&amp;N's</text>
+  <text x="110" y="85" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="700" fill="#FDE68A" letter-spacing="2">HALAL FROZEN</text>
+</svg>
