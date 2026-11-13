@@ -7,4 +7,14 @@
 }
 @media (prefers-reduced-motion: reduce) {
     .brand-vision-card, .brand-vision-icon { transition: none !important; }
+}.brand-benefits-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.brand-benefits-grid > .col { min-width: 0; width: 100%; }
+@media(max-width: 991px) { .brand-benefits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+@media(max-width: 575px) {
+  .brand-benefits-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .brand-vision-bar { padding-block: 28px !important; }
+  .brand-vision-bar .brand-vision-card { padding: 18px 20px; min-height: 88px; gap: 16px; border-radius: 14px; box-shadow: none !important; }
+  .brand-vision-bar .brand-vision-icon { width: 42px; height: 42px; box-shadow: none !important; }
+  .brand-vision-bar .brand-vision-card .fw-bold { line-height: 1.4 !important; margin-bottom: 5px !important; }
+  .brand-vision-bar .brand-vision-card .text-xs { line-height: 1.6 !important; }
 }

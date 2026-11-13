@@ -11,7 +11,6 @@ export class BrandPageMotion implements OnDestroy {
   private pressTimer?: ReturnType<typeof setTimeout>;
   constructor() {
     afterNextRender(() => this.zone.runOutsideAngular(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
       this.setupMotion();
     }));
   }
@@ -93,5 +92,6 @@ export class BrandPageMotion implements OnDestroy {
     this.frames.clear();
   }
 }
+
 
 

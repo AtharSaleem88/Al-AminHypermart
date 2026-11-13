@@ -19,9 +19,8 @@ export class AccountComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly routeData = toSignal(this.route.data, { initialValue: this.route.snapshot.data });
   readonly registering = computed(() => this.routeData()['mode'] === 'register');
-  readonly view = computed(() => this.routeData()['view'] ?? 'overview');
+  readonly view = computed(() => this.routeData()['view'] ?? 'details');
   readonly history = computed(() => { this.account.user(); return this.orders.accountHistory(); });
-  readonly totalSpent = computed(() => this.history().reduce((sum, order) => sum + order.total, 0));
   readonly busy = signal(false);
   readonly error = signal('');
   readonly message = signal('');
@@ -34,7 +33,7 @@ export class AccountComponent {
       const user = this.account.user();
       if (user) this.profileForm.patchValue(user);
     });
-    effect(() => { this.routeData(); this.error.set(''); this.message.set(''); this.authForm.reset(); if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'instant' }); });
+    effect(() => { this.routeData(); this.error.set(''); this.message.set(''); this.authForm.reset(); });
   }
   invalid(field: keyof typeof this.authForm.controls): boolean { const control = this.authForm.controls[field]; return control.invalid && control.touched; }
   async authenticate(): Promise<void> {
@@ -75,3 +74,4 @@ export class AccountComponent {
   }
   async logout(): Promise<void> { try { this.account.logout(); await this.router.navigateByUrl('/login'); } catch { this.error.set('Sign out could not be completed. Please try again.'); } }
 }
+

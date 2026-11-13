@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { AccountService } from '../../services/account.service';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,7 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './bottom-nav.component.html',
   styleUrls: ['./bottom-nav.component.scss']
 })
-export class BottomNavComponent {
+export class BottomNavComponent implements OnDestroy {
   isSearchModalOpen: boolean = false;
   searchQuery: string = '';
 
@@ -25,7 +26,7 @@ export class BottomNavComponent {
     'Bakery Bread'
   ];
 
-  constructor(public router: Router, public cartService: CartService) {}
+  constructor(public router: Router, public cartService: CartService, public account: AccountService) {}
 
   openSearch(): void {
     this.isSearchModalOpen = true;
@@ -52,10 +53,12 @@ export class BottomNavComponent {
 
   isRouteActive(route: string): boolean {
     if (route === '/') {
-      return this.router.url === '/' || this.router.url === '';
+      return this.router.url.split('?')[0] === '/' || this.router.url === '';
     }
     return this.router.url.startsWith(route);
   }
+
+  ngOnDestroy(): void { if (this.isSearchModalOpen) document.body.classList.remove('overflow-hidden'); }
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
@@ -64,3 +67,4 @@ export class BottomNavComponent {
     }
   }
 }
+

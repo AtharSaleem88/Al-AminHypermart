@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, afterNextRender } from '@angular/core';
+import { Component, DestroyRef, inject, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -24,8 +24,9 @@ export class ShopComponent {
   draftMin = 0; draftMax = 3000; searchDraft = '';
 
   filtersOpen = true;
+  mobileFiltersOpen = false;
+  @ViewChild('filterDialog') filterDialog!: ElementRef<HTMLDialogElement>;
   constructor() {
-    afterNextRender(() => { this.filtersOpen = !window.matchMedia('(max-width: 991px)').matches; });
     this.route.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
       const category = params.get('category') ?? '';
       this.category = this.departments.some(d => d.id === category) ? category : '';
@@ -38,6 +39,25 @@ export class ShopComponent {
       this.page = Math.min(this.totalPages, Math.max(1, Math.floor(this.number(params.get('page'), 1))));
       this.draftMin = this.min; this.draftMax = this.max; this.searchDraft = this.search;
     });
+  }
+  get refinementCount(): number { return this.selectedBrands.length + Number(this.min > 0 || this.max !== 3000) + Number(this.offers); }
+  openFilters(): void {
+    this.filterDialog.nativeElement.showModal();
+    this.mobileFiltersOpen = true;
+  }
+  onFilterBackdropClick(event: MouseEvent): void {
+    if (event.target === this.filterDialog.nativeElement) this.closeFilters();
+  }
+  closeFilters(): void {
+    this.filterDialog.nativeElement.close();
+    this.mobileFiltersOpen = false;
+  }
+  finishFilters(): void {
+    this.applyPrice();
+    this.closeFilters();
+  }
+  @HostListener('window:resize') onResize(): void {
+    if (this.mobileFiltersOpen && window.innerWidth > 991) this.closeFilters();
   }
   private number(value: string | null, fallback: number): number {
     const n = value === null || value.trim() === '' ? NaN : Number(value);

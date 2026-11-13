@@ -1,3 +1,5 @@
+import { WishlistButtonComponent } from '../../component/wishlist-button/wishlist-button.component';
+import { CATALOG } from '../../data/catalog';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // ✅ Import this
 import { RouterLink } from '@angular/router';
@@ -11,7 +13,7 @@ import { SmileAddBtnComponent } from '../../component/smile-add-btn/smile-add-bt
 
 @Component({
   selector: 'app-product-details-two',
-  imports: [CommonModule,RouterLink,FormsModule,SlickCarouselModule,BreadcrumbComponent,SmileAddBtnComponent],
+  imports: [WishlistButtonComponent,CommonModule,RouterLink,FormsModule,SlickCarouselModule,BreadcrumbComponent,SmileAddBtnComponent],
   templateUrl: './product-details-two.component.html',
   styleUrl: './product-details-two.component.scss'
 })
@@ -49,92 +51,7 @@ export class ProductDetailsTwoComponent {
     'assets/images/thumbs/product-details-two-thumb2.png',
   ];
 
-  products = [
-    {
-      id: "related-pd2-1",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img26.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 200,
-      total: 35
-    },
-    {
-      id: "related-pd2-2",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img27.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 400,
-      total: 35
-    },
-    {
-      id: "related-pd2-3",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img28.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 600,
-      total: 35
-    },
-    {
-      id: "related-pd2-4",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img29.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 800,
-      total: 35
-    },
-    {
-      id: "related-pd2-5",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img30.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 800,
-      total: 35
-    },
-    {
-      id: "related-pd2-6",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img13.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 800,
-      total: 35
-    },
-    {
-      id: "related-pd2-7",
-      name: "Taylor Farms Broccoli Florets Vegetables",
-      image: "assets/images/thumbs/product-img3.png",
-      price: 14.99,
-      oldPrice: 28.99,
-      rating: 4.8,
-      reviews: "17k",
-      sold: 18,
-      fadeDuration: 800,
-      total: 35
-    },
-  ];
+  products = CATALOG.slice(0,7).map((p,i)=>({...p,name:p.title,reviews:120,fadeDuration:200+i*80,productLink:'/shop/product/'+p.id}));
 
   arrivalSlider = {
     slidesToShow: 6,

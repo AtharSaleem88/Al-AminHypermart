@@ -159,3 +159,22 @@
 .header-account nav a, .header-account nav button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; border: 0; border-radius: 8px; background: transparent; color: #53174D; font-size: 13px; text-align: left; }
 .header-account nav a:hover, .header-account nav button:hover { background: #F1EBF6; }
 .header-account summary:focus-visible, .header-account nav a:focus-visible, .header-account nav button:focus-visible { outline: 2px solid #F89C24; outline-offset: 2px; }
+
+/* The pinned shopping header adopts the primary brand palette. */
+.header, .header-main-row { transition: background-color 260ms ease, border-color 260ms ease, box-shadow 260ms ease; }
+.header.is-pinned {
+  background-color: #53174D !important;
+  border-color: #784370 !important;
+  box-shadow: 0 5px 20px #290E2820;
+  .header-main-row { background-color: #53174D !important; border-color: #784370 !important; }
+  nav.d-lg-flex > a, .category-dropdown-wrapper > button { color: #fff !important; }
+  nav.d-lg-flex > a:hover, nav.d-lg-flex > a.text-main-600, nav.d-lg-flex > a.text-main-two-600, .category-dropdown-wrapper > button:hover { color: #F89C24 !important; }
+  .header-actions > a, .header-actions > button { background-color: #FFFFFF12 !important; color: #fff !important; border-color: #9F85BD70 !important; }
+  .header-actions > a:hover, .header-actions > button:hover { background-color: #F89C24 !important; border-color: #F89C24 !important; color: #290E28 !important; }
+  .header-actions > button[data-cart-animation-target] { color: #F89C24 !important; }
+  .header-actions > button[data-cart-animation-target]:hover { color: #290E28 !important; }
+  .header-account summary { background: #DCD1EB; border-color: #DCD1EB; color: #53174D; }
+}
+@media(prefers-reduced-motion: reduce) { .header, .header-main-row { transition: none; } }
+
+.basket-update{position:fixed;bottom:24px;right:24px;z-index:1100;display:flex;align-items:center;gap:12px;width:calc(100% - 32px);max-width:380px;padding:14px 16px;background:#53174d;color:white;border-radius:16px;box-shadow:0 8px 24px #290e2820}.basket-update img{width:32px;height:32px}.basket-update div{flex:1;min-width:0}.basket-update strong,.basket-update span{display:block}.basket-update strong{font-size:13px}.basket-update span{font-size:11px;opacity:.85;margin-top:4px}.basket-update button{background:#f89c24;color:#290e28;border:0;border-radius:20px;padding:8px 12px;font-size:11px;font-weight:600;white-space:nowrap}.basket-update .dismiss{background:transparent;color:white;font-size:20px;padding:4px}@media(max-width:991px){.basket-update{bottom:calc(92px + env(safe-area-inset-bottom,0px));right:16px}}

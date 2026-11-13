@@ -1,14 +1,15 @@
+import { WishlistButtonComponent } from '../wishlist-button/wishlist-button.component';
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CatalogProduct, findCatalogProduct, productAlternatives } from '../../data/catalog';
 import { CartService } from '../../services/cart.service';
-@Component({ selector: 'app-stock-alternatives', standalone: true, imports: [RouterLink], template: `
+@Component({ selector: 'app-stock-alternatives', standalone: true, imports: [RouterLink, WishlistButtonComponent], template: `
   <div class="stock-options" (click)="$event.stopPropagation()">
-    <span class="stock-label">Out of stock</span>
+    @if (showStockLabel) { <span class="stock-label">Out of stock</span> }
     <button type="button" class="alternatives-toggle" (click)="open()" aria-haspopup="dialog">See alternatives <i class="ph ph-arrows-left-right" aria-hidden="true"></i></button>
     <dialog #alternativesDialog class="alternatives" aria-label="In-stock alternatives" (close)="expanded = false" (click)="$event.target === alternativesDialog && alternativesDialog.close()">
       <div class="sheet-content"><div class="sheet-heading"><div><span>FIND YOUR NEXT FAVOURITE</span><h2>Fresh alternatives.</h2><p>Available picks from the same department.</p></div><button type="button" class="close-sheet" (click)="alternativesDialog.close()" aria-label="Close alternatives"><i class="ph ph-x" aria-hidden="true"></i></button></div>
-      @if (expanded) { <div class="alternative-grid">@for (alternative of alternatives; track alternative.id) { <article><a [routerLink]="['/shop/product', alternative.id]" (click)="alternativesDialog.close()"><img [src]="alternative.image" [alt]="alternative.title" loading="lazy" /><span>{{ alternative.title }}<strong>{{ cart.formatRs(alternative.price) }}</strong></span></a><button type="button" class="choose-button" (click)="choose(alternative)" [disabled]="added === alternative.id" [attr.aria-label]="'Add alternative ' + alternative.title">{{ added === alternative.id ? 'Added to basket' : 'Choose alternative' }}</button></article> }</div>
+      @if (expanded) { <div class="alternative-grid">@for (alternative of alternatives; track alternative.id) { <article style="position:relative"><app-wishlist-button [itemId]="alternative.id" [itemName]="alternative.title" /><a [routerLink]="['/shop/product', alternative.id]" (click)="alternativesDialog.close()"><img [src]="alternative.image" [alt]="alternative.title" loading="lazy" /><span>{{ alternative.title }}<strong>{{ cart.formatRs(alternative.price) }}</strong></span></a><button type="button" class="choose-button" (click)="choose(alternative)" [disabled]="added === alternative.id" [attr.aria-label]="'Add alternative ' + alternative.title">{{ added === alternative.id ? 'Added to basket' : 'Choose alternative' }}</button></article> }</div>
         @if (!alternatives.length) { <p>No alternatives in this department right now. <a routerLink="/shop" (click)="alternativesDialog.close()">Explore the shop →</a></p> }
       }
       @if (added) { <p class="added-notice" role="status">{{ replaced ? 'Unavailable item replaced in your basket.' : 'Alternative added to your basket.' }} <a routerLink="/cart" (click)="alternativesDialog.close()">View basket →</a></p> }
@@ -25,6 +26,7 @@ import { CartService } from '../../services/cart.service';
   @media(max-width: 575px) { dialog { inset: auto 0 0; margin: 0; width: 100%; max-width: 100%; max-height: 82dvh; border-radius: 24px 24px 0 0; } .sheet-content { padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px)); } .alternative-grid { grid-template-columns: 1fr; gap: 12px; } article { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 12px; padding: 14px; } article a { display: flex; align-items: center; gap: 12px; } article img { width: 54px; height: 64px; margin: 0; } .choose-button { margin: 0; max-width: none; width: 100%; } h2 { font-size: 25px; } }
 `] })
 export class StockAlternativesComponent {
+  @Input() showStockLabel = true;
   @Input() itemId?: string | number;
   @Input() itemName = '';
   @ViewChild('alternativesDialog') dialog!: ElementRef<HTMLDialogElement>;

@@ -9,15 +9,16 @@ import { NgFor } from '@angular/common'; // (Optional: For tree-shaking optimiza
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart.service';
-import { SmileAddBtnComponent } from '../../component/smile-add-btn/smile-add-btn.component';
+
 
 @Component({
   selector: 'app-index',
-  imports: [CommonModule, SlickCarouselModule, RouterLink, SmileAddBtnComponent, ProductCardComponent],
+  imports: [CommonModule, SlickCarouselModule, RouterLink, ProductCardComponent],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss'
 })
 export class IndexComponent implements OnDestroy {
+  readonly flashProducts = LANDING_ESSENTIALS.map(item => CATALOG.find(product => product.id === item.id)!);
   readonly cartService = inject(CartService);
   readonly beverageProducts = CATALOG.filter(product => product.department === 'drinks').slice(0, 6);
 

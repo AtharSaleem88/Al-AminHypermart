@@ -19,7 +19,7 @@
     <button type="button" class="close-button" (click)="closeMobileMenu()" aria-label="Close menu"> <i class="ph ph-x"></i> </button>
     <div class="mobile-menu__inner">
         <a [routerLink]="['/']" class="mobile-menu__logo mb-24 d-inline-block" (click)="closeMobileMenu()">
-            <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 48px; object-fit: contain;">
+            <img [src]="isHeaderPinned ? 'assets/images/logo/logo-wordmark-white.png' : 'assets/images/logo/logo.png'" alt="Al-Amin Hypermart" style="max-height: 48px; object-fit: contain;">
         </a>
         <div class="mobile-menu__menu">
             <ul class="nav-menu flex-align nav-menu--mobile">
@@ -41,9 +41,7 @@
                 <li class="nav-menu__item" (click)="closeMobileMenu()">
                     <a [routerLink]="['/about-us']" class="nav-menu__link text-heading-two">About Us</a>
                 </li>
-                <li class="nav-menu__item" (click)="closeMobileMenu()">
-                    <a [routerLink]="['/contact']" class="nav-menu__link text-heading-two">Contact Us</a>
-                </li>
+
             </ul>
         </div>
     </div>
@@ -52,7 +50,7 @@
 
 <!-- ==================== Header ==================== -->
 <header #mainHeader [class.is-pinned]="isHeaderPinned" class="header bg-white border-bottom border-gray-100 position-relative z-9">
-    
+
     <!-- 1. Top Announcement Bar (Smooth Infinite Moving Marquee in Brand Dark Plum #53174D) -->
     <div #announcementBar class="top-announcement-bar py-8 overflow-hidden" style="background-color: #53174D;">
         <div class="container-fluid px-0">
@@ -84,18 +82,18 @@
     </div>
 
     <!-- 2. Main Header Row: Logo | Centered Navigation | 4 Circular Action Icons -->
-    <div class="py-14 bg-white border-bottom border-gray-100">
+    <div class="header-main-row py-14 bg-white border-bottom border-gray-100">
         <div class="container container-lg">
             <div class="d-flex align-items-center justify-content-between gap-24">
 
                 <!-- Left: Brand Logo & Mobile Toggle -->
-                <div class="d-flex align-items-center gap-12 flex-shrink-0">
+                <div class="header-actions d-flex align-items-center gap-12 flex-shrink-0">
                     <button type="button" class="toggle-mobileMenu d-lg-none text-main-600 text-3xl border-0 bg-transparent p-0 flex-center"
                         (click)="openMobileMenu()" aria-label="Toggle Navigation">
                         <i class="ph ph-list"></i>
                     </button>
                     <a [routerLink]="['/']" class="d-inline-flex align-items-center">
-                        <img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" style="max-height: 48px; max-width: 220px; object-fit: contain;">
+                        <img [src]="isHeaderPinned ? 'assets/images/logo/logo-wordmark-white.png' : 'assets/images/logo/logo.png'" alt="Al-Amin Hypermart" style="max-height: 48px; max-width: 220px; object-fit: contain;">
                     </a>
                 </div>
 
@@ -143,14 +141,11 @@
                         About Us
                     </a>
 
-                    <a [routerLink]="['/contact']"
-                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
-                        Contact Us
-                    </a>
+
                 </nav>
 
                 <!-- Right: 4 Circular Action Buttons -->
-                <div class="d-flex align-items-center gap-12 flex-shrink-0">
+                <div class="header-actions d-flex align-items-center gap-12 flex-shrink-0">
 
                     <!-- 1. Search Circle Button (Opens Full Search Overlay) -->
                     <button type="button" (click)="openSearchModal()"
@@ -165,7 +160,7 @@
                             <summary aria-label="Open account menu"><span>{{ user.name.charAt(0).toUpperCase() }}</span></summary>
                             <nav aria-label="Account menu">
                                 <div class="header-account__identity"><strong>Hello, {{ user.name.split(' ')[0] }}</strong><small>{{ user.email }}</small></div>
-                                <a routerLink="/account" (click)="accountMenu.open = false"><i class="ph ph-squares-four" aria-hidden="true"></i> Account overview</a>
+
                                 <a routerLink="/account/orders" (click)="accountMenu.open = false"><i class="ph ph-package" aria-hidden="true"></i> Orders & reorder</a>
                                 <a routerLink="/account/details" (click)="accountMenu.open = false"><i class="ph ph-user-circle" aria-hidden="true"></i> Account settings</a>
                                 <button type="button" (click)="accountMenu.open = false; signOut()"><i class="ph ph-sign-out" aria-hidden="true"></i> Sign out</button>
@@ -202,11 +197,11 @@
 <div class="search-overlay-modal" *ngIf="isSearchModalOpen">
     <!-- Backdrop Blur -->
     <div class="search-overlay-backdrop" (click)="closeSearchModal()"></div>
-    
+
     <!-- White Dropdown Search Canvas -->
     <div class="search-overlay-content bg-white shadow-2xl py-40 px-24 position-relative">
         <div class="container container-lg position-relative">
-            
+
             <!-- Close ✕ Button (Top-Right) -->
             <button type="button" class="btn-close-overlay position-absolute top-0 end-0 border-0 bg-transparent text-heading hover-text-main-600 text-2xl p-8 flex-center transition-1"
                 (click)="closeSearchModal()" aria-label="Close search">
@@ -285,10 +280,10 @@
 <div class="cart-slider-modal" *ngIf="isCartSliderOpen">
     <!-- Backdrop Blur -->
     <div class="cart-slider-backdrop" (click)="closeCartSlider()"></div>
-    
+
     <!-- Right Drawer Sheet -->
     <div class="cart-slider-drawer bg-white shadow-2xl position-fixed top-0 end-0 h-100 z-999 d-flex flex-column">
-        
+
         <!-- Drawer Header -->
         <div class="cart-slider-header p-20 border-bottom border-gray-100 d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-10">
@@ -393,34 +388,4 @@
 <!-- ==================== Slide-Out Cart Slider End ==================== -->
 
 <!-- ==================== Live Add-To-Cart Smile Toast ==================== -->
-<div class="cart-live-toast" *ngIf="cartService.toast() as toast" role="status" aria-live="polite" aria-atomic="true">
-    <div class="cart-live-toast__card">
-        <div class="cart-live-toast__top">
-            <img [src]="toast.image" [alt]="toast.title" class="cart-live-toast__thumb" />
-            <div class="flex-grow-1 min-w-0">
-                <div class="d-flex align-items-center justify-content-between gap-8 mb-2">
-                    <span class="cart-live-toast__tag">Added to Basket</span>
-                    <button type="button" (click)="cartService.dismissToast()" class="cart-live-toast__close" aria-label="Dismiss notification">
-                        <i class="ph ph-x"></i>
-                    </button>
-                </div>
-                <div class="cart-live-toast__title text-truncate">{{ toast.title }}</div>
-                <div class="cart-live-toast__price">{{ cartService.formatRs(toast.unitPrice) }} · Cart: {{ cartService.formatRs(cartService.subtotal()) }}</div>
-            </div>
-        </div>
-        <div class="cart-live-toast__progress">
-            <img src="assets/images/logo/brand-smile.png" alt="Smile" class="cart-live-toast__smile" />
-            <span class="cart-live-toast__status">
-                @if (cartService.isMinimumMet()) {
-                    Rs. 3,000 minimum order reached!
-                } @else {
-                    Spend {{ cartService.formatRs(cartService.remainingAmount()) }} more for Rs. 3,000 minimum
-                }
-            </span>
-            <button type="button" (click)="openCartSlider(); cartService.dismissToast()" class="cart-live-toast__cta">
-                View Cart
-            </button>
-        </div>
-    </div>
-</div>
-
+<div class="basket-update" *ngIf="cartService.toast()" role="status" aria-live="polite"><img src="assets/images/logo/brand-smile-clean.svg" alt="" /><div><strong>Basket updated</strong><span>{{cartService.itemCount()}} items in your order</span></div><button type="button" (click)="openCartSlider(); cartService.dismissToast()">View basket</button><button type="button" class="dismiss" (click)="cartService.dismissToast()" aria-label="Dismiss notification">×</button></div>

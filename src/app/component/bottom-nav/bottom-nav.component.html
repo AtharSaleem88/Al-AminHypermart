@@ -1,69 +1,12 @@
-<!-- ==================== Instagram-Inspired Mobile Bottom Nav ==================== -->
 <nav class="bottom-nav d-lg-none" aria-label="Mobile Navigation">
-    <div class="bottom-nav__container">
-        
-        <!-- 1. Home -->
-        <a [routerLink]="['/']" class="bottom-nav__item" [class.is-active]="isRouteActive('/')">
-            <div class="bottom-nav__icon-wrapper">
-                <i class="ph-bold ph-house bottom-nav__icon" [class.d-none]="isRouteActive('/')"></i>
-                <i class="ph-fill ph-house bottom-nav__icon-active" [class.d-none]="!isRouteActive('/')"></i>
-            </div>
-            <span class="bottom-nav__label">Home</span>
-            <!-- Al-Amin Smile Active Indicator -->
-            <div class="bottom-nav__smile-bar" *ngIf="isRouteActive('/')">
-                <img src="assets/images/logo/smile-curve.svg" alt="Active" class="bottom-nav__smile-img">
-            </div>
-        </a>
-
-        <!-- 2. Categories -->
-        <a [routerLink]="['/shop']" class="bottom-nav__item" [class.is-active]="isRouteActive('/shop')">
-            <div class="bottom-nav__icon-wrapper">
-                <i class="ph-bold ph-squares-four bottom-nav__icon" [class.d-none]="isRouteActive('/shop')"></i>
-                <i class="ph-fill ph-squares-four bottom-nav__icon-active" [class.d-none]="!isRouteActive('/shop')"></i>
-            </div>
-            <span class="bottom-nav__label">Categories</span>
-            <div class="bottom-nav__smile-bar" *ngIf="isRouteActive('/shop')">
-                <img src="assets/images/logo/smile-curve.svg" alt="Active" class="bottom-nav__smile-img">
-            </div>
-        </a>
-
-        <!-- 3. Search Trigger (Opens quick-search sheet) -->
-        <button type="button" class="bottom-nav__item border-0 bg-transparent p-0" (click)="openSearch()" aria-label="Search Catalog">
-            <div class="bottom-nav__icon-wrapper">
-                <i class="ph-bold ph-magnifying-glass bottom-nav__icon"></i>
-            </div>
-            <span class="bottom-nav__label">Search</span>
-        </button>
-
-        <!-- 4. Cart -->
-        <a data-cart-animation-target [routerLink]="['/cart']" class="bottom-nav__item" [class.is-active]="isRouteActive('/cart')">
-            <div class="bottom-nav__icon-wrapper position-relative">
-                <i class="ph-bold ph-shopping-cart-simple bottom-nav__icon" [class.d-none]="isRouteActive('/cart')"></i>
-                <i class="ph-fill ph-shopping-cart-simple bottom-nav__icon-active" [class.d-none]="!isRouteActive('/cart')"></i>
-                <!-- Cart Count Badge in Brand Amber -->
-                <span class="bottom-nav__badge bg-main-two-600 text-white">{{ cartService.itemCount() }}</span>
-            </div>
-            <span class="bottom-nav__label">Cart</span>
-            <div class="bottom-nav__smile-bar" *ngIf="isRouteActive('/cart')">
-                <img src="assets/images/logo/smile-curve.svg" alt="Active" class="bottom-nav__smile-img">
-            </div>
-        </a>
-
-        <!-- 5. Account -->
-        <a [routerLink]="['/account']" class="bottom-nav__item" [class.is-active]="isRouteActive('/account')">
-            <div class="bottom-nav__icon-wrapper">
-                <i class="ph-bold ph-user bottom-nav__icon" [class.d-none]="isRouteActive('/account')"></i>
-                <i class="ph-fill ph-user bottom-nav__icon-active" [class.d-none]="!isRouteActive('/account')"></i>
-            </div>
-            <span class="bottom-nav__label">Account</span>
-            <div class="bottom-nav__smile-bar" *ngIf="isRouteActive('/account')">
-                <img src="assets/images/logo/smile-curve.svg" alt="Active" class="bottom-nav__smile-img">
-            </div>
-        </a>
-
-    </div>
+  <div class="bottom-nav__container">
+    <a routerLink="/" class="bottom-nav__item" [class.is-active]="isRouteActive('/')" aria-label="Home" [attr.aria-current]="isRouteActive('/') ? 'page' : null"><i [class]="isRouteActive('/') ? 'ph-fill ph-house' : 'ph ph-house'" aria-hidden="true"></i><span class="visually-hidden">Home</span></a>
+    <button type="button" class="bottom-nav__item" [class.is-active]="isSearchModalOpen" (click)="openSearch()" aria-label="Search products" [attr.aria-expanded]="isSearchModalOpen"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><span class="visually-hidden">Search</span></button>
+    <a routerLink="/shop" class="bottom-nav__item" [class.is-active]="isRouteActive('/shop')" aria-label="Shop categories" [attr.aria-current]="isRouteActive('/shop') ? 'page' : null"><i [class]="isRouteActive('/shop') ? 'ph-fill ph-squares-four' : 'ph ph-squares-four'" aria-hidden="true"></i><span class="visually-hidden">Categories</span></a>
+    <a data-cart-animation-target routerLink="/cart" class="bottom-nav__item" [class.is-active]="isRouteActive('/cart')" [attr.aria-label]="'Basket, ' + cartService.itemCount() + ' items'" [attr.aria-current]="isRouteActive('/cart') ? 'page' : null"><span class="bottom-nav__cart"><i [class]="isRouteActive('/cart') ? 'ph-fill ph-shopping-bag' : 'ph ph-shopping-bag'" aria-hidden="true"></i>@if (cartService.itemCount()) { <span class="bottom-nav__badge" aria-hidden="true">{{ cartService.itemCount() > 99 ? '99+' : cartService.itemCount() }}</span> }</span><span class="visually-hidden">Basket</span></a>
+    <a routerLink="/account" class="bottom-nav__item" [class.is-active]="isRouteActive('/account')" aria-label="Your account" [attr.aria-current]="isRouteActive('/account') ? 'page' : null"><span class="bottom-nav__profile" [class.has-user]="!!account.user()">@if (account.user(); as user) { {{ user.name.charAt(0).toUpperCase() }} } @else { <i class="ph ph-user" aria-hidden="true"></i> }</span><span class="visually-hidden">Account</span></a>
+  </div>
 </nav>
-
 <!-- ==================== Quick Search Drawer (Mobile) ==================== -->
 <div class="mobile-search-modal" *ngIf="isSearchModalOpen">
     <div class="mobile-search-backdrop" (click)="closeSearch()"></div>
@@ -103,3 +46,4 @@
         </div>
     </div>
 </div>
+

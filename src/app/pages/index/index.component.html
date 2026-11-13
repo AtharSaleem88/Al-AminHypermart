@@ -158,7 +158,7 @@
         <div class="categories-heading-divider">
             <h2 class="categories-heading-divider__title">Shop By Categories</h2>
         </div>
-        <div class="position-relative arrow-center gradient-shadow">
+        <div class="category-desktop position-relative arrow-center gradient-shadow">
             <div class="flex-align">
                 <button type="button" id="feature-item-wrapper-prev"
                     aria-label="Previous categories"
@@ -187,6 +187,14 @@
                 </div>
             </ngx-slick-carousel>
         </div>
+        <div class="category-mobile-grid" aria-label="Shop categories">
+            @for (item of featureItems; track item.id; let i = $index) {
+                <a [routerLink]="['/shop']" [queryParams]="{category: item.id}" class="category-tile" [class.category-tile--amber]="i % 2 === 1">
+                    <span class="category-tile__image"><img [src]="item.img" alt="" loading="lazy" /></span>
+                    <strong>{{ item.title }}</strong>
+                </a>
+            }
+        </div>
     </div>
 </div>
 
@@ -209,40 +217,8 @@
 
         <!-- Slick Carousel -->
         <ngx-slick-carousel #slickModal="slick-carousel" class="product-one-slider g-12" [config]="productSlideConfig">
-            <div ngxSlickItem *ngFor="let product of products" class="slide">
-                <div class="" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="product.fadeDuration">
-                    <div
-                        class="product-card flash-deal-card border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2">
-
-                        <a [routerLink]="['/product-details']" class="product-card__thumb flex-center overflow-hidden">
-                            <img [src]="product.image" [alt]="product.name">
-                        </a>
-
-                        <div class="product-card__content mt-12 w-100">
-                            <div>
-                                <div class="product-card__price mb-8 d-flex align-items-baseline gap-8 flex-wrap">
-                                    <span class="flash-deal-card__price-now">Rs. {{ product.price | number:'1.0-0' }}</span>
-                                    <span class="flash-deal-card__price-old">Rs. {{ product.oldPrice | number:'1.0-0' }}</span>
-                                </div>
-
-                                <h6 class="title flash-deal-card__title mt-4 mb-0">
-                                    <a [routerLink]="['/product-details']" class="link text-line-2">{{ product.name }}</a>
-                                </h6>
-                            </div>
-
-                            <div class="mt-14 w-100">
-                                <app-smile-add-btn
-                                    label="Add"
-                                    [fullWidth]="true"
-                                    [itemId]="product.id"
-                                    [itemName]="product.name"
-                                    (add)="addProductToCart(product, product.category)">
-                                </app-smile-add-btn>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div ngxSlickItem *ngFor="let product of flashProducts" class="slide">
+                <div data-aos="fade-up" data-aos-duration="400" style="height:100%"><app-product-card [product]="product" /></div>
             </div>
         </ngx-slick-carousel>
     </div>
@@ -392,36 +368,7 @@
                 <div class="row g-12">
                     <div *ngFor="let product of items" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
                         data-aos="fade-up" data-aos-duration="200">
-                        <div
-                            class="product-card h-100 p-12 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2 group-item">
-                            <button type="button" class="wishlist-btn-two">
-                                <i class="ph-bold ph-heart"></i>
-                            </button>
-                            <span *ngIf="product.badge"
-                                class="product-card__badge {{product.badgeClass}} px-8 py-4 text-sm text-white">
-                                {{ product.badge }}
-                            </span>
-                            <a [routerLink]="['product-details']"
-                                class="product-card__thumb flex-center overflow-hidden">
-                                <img [src]="product.image" [alt]="product.title">
-                            </a>
-                            <div class="product-card__content p-sm-2 w-100">
-                                <h6 class="title text-lg fw-semibold my-12 w-100">
-                                    <a [routerLink]="['product-details']" class="link text-line-2">{{ product.title }}</a>
-                                </h6>
-
-                                <div class="product-card__content mt-8 w-100">
-                                    <div class="product-card__price mb-8">
-                                        <span class="text-heading text-md fw-semibold">{{ product.price }}</span>
-                                        <span class="text-gray-400 text-md fw-semibold text-decoration-line-through ms-6">{{
-                                            product.originalPrice }}</span>
-                                    </div>
-                                    <div class="mt-16 w-100">
-                                        <app-smile-add-btn label="Add" [fullWidth]="true" [itemId]="product.id" [itemName]="product.title" (add)="addProductToCart(product)"></app-smile-add-btn>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <app-product-card [product]="catalogProduct(product.id)" [badge]="product.badge || ''" />
                     </div>
                 </div>
             </ng-template>
@@ -555,36 +502,7 @@
         <div class="row g-12">
             <div *ngFor="let product of frozenProducts" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
                 data-aos="fade-up" data-aos-duration="250">
-                <div
-                    class="product-card h-100 p-12 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2 group-item">
-                    <button type="button" class="wishlist-btn-two">
-                        <i class="ph-bold ph-heart"></i>
-                    </button>
-                    <span *ngIf="product.badge"
-                        class="product-card__badge {{product.badgeClass}} px-8 py-4 text-sm text-white">
-                        {{ product.badge }}
-                    </span>
-                    <a [routerLink]="['product-details']"
-                        class="product-card__thumb flex-center overflow-hidden">
-                        <img [src]="product.image" [alt]="product.title">
-                    </a>
-                    <div class="product-card__content p-sm-2 w-100">
-                        <h6 class="title text-lg fw-semibold my-12 w-100">
-                            <a [routerLink]="['product-details']" class="link text-line-2">{{ product.title }}</a>
-                        </h6>
-
-                        <div class="product-card__content mt-8 w-100">
-                            <div class="product-card__price mb-8">
-                                <span class="text-heading text-md fw-semibold">{{ product.price }}</span>
-                                <span class="text-gray-400 text-md fw-semibold text-decoration-line-through ms-6">{{
-                                    product.originalPrice }}</span>
-                            </div>
-                            <div class="mt-16 w-100">
-                                <app-smile-add-btn label="Add" [fullWidth]="true" [itemId]="product.id" [itemName]="product.title" (add)="addProductToCart(product, 'Al-Amin Frozen')"></app-smile-add-btn>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <app-product-card [product]="catalogProduct(product.id)" [badge]="product.badge || ''" />
             </div>
         </div>
     </div>
@@ -661,5 +579,6 @@
         </div>
     </div>
 </section>
+
 
 

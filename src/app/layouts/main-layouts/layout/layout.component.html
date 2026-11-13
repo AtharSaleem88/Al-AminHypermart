@@ -1,7 +1,9 @@
-@if (!authScreen()) { <app-header></app-header><div class="mobile-brand"><img src="assets/images/logo/logo-wordmark.png" alt="Al-Amin Hypermart" /><span>Life. Stocked.</span></div> }
+@if (!authScreen()) { <app-header></app-header><div class="mobile-brand-slot"><div class="mobile-brand" [class.is-scrolled]="mobileScrolled()"><img [src]="mobileScrolled() ? 'assets/images/logo/logo-wordmark-white.png' : 'assets/images/logo/logo-wordmark.png'" alt="Al-Amin Hypermart" /><span>Life. Stocked.</span></div></div> }
 <main class="main-content-area"><router-outlet></router-outlet></main>
 @if (!authScreen()) {
   <app-shipping></app-shipping>
   <app-footer></app-footer>
   <app-bottom-nav></app-bottom-nav>
 }
+
+

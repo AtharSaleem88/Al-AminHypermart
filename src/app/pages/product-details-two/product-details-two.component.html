@@ -807,22 +807,21 @@
             <div ngxSlickItem *ngFor="let product of products" class="slide">
                 <div class="" [attr.data-aos]="'fade-up'" [attr.data-aos-duration]="product.fadeDuration">
                     <div
-                        class="product-card px-20 py-16 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2">
+                        class="product-card px-20 py-16 border border-gray-100 hover-border-main-600 rounded-16 position-relative transition-2"><app-wishlist-button [itemId]="product.id" [itemName]="product.name" />
 
-                        <a [routerLink]="['product-details']" class="product-card__thumb flex-center overflow-hidden">
+                        <a [routerLink]="['/shop/product',product.id]" class="product-card__thumb flex-center overflow-hidden">
                             <img [src]="product.image" [alt]="product.name">
                         </a>
 
                         <div class="product-card__content mt-12 w-100">
                             <div class="product-card__price mb-8 d-flex align-items-center gap-8">
-                                <span class="text-heading text-md fw-semibold">${{ product.price }} <span
+                                <span class="text-heading text-md fw-semibold">Rs. {{ product.price }} <span
                                         class="text-gray-500 fw-normal">/Qty</span></span>
-                                <span class="text-gray-400 text-md fw-semibold text-decoration-line-through">${{
-                                    product.oldPrice }}</span>
+                                <span class="text-gray-400 text-md fw-semibold text-decoration-line-through">Rs. {{ product.oldPrice }}</span>
                             </div>
 
                             <h6 class="title text-lg fw-semibold mt-12 mb-0">
-                                <a [routerLink]="['product-details']" class="link text-line-2">{{ product.name }}</a>
+                                <a [routerLink]="['/shop/product',product.id]" class="link text-line-2">{{ product.name }}</a>
                             </h6>
 
                             <div class="mt-14 w-100">

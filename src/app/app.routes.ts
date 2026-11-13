@@ -59,12 +59,8 @@ export const routes: Routes = [
             { path: 'create-account', component: AccountComponent, data: { mode: 'register', auth: true }, title: 'Create Account - Al-Amin Hypermart' },
             { path: 'register', redirectTo: 'create-account', pathMatch: 'full' },
             { path: 'account/orders', component: AccountComponent, data: { view: 'orders' }, title: 'Order History - Al-Amin Hypermart' },
-            { path: 'account/details', component: AccountComponent, data: { view: 'details' }, title: 'Account Details - Al-Amin Hypermart' },
-            {
-                path: 'account',
-                component: AccountComponent,
-                title: 'Account - Al-Amin Hypermart'
-            },
+            { path: 'account/details', component: AccountComponent, data: { view: 'details' }, title: 'Account Settings - Al-Amin Hypermart' },
+            { path: 'account', redirectTo: 'account/details', pathMatch: 'full' },
             {
                 path: 'about-us',
                 loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent),

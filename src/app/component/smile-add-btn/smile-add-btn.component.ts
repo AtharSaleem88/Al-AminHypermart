@@ -13,7 +13,7 @@ import { StockAlternativesComponent } from '../stock-alternatives/stock-alternat
     .smile-add-wrap > [hidden] { display: none !important; }
   `],
   template: `
-    @if (!available) { <app-stock-alternatives [itemId]="itemId" [itemName]="itemName" /> } @else {
+    @if (!available) { <app-stock-alternatives [showStockLabel]="showStockLabel" [itemId]="itemId" [itemName]="itemName" /> } @else {
     <div
       class="smile-add-wrap"
       [class.smile-add-wrap--full]="fullWidth"
@@ -67,6 +67,7 @@ import { StockAlternativesComponent } from '../stock-alternatives/stock-alternat
   `,
 })
 export class SmileAddBtnComponent implements OnDestroy {
+  @Input() showStockLabel = true;
   @Input() label: string = 'Add';
   @Input() fullWidth: boolean = false;
   @Input() itemId?: string | number;

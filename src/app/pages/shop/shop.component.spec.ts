@@ -33,4 +33,22 @@ describe('Shop routes and filters', () => {
     expect(shop.resultStart).toBe(0); expect(shop.visibleProducts.length).toBe(0);
     expect(harness.routeNativeElement!.textContent).toContain('No products match just yet');
   });
+  it('opens mobile filters, applies a brand and closes back to products', async () => {
+    const harness = await RouterTestingHarness.create();
+    const shop = await harness.navigateByUrl('/shop?category=drinks', ShopComponent);
+    const element = harness.routeNativeElement!;
+    (element.querySelector('.mobile-filter-button') as HTMLButtonElement).click();
+    harness.detectChanges();
+    const dialog = element.querySelector('#mobile-shop-filters') as HTMLDialogElement;
+    expect(dialog.open).toBeTrue();
+    const brand = Array.from(dialog.querySelectorAll('label')).find(label => label.textContent?.includes('Al-Amin Fresh Dairy'))!.querySelector('input')!;
+    brand.click();
+    await harness.fixture.whenStable(); harness.detectChanges();
+    expect(shop.selectedBrands).toEqual(['Al-Amin Fresh Dairy']);
+    expect(shop.filteredProducts.length).toBe(1);
+    shop.finishFilters();
+    await harness.fixture.whenStable(); harness.detectChanges();
+    expect(dialog.open).toBeFalse();
+    expect(element.querySelectorAll('.catalog-grid app-product-card').length).toBe(1);
+  });
 });

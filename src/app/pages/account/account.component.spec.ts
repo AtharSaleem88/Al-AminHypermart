@@ -22,6 +22,8 @@ describe('Branded account area', () => {
     expect(fixture.nativeElement.querySelector('h1').textContent).toContain('Test');
     expect(fixture.nativeElement.querySelector('a[href="/account/orders"]')).toBeTruthy();
     expect(fixture.nativeElement.querySelector('a[href="/account/details"]')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.account-nav a[href="/account"]')).toBeNull();
+    expect(fixture.nativeElement.querySelector('h2').textContent).toContain('Account settings');
     fixture.destroy();
   });
   it('rejects invalid credentials before calling the account service', async () => {

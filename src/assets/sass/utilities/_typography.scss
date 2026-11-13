@@ -6,7 +6,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto !important; // Router transitions start at the top immediately; explicit in-page actions remain smooth.
 }
 
 body {
@@ -119,3 +119,5 @@ input:focus-visible {
   outline: 0;
 }
 /* ================================= Typography Css End =========================== */
+
+
