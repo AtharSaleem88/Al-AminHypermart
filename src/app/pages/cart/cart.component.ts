@@ -19,6 +19,6 @@ export class CartComponent {
   productQuery(id: string, name: string): Record<string, string> { return this.catalogIds.has(id) ? {} : {q: name}; }
   get suggestions() {
     const inCart = new Set(this.cartService.items().map(p => p.id));
-    return CATALOG.filter(p => ['pantry', 'bakery', 'drinks'].includes(p.department) && !inCart.has(p.id)).sort((a, b) => a.price - b.price).slice(0, 3);
+    return CATALOG.filter(p => p.inStock !== false && ['pantry', 'bakery', 'drinks'].includes(p.department) && !inCart.has(p.id)).sort((a, b) => a.price - b.price).slice(0, 3);
   }
 }

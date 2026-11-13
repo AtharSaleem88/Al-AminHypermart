@@ -9,8 +9,9 @@ import { SmileAddBtnComponent } from '../smile-add-btn/smile-add-btn.component';
   standalone: true,
   imports: [RouterLink, SmileAddBtnComponent],
   template: `
-    <article class="catalog-card">
+    <article class="catalog-card" [class.is-unavailable]="product.inStock === false">
       <a class="catalog-card__image" [routerLink]="['/shop/product', product.id]" [attr.aria-label]="product.title">
+        @if (product.inStock === false) { <span class="stock-badge">Out of stock</span> }
         <img [src]="product.image" [alt]="product.title" loading="lazy" />
       </a>
       <div class="catalog-card__body">

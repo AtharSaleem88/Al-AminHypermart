@@ -14,7 +14,7 @@
     </div>
     <div class="shop-layout">
       <aside>
-        <details class="shop-filters" open>
+        <details class="shop-filters" [open]="filtersOpen" (toggle)="filtersOpen = $any($event.target).open">
           <summary>Refine your shop <i class="ph ph-sliders-horizontal" aria-hidden="true"></i></summary>
           <div class="shop-filters__content">
             <div class="filter-heading"><span>Filters</span><button type="button" (click)="clear()" [disabled]="!hasFilters">Clear all</button></div>

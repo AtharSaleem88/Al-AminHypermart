@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -23,7 +23,9 @@ export class ShopComponent {
   search = ''; sort = 'popular'; offers = false; page = 1;
   draftMin = 0; draftMax = 3000; searchDraft = '';
 
+  filtersOpen = true;
   constructor() {
+    afterNextRender(() => { this.filtersOpen = !window.matchMedia('(max-width: 991px)').matches; });
     this.route.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
       const category = params.get('category') ?? '';
       this.category = this.departments.some(d => d.id === category) ? category : '';

@@ -1,4 +1,4 @@
-@if (!authScreen()) { <app-header></app-header> }
+@if (!authScreen()) { <app-header></app-header><div class="mobile-brand"><img src="assets/images/logo/logo-wordmark.png" alt="Al-Amin Hypermart" /><span>Life. Stocked.</span></div> }
 <main class="main-content-area"><router-outlet></router-outlet></main>
 @if (!authScreen()) {
   <app-shipping></app-shipping>

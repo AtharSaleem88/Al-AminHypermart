@@ -59,7 +59,7 @@ export class AccountComponent {
     const unavailable: string[] = [];
     for (const item of order.items) {
       const product = CATALOG.find(product => product.id === item.id) ?? CATALOG.find(product => product.title === item.name);
-      if (!product) { unavailable.push(item.name); continue; }
+      if (!product || product.inStock === false) { unavailable.push(item.name); continue; }
       this.cart.addItem({ id: product.id, name: product.title, price: product.price, image: product.image, category: item.category }, item.quantity);
       added += item.quantity;
     }
@@ -75,6 +75,3 @@ export class AccountComponent {
   }
   async logout(): Promise<void> { try { this.account.logout(); await this.router.navigateByUrl('/login'); } catch { this.error.set('Sign out could not be completed. Please try again.'); } }
 }
-
-
-

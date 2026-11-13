@@ -29,7 +29,7 @@
           <div class="summary-line"><span>Minimum order</span><span>{{ cartService.formatRs(cartService.MINIMUM_ORDER_RS) }}</span></div>
           <div class="summary-status" [class.is-ready]="cartService.isMinimumMet()" aria-live="polite"><img src="assets/images/logo/brand-smile.png" alt="" /><span>@if (cartService.isMinimumMet()) { Your basket is ready for checkout. } @else { Add {{ cartService.formatRs(cartService.remainingAmount()) }} more to checkout. }</span></div>
           <div class="summary-total"><span>Items total</span><strong>{{ cartService.formatRs(cartService.subtotal()) }}</strong></div>
-          @if (cartService.isMinimumMet()) { <a class="basket-checkout" routerLink="/checkout">Proceed to checkout <i class="ph ph-arrow-right" aria-hidden="true"></i></a> } @else { <button class="basket-checkout" type="button" disabled>Minimum order not reached</button> }
+          @if (cartService.isMinimumMet() && !cartService.unavailableItems().length) { <a class="basket-checkout" routerLink="/checkout">Proceed to checkout <i class="ph ph-arrow-right" aria-hidden="true"></i></a> } @else { <button class="basket-checkout" type="button" disabled>{{ cartService.unavailableItems().length ? 'Review out-of-stock items' : 'Minimum order not reached' }}</button> }
           <a class="basket-continue" routerLink="/shop">Continue shopping</a>
           <p class="summary-note">Review your delivery details at checkout.</p>
         </aside>

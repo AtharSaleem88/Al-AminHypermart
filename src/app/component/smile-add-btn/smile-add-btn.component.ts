@@ -1,16 +1,19 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, Output, inject } from '@angular/core';
 import { CartService } from '../../services/cart.service';
+import { isProductAvailable } from '../../data/catalog';
+import { StockAlternativesComponent } from '../stock-alternatives/stock-alternatives.component';
 
 @Component({
   selector: 'app-smile-add-btn',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, StockAlternativesComponent],
   styles: [`
     :host { display: block; }
     .smile-add-wrap > [hidden] { display: none !important; }
   `],
   template: `
+    @if (!available) { <app-stock-alternatives [itemId]="itemId" [itemName]="itemName" /> } @else {
     <div
       class="smile-add-wrap"
       [class.smile-add-wrap--full]="fullWidth"
@@ -60,6 +63,7 @@ import { CartService } from '../../services/cart.service';
           </button>
         </div>
     </div>
+    }
   `,
 })
 export class SmileAddBtnComponent implements OnDestroy {
@@ -75,6 +79,7 @@ export class SmileAddBtnComponent implements OnDestroy {
   recentlyAdded: boolean = false;
   private resetTimer: ReturnType<typeof setTimeout> | null = null;
 
+  get available(): boolean { return isProductAvailable(this.itemId, this.itemName); }
   get quantityInCart(): number {
     if (this.itemId === undefined && !this.itemName) {
       return 0;
@@ -85,7 +90,7 @@ export class SmileAddBtnComponent implements OnDestroy {
   handlePrimaryAdd(event: Event): void {
     event.stopPropagation();
     event.preventDefault();
-    if (this.quantityInCart > 0) {
+    if (!this.available || this.quantityInCart > 0) {
       return;
     }
     this.add.emit(event);
@@ -98,7 +103,7 @@ export class SmileAddBtnComponent implements OnDestroy {
   private flySmileToCart(event: Event): void {
     const view = this.document.defaultView;
     const source = event.currentTarget as HTMLElement | null;
-    const target = this.document.querySelector<HTMLElement>('[data-cart-animation-target]');
+    const target = Array.from(this.document.querySelectorAll<HTMLElement>('[data-cart-animation-target]')).find(element => element.getBoundingClientRect().width > 0 && element.getBoundingClientRect().height > 0);
     if (!view || !source || !target || view.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }

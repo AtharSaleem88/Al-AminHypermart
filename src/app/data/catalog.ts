@@ -1,6 +1,7 @@
 import { LANDING_ESSENTIALS, LANDING_RECOMMENDED, LANDING_FROZEN } from './landing-products';
 
 export interface CatalogProduct {
+  inStock?: boolean;
   id: string; title: string; image: string; price: number; oldPrice: number;
   department: string; brand: string; rating: number;
 }
@@ -39,9 +40,9 @@ function department(id: string): string {
 // Share the homepage's products and cart identifiers; no placeholder inventory.
 export const CATALOG: CatalogProduct[] = [
   // Beverage pack variants for the storefront's local demonstration catalog.
-  { id: 'beverage-kinnow-250ml', title: 'Sargodha Fresh Kinnow Orange Juice 250ml', image: 'assets/images/thumbs/cat-drinks.jpg', price: 140, oldPrice: 170, department: 'drinks', brand: 'Al-Amin Orchard', rating: 4.8 },
+  { inStock: false, id: 'beverage-kinnow-250ml', title: 'Sargodha Fresh Kinnow Orange Juice 250ml', image: 'assets/images/thumbs/cat-drinks.jpg', price: 140, oldPrice: 170, department: 'drinks', brand: 'Al-Amin Orchard', rating: 4.8 },
   { id: 'beverage-kinnow-500ml', title: 'Sargodha Fresh Kinnow Orange Juice 500ml', image: 'assets/images/thumbs/cat-drinks.jpg', price: 250, oldPrice: 300, department: 'drinks', brand: 'Al-Amin Orchard', rating: 4.8 },
-  { id: 'beverage-danedar-450g', title: 'Strong Danedar Black Tea 450g', image: 'assets/images/thumbs/pk-danedar-tea.jpg', price: 720, oldPrice: 820, department: 'drinks', brand: 'Al-Amin Hypermart', rating: 4.8 },
+  { inStock: false, id: 'beverage-danedar-450g', title: 'Strong Danedar Black Tea 450g', image: 'assets/images/thumbs/pk-danedar-tea.jpg', price: 720, oldPrice: 820, department: 'drinks', brand: 'Al-Amin Hypermart', rating: 4.8 },
   { id: 'beverage-full-cream-milk-1l', title: 'Full Cream Fresh Dairy Milk 1L', image: 'assets/images/thumbs/pk-dairy-milk.jpg', price: 290, oldPrice: 330, department: 'drinks', brand: 'Al-Amin Fresh Dairy', rating: 4.9 },
   ...LANDING_RECOMMENDED.map(p => ({
     id: p.id, title: p.title, image: p.image, price: amount(p.price),
@@ -74,4 +75,18 @@ export function filterCatalog(products: CatalogProduct[], filters: CatalogFilter
   else if (filters.sort === 'name') result.sort((a, b) => a.title.localeCompare(b.title));
   else result.sort((a, b) => b.rating - a.rating);
   return result;
+}
+
+// Preview availability only; replace with inventory API data when connected.
+export function findCatalogProduct(id?: string | number, name = ''): CatalogProduct | undefined {
+  return CATALOG.find(product => product.id === String(id)) ?? CATALOG.find(product => product.title.toLowerCase() === name.toLowerCase());
+}
+export function isProductAvailable(id?: string | number, name = ''): boolean {
+  return findCatalogProduct(id, name)?.inStock !== false;
+}
+export function productAlternatives(id?: string | number, name = ''): CatalogProduct[] {
+  const source = findCatalogProduct(id, name);
+  if (!source) return [];
+  return CATALOG.filter(product => product.id !== source.id && product.inStock !== false && product.department === source.department)
+    .sort((a, b) => Number(b.brand === source.brand) - Number(a.brand === source.brand) || Math.abs(a.price - source.price) - Math.abs(b.price - source.price)).slice(0, 3);
 }

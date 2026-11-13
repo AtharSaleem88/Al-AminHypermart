@@ -1,3 +1,4 @@
+import { isProductAvailable } from '../data/catalog';
 import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -116,9 +117,11 @@ export class CartService {
     return Math.min(100, Math.max(0, Math.round(pct * 10) / 10));
   });
 
+  readonly unavailableItems = computed(() => this._items().filter(item => !isProductAvailable(item.id, item.name)));
   readonly isMinimumMet = computed(() => this.subtotal() >= this.MINIMUM_ORDER_RS);
 
   addItem(input: AddCartItemInput, quantity: number = 1): void {
+    if (!isProductAvailable(input.id, input.name)) return;
     const safeQty = Math.max(1, Math.floor(Number(quantity) || 1));
     const unitPrice = this.parsePriceToRs(input.price);
     const id = this.resolveItemId(input.id, input.name);
@@ -158,6 +161,8 @@ export class CartService {
   }
 
   increaseQuantity(id: string): void {
+    const currentItem = this._items().find(item => item.id === id);
+    if (currentItem && !isProductAvailable(id, currentItem.name)) return;
     this._items.update((current) =>
       current.map((item) =>
         item.id === id ? { ...item, quantity: item.quantity + 1 } : item
@@ -360,4 +365,3 @@ export class CartService {
     }
   }
 }
-

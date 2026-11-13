@@ -1,5 +1,6 @@
 <section class="checkout-page">
   <div class="container container-lg">
+    @if (cartService.unavailableItems().length) { <div class="form-message error" role="alert">Some items are out of stock. <a routerLink="/cart">Choose alternatives in your basket →</a></div> }
     <nav class="checkout-breadcrumb" aria-label="Breadcrumb"><a routerLink="/">Home</a><span aria-hidden="true">/</span><a routerLink="/cart">Your basket</a><span aria-hidden="true">/</span><span aria-current="page">Checkout</span></nav>
     <div class="categories-heading-divider"><h1 class="categories-heading-divider__title">A few details. Then you're stocked.</h1></div>
     @if (placedOrder; as order) {
@@ -74,4 +75,3 @@
     }
   </div>
 </section>
-

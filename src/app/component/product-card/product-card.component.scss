@@ -13,3 +13,6 @@ strong { font-size: 15px; color: #290E28; }
 del { font-size: 12px; color: #8B818A; }
 @media (max-width: 575px) { .catalog-card { padding: 12px; } .catalog-card__image { height: 140px; } h3 { font-size: 13px; } strong { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .catalog-card, img { transition: none !important; } }
+.catalog-card__image { position: relative; }
+.stock-badge { position: absolute; z-index: 1; top: 0; left: 0; background: #E9E7E9; color: #53174D; border-radius: 20px; padding: 6px 10px; font-size: 10px; font-weight: 600; }
+.is-unavailable .catalog-card__image img { opacity: .65; }

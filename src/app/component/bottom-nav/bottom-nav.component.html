@@ -36,7 +36,7 @@
         </button>
 
         <!-- 4. Cart -->
-        <a [routerLink]="['/cart']" class="bottom-nav__item" [class.is-active]="isRouteActive('/cart')">
+        <a data-cart-animation-target [routerLink]="['/cart']" class="bottom-nav__item" [class.is-active]="isRouteActive('/cart')">
             <div class="bottom-nav__icon-wrapper position-relative">
                 <i class="ph-bold ph-shopping-cart-simple bottom-nav__icon" [class.d-none]="isRouteActive('/cart')"></i>
                 <i class="ph-fill ph-shopping-cart-simple bottom-nav__icon-active" [class.d-none]="!isRouteActive('/cart')"></i>

@@ -1,3 +1,4 @@
+import { isProductAvailable } from '../data/catalog';
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { CartItem } from './cart.service';
@@ -22,6 +23,7 @@ export class OrderService {
   // Front-end receipt only. Replace this method with the order API when connected.
   placeDemoOrder(key: string, items: CartItem[], minimum: number): OrderReceipt {
     if (!this.isBrowser) throw new Error('Order placement is only available in your browser.');
+    if (items.some(item => !isProductAvailable(item.id, item.name))) throw new Error('An item is out of stock. Please choose an alternative.');
     const total = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
     if (!items.length || total < minimum) throw new Error('Your basket no longer meets the minimum order.');
     const existing = this.lastReceipt();
@@ -58,4 +60,3 @@ export class OrderService {
     } catch { return null; }
   }
 }
-

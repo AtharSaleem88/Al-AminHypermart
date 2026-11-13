@@ -44,7 +44,7 @@ describe('Branded account area', () => {
   });
   it('reorders current catalogue products at current prices without replacing the basket or duplicating a click', () => {
     const cart = TestBed.inject(CartService); cart.clearCart();
-    const first = CATALOG[0], second = CATALOG[1];
+    const available = CATALOG.filter(product => product.inStock !== false); const first = available[0], second = available[1];
     cart.addItem({ id: second.id, name: second.title, price: second.price, image: second.image });
     cart.addItem({ id: first.id, name: first.title, price: 1, image: first.image });
     const order = { id: 'TEST-REORDER', createdAt: new Date().toISOString(), total: 100, demo: true as const, accountId: 'test', items: [{ id: first.id, name: first.title, unitPrice: 50, quantity: 2, category: 'Test', image: first.image }, { id: 'removed', name: 'Unavailable item', unitPrice: 10, quantity: 1, category: 'Test', image: '' }] };
@@ -59,4 +59,3 @@ describe('Branded account area', () => {
     expect(cart.items().find(item => item.id === first.id)?.quantity).toBe(3);
     cart.dismissToast(); cart.clearCart(); fixture.destroy();
   });});
-

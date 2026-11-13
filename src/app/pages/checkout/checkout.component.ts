@@ -62,6 +62,7 @@ export class CheckoutComponent {
     return field.invalid && (field.touched || this.attempted);
   }
   reviewOrder(): void {
+    if (this.cartService.unavailableItems().length) { this.orderError = 'Some items are out of stock. Return to your basket to remove them or choose alternatives.'; return; }
     this.attempted = true;
     this.form.markAllAsTouched();
     if (this.form.invalid || !this.cartService.isMinimumMet() || !this.cartService.items().length) return;
@@ -95,4 +96,3 @@ export class CheckoutComponent {
     }
   }
 }
-
