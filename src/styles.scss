@@ -2862,3 +2862,58 @@ a[href="#featureSection"],
     }
 }
 @media(prefers-reduced-motion: reduce) { .banner.banner--campaign .slick-list { transition: none; } }
+
+/* Quiet, consistent hero pagination with generous tap targets. */
+.banner.banner--campaign {
+  .campaign-mobile-content { display:none; }
+  .slick-dots {
+    position:relative!important; inset:auto!important; left:auto!important; right:auto!important; bottom:auto!important; transform:none!important;
+    display:flex!important; width:100%!important; height:38px; gap:4px; margin:0!important; padding:0!important;
+    background:#fff!important; border:0!important; border-radius:0!important; box-shadow:none!important; backdrop-filter:none!important;
+  }
+  .slick-dots li { width:36px!important; height:32px!important; margin:0!important; }
+  .slick-dots li button { position:relative; width:36px!important; height:32px!important; padding:0!important; border:0!important; border-radius:0!important; background:transparent!important; box-shadow:none!important; transition:none!important; }
+  .slick-dots li button::before { content:''!important; position:absolute; top:14px; left:5px; width:26px; height:4px; border-radius:4px; background:#DCD1EB; opacity:1!important; font-size:0; transition:background-color .2s ease; }
+  .slick-dots li.slick-active button::before { background:#53174D; }
+  .slick-dots li button:hover::before { background:#F89C24; }
+  .slick-dots li button:focus-visible { outline:2px solid #F89C24; outline-offset:-2px; border-radius:6px!important; }
+}
+@media(max-width:991px) {
+  .banner.banner--campaign {
+    --mobile-hero-height:360px;
+    .campaign-banner { height:var(--mobile-hero-height); overflow:hidden; }
+    .campaign-desktop-art { display:none!important; }
+    .campaign-mobile-content { position:relative; display:flex; flex-direction:column; height:100%; overflow:hidden; background:#9F85BD; }
+    .campaign-mobile-copy { position:relative; z-index:1; padding:22px 22px 0; }
+    .campaign-mobile-eyebrow { display:block; color:#fff; font-size:9px; letter-spacing:1.3px; font-weight:600; line-height:1.5; }
+    .campaign-mobile-copy strong { display:block; color:#53174D; font-size:30px; line-height:1.06; letter-spacing:-.8px; font-weight:900; margin:10px 0; }
+    .campaign-mobile-copy strong span { color:#FFAA20; }
+    .campaign-mobile-cta { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:#53174D; border-radius:20px; color:#fff; font-size:11px; line-height:1.3; }
+    .campaign-mobile-art { position:absolute; right:0; bottom:0; width:88%; height:204px; overflow:hidden; }
+    .campaign-mobile-art img { display:block; width:auto; height:100%; min-width:0; max-width:none; position:absolute; right:0; bottom:0; object-fit:contain; }
+    .banner-slider__item { height:var(--mobile-hero-height)!important; padding:22px 22px!important; }
+    .banner-slider__inner { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr); align-items:center; gap:14px; height:100%; min-height:0; }
+    .banner-item__content { width:100%; min-height:0; }
+    .banner-item__content>.d-inline-flex, .banner-item__content>p { display:none!important; }
+    .banner-item__title { font-size:25px!important; line-height:1.15!important; margin-bottom:12px!important; }
+    .banner-item__content .btn { padding:9px 14px!important; min-height:40px; font-size:12px; }
+    .banner-item__thumb.hero-image-frame { width:100%; height:100%; max-height:190px; aspect-ratio:auto; margin:0; }
+    .banner-item__thumb.hero-image-frame .banner-hero-img { object-fit:contain!important; }
+    .slick-list { transition:none; }
+  }
+}
+@media(min-width:576px) and (max-width:991px) { .banner.banner--campaign { --mobile-hero-height:400px; }.banner.banner--campaign .campaign-mobile-copy { padding:30px 32px 0; }.banner.banner--campaign .campaign-mobile-copy strong { font-size:38px; }.banner.banner--campaign .campaign-mobile-art { height:280px; width:75%; } }
+@media(prefers-reduced-motion:reduce) { .banner.banner--campaign .slick-dots li button::before { transition:none; } }
+
+.banner.banner--campaign .slick-dots { height:44px; }
+.banner.banner--campaign .slick-dots li { height:44px!important; }
+.banner.banner--campaign .slick-dots li button,
+.banner.banner--campaign .slick-dots li.slick-active button,
+.banner.banner--campaign .slick-dots li button:hover { height:44px!important; width:36px!important; background:transparent!important; box-shadow:none!important; }
+.banner.banner--campaign .slick-dots li button::before { top:20px; }
+@media(max-width:991px) { .banner.banner--campaign .slick-arrow { display:none!important; }.banner.banner--campaign .campaign-mobile-art { mask-image:linear-gradient(to bottom,transparent,#000 14px); } }
+
+.banner.banner--campaign .carousel .slick-dots li button,
+.banner.banner--campaign .carousel .slick-dots li.slick-active button,
+.banner.banner--campaign .carousel .slick-dots li button:hover { background:transparent!important; box-shadow:none!important; width:36px!important; height:44px!important; border-radius:0!important; }
+@media(max-width:991px) { .banner.banner--campaign .banner-item.arrow-center .slick-arrow { display:none!important; } }
