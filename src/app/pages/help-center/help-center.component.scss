@@ -1,11 +1,5 @@
-.help-intro { max-width: 600px; margin: 24px auto 0; }
-.help-guide { padding-top: 0; }
-.help-answer { margin-top: 24px; }
-.help-answer h3, .help-answer h4 { color: inherit; font-size: 16px; line-height: 1.5; margin: 0 0 8px; }
-.help-answer p { margin-bottom: 0; }
-.leadership a { color: #F89C24; text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
-.help-hours { display: block; margin-top: 16px; font-size: 16px; color: #DCD1EB; }
-.operation-card:first-child { color: #53174D; }
-.operation-card:nth-child(3) { color: #fff; }
-
-
+.help-page .metric__value { font-size:clamp(30px,3.25vw,46px); }.help-page .origin__date strong { font-size:34px; }.help-directory,.help-directory .operation-card { scroll-margin-top:100px; }
+.help-answer { border-bottom:1px solid #FFFFFF26; }.help-answer:last-child { border-bottom:0; }.help-answer summary { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:52px; padding:14px 0; list-style:none; cursor:pointer; color:#fff; font-size:14px; line-height:1.5; font-weight:500; }.help-answer summary::-webkit-details-marker { display:none; }.help-answer summary>i { flex-shrink:0; color:#F89C24; font-size:18px; transition:transform .25s ease; }.help-answer[open] summary>i { transform:rotate(45deg); }.help-answer p { padding:0 22px 18px 0; margin:0; font-size:13px; }.help-answer strong { color:white; }.help-answer summary:focus-visible { outline:2px solid #F89C24; outline-offset:3px; border-radius:6px; }
+.help-support .leadership__words>.eyebrow { color:#756575; }.help-support h3 { font-size:28px; color:#53174D; margin:12px 0 24px; }.help-contact-links { display:grid; gap:12px; }.help-contact-links>a { display:flex; align-items:center; gap:12px; min-height:66px; border:1px solid #DDD2E1; border-radius:12px; padding:12px 14px; color:#53174D; transition:background-color .25s ease,border-color .25s ease; }.help-contact-links>a:hover { background:#E9E2EE; border-color:#9F85BD; }.help-contact-links>a>i { font-size:22px; flex-shrink:0; }.help-contact-links>a>i:last-child { margin-left:auto; font-size:18px; }.help-contact-links>a>span { min-width:0; overflow-wrap:anywhere; font-size:14px; font-weight:600; line-height:1.5; }.help-contact-links small { display:block; font-size:10px; color:#756575; font-weight:400; margin-bottom:3px; }.help-hours { display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#53174D; margin:20px 0; }.help-support .leadership__words>p a { color:#53174D; text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:767px) { .help-page .metric__value { font-size:30px; }.help-page .origin__date strong { font-size:27px; }.help-answer summary { font-size:13px; min-height:52px; }.help-answer p { font-size:12px; }.help-support h3 { font-size:24px; }.help-contact-links>a { gap:10px; padding:12px; }.help-contact-links>a>span { font-size:12px; }.help-contact-links>a>i:last-child { display:none; } }
+@media(prefers-reduced-motion:no-preference) { .help-answer[open] p { animation:help-answer-enter .25s ease both; }@keyframes help-answer-enter { from { opacity:0; transform:translateY(-4px); }to { opacity:1; transform:translateY(0); } } }

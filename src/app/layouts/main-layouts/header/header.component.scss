@@ -169,8 +169,8 @@
   .header-main-row { background-color: #53174D !important; border-color: #784370 !important; }
   nav.d-lg-flex > a, .category-dropdown-wrapper > button { color: #fff !important; }
   nav.d-lg-flex > a:hover, nav.d-lg-flex > a.text-main-600, nav.d-lg-flex > a.text-main-two-600, .category-dropdown-wrapper > button:hover { color: #F89C24 !important; }
-  .header-actions > a, .header-actions > button { background-color: #FFFFFF12 !important; color: #fff !important; border-color: #9F85BD70 !important; }
-  .header-actions > a:hover, .header-actions > button:hover { background-color: #F89C24 !important; border-color: #F89C24 !important; color: #290E28 !important; }
+  .header-actions > a:not(.header-brand-link), .header-actions > button { background-color: #FFFFFF12 !important; color: #fff !important; border-color: #9F85BD70 !important; }
+  .header-actions > a:not(.header-brand-link):hover, .header-actions > button:hover { background-color: #F89C24 !important; border-color: #F89C24 !important; color: #290E28 !important; }
   .header-actions > button[data-cart-animation-target] { color: #F89C24 !important; }
   .header-actions > button[data-cart-animation-target]:hover { color: #290E28 !important; }
   .header-account summary { background: #DCD1EB; border-color: #DCD1EB; color: #53174D; }

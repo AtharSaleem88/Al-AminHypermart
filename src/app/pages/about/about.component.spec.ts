@@ -20,6 +20,17 @@ describe('About Us content and routing', () => {
     expect(image.classList.contains('is-visible')).toBeTrue();
     fixture.destroy();
   });
+  it('leaves content visible without initializing motion when reduced motion is requested', () => {
+    spyOn(window, 'matchMedia').and.returnValue({ matches: true } as MediaQueryList);
+    const observer = spyOn(window, 'IntersectionObserver');
+    const fixture = TestBed.createComponent(AboutComponent);
+    fixture.detectChanges();
+    (fixture.componentInstance as unknown as { setupMotion(): void }).setupMotion();
+    expect(observer).not.toHaveBeenCalled();
+    expect(fixture.nativeElement.querySelector('.about-page').classList.contains('motion-ready')).toBeFalse();
+    expect(fixture.nativeElement.querySelector('.storefront-photo img')).toBeTruthy();
+    fixture.destroy();
+  });
   it('gives touch feedback without making desktop pointer presses sticky', fakeAsync(() => {
     const fixture = TestBed.createComponent(AboutComponent);
     fixture.detectChanges();
@@ -50,8 +61,8 @@ describe('About Us content and routing', () => {
     expect(page.querySelector('h1')).toBeTruthy();
     expect(page.querySelector('.storefront-photo img')!.getAttribute('src')).toBe('assets/images/bg/about-storefront.jpg');
     expect(page.querySelector('.about-button')!.getAttribute('href')).toBe('/shop');
-    expect(page.querySelectorAll('.about-marquee__group').length).toBe(2);
-    expect(page.querySelector('.brand-orbit textPath')).toBeTruthy();
+    expect(page.querySelectorAll('.advantage-card').length).toBe(4);
+    expect(page.querySelector('.about-hero__photo')).toBeTruthy();
   });
   it('keeps the original AboutUs URL working and supports the short alias', async () => {
     const harness = await RouterTestingHarness.create();

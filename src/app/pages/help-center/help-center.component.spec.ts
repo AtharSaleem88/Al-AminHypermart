@@ -19,6 +19,19 @@ describe('Help Centre', () => {
     expect(page.querySelectorAll('.operation-card').length).toBe(4);
     fixture.destroy();
   });
+  it('opens and closes FAQ answers through the native disclosure control', () => {
+    const fixture = TestBed.createComponent(HelpCenterComponent);
+    fixture.detectChanges();
+    const answer: HTMLDetailsElement = fixture.nativeElement.querySelector('.operation-card .help-answer');
+    expect(answer.open).toBeFalse();
+    answer.querySelector('summary')!.click();
+    expect(answer.open).toBeTrue();
+    answer.querySelector('summary')!.click();
+    expect(answer.open).toBeFalse();
+    expect(fixture.nativeElement.querySelectorAll('.advantage-card').length).toBe(4);
+    expect(fixture.nativeElement.querySelector('.about-hero')).toBeTruthy();
+    fixture.destroy();
+  });
   it('keeps the original HelpCenter URL working', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/page/HelpCenter');

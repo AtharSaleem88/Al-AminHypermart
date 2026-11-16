@@ -29,7 +29,7 @@ import { StockAlternativesComponent } from '../stock-alternatives/stock-alternat
           [attr.aria-label]="label + ' ' + itemName + ' to cart'"
         >
           <span>{{ label }}</span>
-          <img class="simple-add-btn__smile" src="assets/images/logo/brand-smile.png" alt="" aria-hidden="true" />
+          <img class="simple-add-btn__smile" src="assets/images/logo/brand-smile-clean.svg" alt="" aria-hidden="true" />
         </button>
         <div
           [hidden]="quantityInCart === 0"
