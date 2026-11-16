@@ -89,6 +89,6 @@
   .mobile-brand.is-scrolled { position: fixed; inset: 0 0 auto; width: 100%; }
 }
 @media(max-width: 991px) {
-  .hot-deals .deals-layout__products .slick-list { margin: 0 !important; }
-  .hot-deals .deals-layout__products .slick-slide { padding: 0 !important; }
+  .hot-deals .deals-layout__products .slick-list { margin: 0 !important; padding: 0 !important; }
+  .hot-deals .deals-layout__products .slick-slide { margin: 0 !important; padding: 0 !important; }
 }

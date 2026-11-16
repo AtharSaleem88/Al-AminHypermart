@@ -3,17 +3,6 @@
     display: block;
 }
 
-.beverages-pill-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: #FEF8F0;
-    color: #53174D;
-    font-size: 12px;
-    font-weight: 600;
-}
 
 .app-download__banner {
     display: grid;
@@ -388,16 +377,29 @@
   .category-tile strong { font-size: 12px; font-weight: 600; line-height: 1.5; }
   .category-tile:focus-visible { outline: 2px solid #F89C24; outline-offset: 5px; border-radius: 12px; }
   .category-tile:active .category-tile__image { background: #DCD1EB; }
-  .hot-deals .deals-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 14px; align-items: start; }
+  .hot-deals .deals-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 14px; align-items: center; }
   .hot-deals .all-in-one-promo { height: auto; width: 100%; border-radius: 12px; }
   .hot-deals .all-in-one-promo__poster { width: 100%; height: auto; border-radius: 12px; clip-path: none; }
   .hot-deals .section-heading { margin-bottom: 16px; }
+  .hot-deals .section-heading > .flex-between { justify-content: flex-end; }
+  .hot-deals .deals-layout__promo { display: flex; align-items: center; justify-content: center; min-width: 0; }
   .hot-deals #deals-prev, .hot-deals #deals-next { display: none !important; }
 }
 @media(max-width: 575px) {
   .category-mobile-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 12px; }
   .category-tile__image { width: 80px; }
   .category-tile strong { font-size: 11px; }
-  .hot-deals .deals-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; }
+  .hot-deals .deals-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: center; }
   .hot-deals .section-heading a { font-size: 12px !important; }
 }
+
+/* Keep section actions at the end of the title divider, never on a second row. */
+.categories-heading-divider.has-view-all { flex-wrap:nowrap; }
+.has-view-all::before { order:0; min-width:8px; }
+.has-view-all .categories-heading-divider__title { order:1; flex:0 1 auto; min-width:0; }
+.has-view-all::after { order:2; min-width:8px; }
+.has-view-all .section-view-all { order:3; display:inline-flex; align-items:center; justify-content:flex-end; flex:0 0 auto; gap:6px; min-height:32px; white-space:nowrap; color:#53174D; font-size:12px; font-weight:500; letter-spacing:normal; text-transform:none; text-decoration:none; transition:color .2s ease; }
+.has-view-all .section-view-all:hover { color:#F89C24; }
+.has-view-all .section-view-all:focus-visible { outline:2px solid #F89C24; outline-offset:3px; border-radius:4px; }
+@media(max-width:991px) { .has-view-all .categories-heading-divider__title { font-size:clamp(13px,3.5vw,18px)!important; text-align:left; }.categories-heading-divider.has-view-all { gap:10px!important; }.has-view-all::before { display:none; }.has-view-all::after { flex:1 1 0; min-width:6px; }.has-view-all .section-view-all { font-size:11px; gap:4px; }.hot-deals .section-heading { display:none; } }
+@media(prefers-reduced-motion:reduce) { .section-view-all { transition:none!important; } }

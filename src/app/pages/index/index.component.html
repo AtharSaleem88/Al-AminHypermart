@@ -202,14 +202,12 @@
 <!-- ============================ Feature Section End =============================== -->
 <div class="product pt-60">
     <div class="container container-lg">
-        <div class="categories-heading-divider">
+        <div class="categories-heading-divider has-view-all">
             <h2 class="categories-heading-divider__title">Flash Smile Deals</h2>
-        </div>
+        <a [routerLink]="['/shop']" class="section-view-all" aria-label="View all Flash Smile Deals">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
 
         <div class="flash-deals-subbar">
-            <a [routerLink]="['/shop']" class="flash-deals-view-all">
-                View All Deals
-            </a>
+
             <div class="flex-align gap-8">
                 <button type="button" (click)="slickModal.slickPrev()" class="slick-prev slick-arrow" aria-label="Previous flash deals">‹</button>
                 <button type="button" (click)="slickModal.slickNext()" class="slick-next slick-arrow" aria-label="Next flash deals">›</button>
@@ -274,13 +272,8 @@
 <!-- Beverages -->
 <section class="beverages-section pt-64" aria-labelledby="beverages-title">
     <div class="container container-lg">
-        <div class="categories-heading-divider"><h2 id="beverages-title" class="categories-heading-divider__title">Beverages &amp; Refreshments</h2></div>
-        <div class="section-heading">
-            <div class="flex-between flex-wrap gap-8">
-                <span class="beverages-pill-tag"><i class="ph-bold ph-coffee" aria-hidden="true"></i> Sip. Smile. Repeat.</span>
-                <a [routerLink]="['/shop']" [queryParams]="{ category: 'drinks' }" class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View All Beverages <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-            </div>
-        </div>
+        <div class="categories-heading-divider has-view-all"><h2 id="beverages-title" class="categories-heading-divider__title">Beverages &amp; Refreshments</h2><a [routerLink]="['/shop']" [queryParams]="{ category: 'drinks' }" class="section-view-all" aria-label="View all Beverages &amp; Refreshments">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
+
         <div class="row g-12">
             @for (product of beverageProducts; track product.id) {
                 <div class="col-xxl-2 col-lg-3 col-sm-4 col-6" data-aos="fade-up" data-aos-duration="250">
@@ -324,7 +317,7 @@
     <div class="container container-lg">
         <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Recommended for you</h2></div>
         <div class="section-heading flex-between flex-wrap gap-16">
-            
+
             <ul class="nav common-tab nav-pills wow fadeInRight" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link fw-medium text-sm border border-white hover-border-main-600 active"
@@ -439,16 +432,15 @@
 <!-- =========================== Offer Section End =============================== -->
 
 <!-- ========================= hot-deals Start ================================ -->
-<section class="hot-deals pt-80 overflow-hidden">
+<section id="al-amin-finds" class="hot-deals pt-80 overflow-hidden">
     <div class="container container-lg">
-        <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Al-AMIN FINDS</h2></div>
+        <div class="categories-heading-divider has-view-all"><h2 class="categories-heading-divider__title">Al-AMIN FINDS</h2><a [routerLink]="['shop']"
+                        class="section-view-all" aria-label="View all Al-AMIN FINDS">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
         <div class="section-heading">
             <div class="flex-between flex-wrap gap-8">
-                
+
                 <div class="flex-align gap-16 wow fadeInRight">
-                    <a [routerLink]="['shop']"
-                        class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View
-                        All Deals</a>
+
                     <div class="flex-align gap-8">
                         <button type="button" id="deals-prev"
                             class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
@@ -466,7 +458,7 @@
         <div class="deals-layout">
             <div class="deals-layout__promo" data-aos="zoom-in">
                 <a [routerLink]="['/shop']" class="all-in-one-promo" aria-label="Shop all departments: drinks, bakery, fresh vegetables and treats">
-                    <img class="all-in-one-promo__poster" src="assets/images/bg/life-stocked-poster.png" alt="Al-Amin Hypermart. Life. Stocked. Everything in One Place." loading="lazy" />
+                    <img class="all-in-one-promo__poster" src="assets/images/bg/life-stocked-poster.png" width="337" height="575" alt="Al-Amin Hypermart. Life. Stocked. Everything in One Place." loading="lazy" />
                 </a>
             </div>
             <div class="deals-layout__products">
@@ -486,19 +478,9 @@
 <!-- ========================== Frozen Section Start ================================== -->
 <section class="frozen-section pt-64">
     <div class="container container-lg">
-        <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Frozen &amp; Ready to Cook</h2></div>
-        <div class="section-heading">
-            <div class="flex-between flex-wrap gap-8">
-                <div class="flex-align gap-12 flex-wrap">
-                    
-                    <span class="frozen-pill-tag"><i class="ph-bold ph-snowflake"></i> Chilled Fresh</span>
-                </div>
-                <div class="flex-align gap-16 wow fadeInRight">
-                    <a [routerLink]="['shop']"
-                        class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View All</a>
-                </div>
-            </div>
-        </div>
+        <div class="categories-heading-divider has-view-all"><h2 class="categories-heading-divider__title">Frozen &amp; Ready to Cook</h2><a [routerLink]="['shop']"
+                        class="section-view-all" aria-label="View all Frozen &amp; Ready to Cook">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
+
 
         <div class="row g-12">
             <div *ngFor="let product of frozenProducts" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
@@ -514,14 +496,13 @@
 <div class="brand py-80 overflow-hidden">
     <div class="container container-lg">
         <div class="brand-inner p-24 rounded-16">
-            <div class="categories-heading-divider"><h2 class="categories-heading-divider__title">Shop by Brands</h2></div>
+            <div class="categories-heading-divider has-view-all"><h2 class="categories-heading-divider__title">Shop by Brands</h2><a [routerLink]="['shop']"
+                            class="section-view-all" aria-label="View all Shop by Brands">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
         <div class="section-heading">
                 <div class="flex-between flex-wrap gap-8">
-                    
+
                     <div class="flex-align gap-16 wow fadeInRight">
-                        <a [routerLink]="['shop']"
-                            class="text-sm fw-medium text-gray-700 hover-text-main-600 hover-text-decoration-underline">View
-                            All Deals</a>
+
                         <div class="flex-align gap-8">
                             <button type="button" id="brand-prev"
                                 class="slick-prev slick-arrow flex-center rounded-circle border border-gray-100 hover-border-main-600 text-xl hover-bg-main-600 hover-text-white transition-1">
