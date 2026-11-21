@@ -2919,10 +2919,21 @@ a[href="#featureSection"],
 @media(max-width:991px) { .banner.banner--campaign .banner-item.arrow-center .slick-arrow { display:none!important; } }
 
 /* Consistent product hierarchy and branded search focus across all entry points. */
-:root { --product-grid-columns:5; --product-card-height:380px; }
-@media(max-width:991px) { :root { --product-grid-columns:3; } }
-@media(max-width:575px) { :root { --product-grid-columns:2; --product-card-height:340px; } }
-@media(max-width:359px) { :root { --product-card-height:320px; } }
+:root { --product-grid-columns:5; --product-card-height:285px; }
+@media(max-width:991px) { :root { --product-grid-columns:3; --product-card-height:275px; } }
+@media(max-width:575px) { :root { --product-grid-columns:2; --product-card-height:250px; } }
+@media(max-width:359px) { :root { --product-card-height:235px; } }
+.catalog-card .simple-add-btn { height:32px; padding:0 12px; font-size:12px; }
+.catalog-card .simple-add-btn__smile { width:16px; height:16px; }
+.catalog-card .simple-qty-control { height:32px; padding:2px; min-width:0; }
+.catalog-card .simple-qty-control__btn { width:24px; height:24px; font-size:12px; }
+.catalog-card .simple-qty-control__smile { width:14px; height:14px; }
+.catalog-card .simple-qty-control__count { font-size:12px; }
+@media(max-width:575px) {
+  .catalog-card .simple-add-btn { height:30px; font-size:11px; }
+  .catalog-card .simple-qty-control { height:30px; }
+  .catalog-card .simple-qty-control__btn { width:22px; height:22px; }
+}
 .product-card .title,.product-card .title a { font-weight:500!important; }
 input[type="search"]:focus,input[type="search"]:focus-visible,
 .search-overlay-modal input:focus,.search-overlay-modal input:focus-visible,
