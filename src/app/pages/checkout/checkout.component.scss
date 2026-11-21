@@ -80,3 +80,5 @@ button:focus-visible, a:focus-visible { outline: 2px solid #F89C24; outline-offs
 @media(max-width: 991px) { .checkout-layout { grid-template-columns: minmax(0, 1fr); } .checkout-summary { position: static; } }
 @media(max-width: 575px) { .checkout-panel, .checkout-summary { padding: 20px 16px; } .field-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } .panel-heading h2 { font-size: 16px; } .checkout-order-item { grid-template-columns: 42px minmax(0, 1fr) auto; gap: 8px; } .checkout-order-item img { width: 42px; height: 42px; } .checkout-order-item > strong { font-size: 11px; } .review-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; } .review-actions { flex-direction: column; } .checkout-empty, .checkout-review { padding: 28px 18px; } .checkout-empty h2, .checkout-review h2 { font-size: 22px; } }
 @media(prefers-reduced-motion: reduce) { input, select, textarea { transition: none !important; } }
+
+.checkout-breadcrumb button,.summary-heading button,.checkout-intro button,.browse-basket { border:0; padding:0; background:transparent; color:#53174D; font:inherit; cursor:pointer; }

@@ -1,6 +1,8 @@
 :host { display:block; min-width:0; height:100%; }
 .catalog-card { position:relative; display:flex; flex-direction:column; height:100%; min-height:352px; padding:14px; border:1px solid #EBE6EE; border-radius:16px; background:#fff; transition:border-color 180ms ease; }
 .catalog-card:hover { border-color:#53174D; }
+.catalog-card__link { position:absolute; inset:0; z-index:1; border-radius:inherit; }
+.catalog-card app-smile-add-btn { position:relative; z-index:2; }
 .catalog-card__image { position:relative; display:flex; align-items:center; justify-content:center; flex-shrink:0; height:186px; padding:8px; margin-bottom:12px; overflow:hidden; border-radius:12px; background:#FAF8FB; }
 .catalog-card__image img { width:100%; height:100%; object-fit:contain; border-radius:8px; transition:transform 220ms ease; }
 .catalog-card:hover .catalog-card__image img { transform:scale(1.035); }
@@ -8,8 +10,8 @@
 .catalog-card__prices { display:flex; flex-wrap:wrap; gap:4px 8px; align-items:baseline; min-height:24px; margin:0 0 8px; }
 .catalog-card__prices strong { font-size:16px; font-weight:800; color:#290E28; }
 .catalog-card__prices del { font-size:13px; color:#9A8B99; }
-h3 { min-width:0; font-size:15px; font-weight:700; line-height:1.38; margin:0 0 14px; }
-h3 a { color:#290E28; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis; height:42px; overflow-wrap:anywhere; }
+h3 { min-width:0; font-size:15px; font-weight:500; line-height:1.38; margin:0 0 14px; }
+h3 a { font-weight:inherit; color:#290E28; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis; height:42px; overflow-wrap:anywhere; }
 app-smile-add-btn { margin-top:auto; }
 .stock-badge { position:absolute; z-index:1; top:0; left:0; background:#E9E7E9; color:#53174D; border-radius:20px; padding:6px 10px; font-size:10px; font-weight:600; }
 .is-unavailable .catalog-card__image img { opacity:.65; }
@@ -18,3 +20,4 @@ app-smile-add-btn { margin-top:auto; }
 @media(prefers-reduced-motion:reduce) { .catalog-card,.catalog-card__image img { transition:none; } }
 
 .product-badge { position:absolute; top:14px; left:14px; z-index:2; max-width:calc(100% - 66px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; background:#53174D; color:white; font-size:10px; font-weight:600; border-radius:20px; padding:6px 10px; }
+.catalog-card { height:var(--product-card-height,380px); }

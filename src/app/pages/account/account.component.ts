@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AccountService } from '../../services/account.service';
+import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { CATALOG } from '../../data/catalog';
 import { CartService } from '../../services/cart.service';
 import { OrderReceipt, OrderService } from '../../services/order.service';
@@ -17,8 +18,14 @@ export class AccountComponent {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly recovery = inject(PasswordRecoveryService);
+  private readonly queryParams = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
   private readonly routeData = toSignal(this.route.data, { initialValue: this.route.snapshot.data });
   readonly registering = computed(() => this.routeData()['mode'] === 'register');
+  readonly resetting = computed(() => this.routeData()['mode'] === 'reset' || !!(this.queryParams().get('token') && this.queryParams().get('email')));
+  readonly recovering = computed(() => this.resetting() || this.routeData()['mode'] === 'forgot');
+  readonly recoveryForm = this.fb.group({ email: ['', [Validators.required, Validators.email]], password: ['', [Validators.minLength(8)]], confirm: [''] });
+  readonly recoverySuccess = signal(false);
   readonly view = computed(() => this.routeData()['view'] ?? 'details');
   readonly history = computed(() => { this.account.user(); return this.orders.accountHistory(); });
   readonly busy = signal(false);
@@ -33,9 +40,33 @@ export class AccountComponent {
       const user = this.account.user();
       if (user) this.profileForm.patchValue(user);
     });
-    effect(() => { this.routeData(); this.error.set(''); this.message.set(''); this.authForm.reset(); });
+    effect(() => {
+      this.routeData(); this.error.set(''); this.message.set('');
+      this.authForm.reset(this.registering() ? {} : this.account.demoCredentials);
+    });
+    effect(() => {
+      this.routeData(); const params = this.queryParams();
+      this.recoverySuccess.set(false);
+      this.recoveryForm.reset({ email: params.get('email') ?? '' });
+    });
+  }
+  async recoverPassword(): Promise<void> {
+    if (this.busy()) return;
+    this.error.set(''); this.recoveryForm.markAllAsTouched();
+    const values = this.recoveryForm.getRawValue();
+    if (this.recoveryForm.controls.email.invalid) { this.error.set('Enter a valid email address.'); return; }
+    if (this.resetting() && (values.password.length < 8 || values.password !== values.confirm)) { this.error.set('Use at least 8 characters and make sure both passwords match.'); return; }
+    this.busy.set(true);
+    try {
+      if (this.resetting()) {
+        await this.recovery.reset(values.email, this.queryParams().get('token') ?? '', values.password);
+      } else await this.recovery.requestLink(values.email);
+      this.recoveryForm.reset(); this.recoverySuccess.set(true);
+    } catch (error) { this.error.set(error instanceof Error ? error.message : 'Password recovery could not be completed.'); }
+    finally { this.busy.set(false); }
   }
   invalid(field: keyof typeof this.authForm.controls): boolean { const control = this.authForm.controls[field]; return control.invalid && control.touched; }
+  openBasket(): void { this.cart.openDrawer(); }
   async authenticate(): Promise<void> {
     if (this.busy()) return;
     this.authForm.markAllAsTouched(); this.error.set('');

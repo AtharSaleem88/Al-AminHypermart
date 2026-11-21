@@ -22,13 +22,6 @@
       <div class="shop-results">
         <div class="results-heading"><div><h2>{{ title }}</h2><p aria-live="polite">Showing {{ resultStart }}–{{ resultEnd }} of {{ filteredProducts.length }} products</p></div><div class="results-actions"><button type="button" class="mobile-filter-button" (click)="openFilters()" aria-haspopup="dialog" aria-controls="mobile-shop-filters" [attr.aria-expanded]="mobileFiltersOpen"><i class="ph ph-sliders-horizontal" aria-hidden="true"></i> Filters @if (refinementCount) { <span>{{ refinementCount }}</span> }</button><label class="sort-label">Sort by<select aria-label="Sort products" [ngModel]="sort" (ngModelChange)="update({sort: $event})"><option value="popular">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div></div>
         <form class="catalog-search" (ngSubmit)="update({ q: searchDraft.trim() || null })"><i class="ph ph-magnifying-glass" aria-hidden="true"></i><input type="search" name="search" [(ngModel)]="searchDraft" placeholder="Search your everyday favourites" aria-label="Search products" /><button type="submit">Search</button></form>
-        @if (hasFilters) { <div class="active-filters" aria-label="Active filters">
-          @if (category) { <button type="button" (click)="chooseDepartment('')">{{ title }} <span aria-hidden="true">×</span><span class="visually-hidden">Remove department filter</span></button> }
-          @for (brand of selectedBrands; track brand) { <button type="button" (click)="toggleBrand(brand)">{{ brand }} <span aria-hidden="true">×</span><span class="visually-hidden">Remove brand filter</span></button> }
-          @if (min || max !== 3000) { <button type="button" (click)="update({min: null, max: null})">Rs. {{ min }}–{{ max }} ×<span class="visually-hidden">Remove price filter</span></button> }
-          @if (search) { <button type="button" (click)="update({q: null})">“{{ search }}” ×<span class="visually-hidden">Remove search</span></button> }
-          @if (offers) { <button type="button" (click)="update({offers: null, filter: null})">Smile deals ×<span class="visually-hidden">Remove offers filter</span></button> }
-        </div> }
         @if (visibleProducts.length) {
           <div class="catalog-grid">@for (product of visibleProducts; track product.id) { <app-product-card [product]="product" /> }</div>
         } @else { <div class="catalog-empty"><img src="assets/images/logo/brand-smile.png" alt="" /><h3>No products match just yet</h3><p>Try another department or clear a filter to find your favourites.</p><button type="button" (click)="clear()">Clear filters</button></div> }
@@ -44,8 +37,8 @@
             <fieldset><legend>Brand</legend>
               @for (brand of brands; track brand) { <label class="filter-option"><input type="checkbox" [checked]="selectedBrands.includes(brand)" (change)="toggleBrand(brand)" [disabled]="!countBrand(brand) && !selectedBrands.includes(brand)" /><span>{{ brand }}</span><small>{{ countBrand(brand) }}</small></label> }
             </fieldset>
-            <fieldset><legend>Price range</legend><form (ngSubmit)="applyPrice()"><div class="price-inputs"><label>Min (Rs.)<input type="number" name="min" min="0" [(ngModel)]="draftMin" /></label><span>–</span><label>Max (Rs.)<input type="number" name="max" min="0" [(ngModel)]="draftMax" /></label></div><button class="price-apply" type="submit">Apply price</button></form></fieldset>
-            <fieldset><legend>Offers</legend><label class="filter-option"><input type="checkbox" [checked]="offers" (change)="update({ offers: offers ? null : '1', filter: null })" /><span>Smile deals only</span></label></fieldset>
+            <fieldset class="filter-group--compact"><legend>Price range</legend><form (ngSubmit)="applyPrice()"><div class="price-inputs"><label>Min (Rs.)<input type="number" name="min" min="0" [(ngModel)]="draftMin" /></label><span>–</span><label>Max (Rs.)<input type="number" name="max" min="0" [(ngModel)]="draftMax" /></label></div><button class="price-apply" type="submit">Apply price</button></form></fieldset>
+            <fieldset class="filter-group--compact"><legend>Offers</legend><label class="filter-option"><input type="checkbox" [checked]="offers" (change)="update({ offers: offers ? null : '1', filter: null })" /><span>Smile deals only</span></label></fieldset>
           </div>
 </ng-template>
 <dialog #filterDialog id="mobile-shop-filters" class="mobile-filter-panel" aria-labelledby="filter-panel-title" (close)="mobileFiltersOpen = false" (click)="onFilterBackdropClick($event)">

@@ -1578,7 +1578,7 @@ a[href="#featureSection"],
 
     .footer-item-wrapper {
         display: grid !important;
-        grid-template-columns: 1.28fr 0.78fr 0.92fr 0.78fr 0.92fr 1.32fr;
+        grid-template-columns: minmax(0,1.28fr) repeat(3,minmax(0,.9fr)) minmax(0,1.32fr);
         gap: 24px;
         align-items: start;
     }
@@ -2917,3 +2917,22 @@ a[href="#featureSection"],
 .banner.banner--campaign .carousel .slick-dots li.slick-active button,
 .banner.banner--campaign .carousel .slick-dots li button:hover { background:transparent!important; box-shadow:none!important; width:36px!important; height:44px!important; border-radius:0!important; }
 @media(max-width:991px) { .banner.banner--campaign .banner-item.arrow-center .slick-arrow { display:none!important; } }
+
+/* Consistent product hierarchy and branded search focus across all entry points. */
+:root { --product-grid-columns:5; --product-card-height:380px; }
+@media(max-width:991px) { :root { --product-grid-columns:3; } }
+@media(max-width:575px) { :root { --product-grid-columns:2; --product-card-height:340px; } }
+@media(max-width:359px) { :root { --product-card-height:320px; } }
+.product-card .title,.product-card .title a { font-weight:500!important; }
+input[type="search"]:focus,input[type="search"]:focus-visible,
+.search-overlay-modal input:focus,.search-overlay-modal input:focus-visible,
+.mobile-search-modal input:focus,.mobile-search-modal input:focus-visible {
+  outline:2px solid #53174D!important;
+  outline-offset:2px;
+  border-color:#53174D!important;
+  box-shadow:0 0 0 3px #53174D14!important;
+}
+
+body:has(.account-page--auth) { padding-bottom:0!important; }
+
+.basket-drawer-link { border:0; padding:0; background:transparent; color:#53174D; text-decoration:underline; cursor:pointer; }

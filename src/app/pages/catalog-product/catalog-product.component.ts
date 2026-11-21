@@ -33,7 +33,7 @@ import { CartService } from '../../services/cart.service';
               <p>Minimum order {{ cart.formatRs(cart.MINIMUM_ORDER_RS) }} across your basket.</p>
             </div>
             <details class="product-information"><summary>Product information <i class="ph ph-plus" aria-hidden="true"></i></summary><dl><div><dt>Brand</dt><dd>{{ p.brand }}</dd></div><div><dt>Department</dt><dd>{{ departmentName }}</dd></div></dl><p>Check the product packaging for ingredients, allergens and storage instructions.</p></details>
-            <div class="product-links"><a routerLink="/shop" [queryParams]="{category: p.department}">Explore this department <i class="ph ph-arrow-right" aria-hidden="true"></i></a><a routerLink="/cart">View basket</a></div>
+            <div class="product-links"><a routerLink="/shop" [queryParams]="{category: p.department}">Explore this department <i class="ph ph-arrow-right" aria-hidden="true"></i></a><button type="button" (click)="cart.openDrawer()" class="basket-drawer-link">View basket</button></div>
           </div>
         </article>
       } @else {

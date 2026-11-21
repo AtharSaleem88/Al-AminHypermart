@@ -16,6 +16,6 @@ export class LayoutComponent {
   private readonly router = inject(Router);
   private readonly account = inject(AccountService);
   private readonly url = toSignal(this.router.events.pipe(filter(event => event instanceof NavigationEnd), map(event => event.urlAfterRedirects.split('?')[0])), { initialValue: this.router.url.split('?')[0] });
-  readonly authScreen = computed(() => ['/login', '/create-account', '/register'].includes(this.url()) || (this.url().startsWith('/account') && !this.account.user()));
+  readonly authScreen = computed(() => ['/login', '/create-account', '/register', '/forgot-password', '/reset-password'].includes(this.url()) || ((this.url() === '/account' || this.url().startsWith('/account/')) && !this.account.user()));
 }
 

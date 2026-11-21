@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+type FooterLink = { label: string; route?: string[]; fragment?: string; href?: string; queryParams?: Record<string, string> };
+
 @Component({
   selector: 'app-footer',
   imports: [RouterLink, CommonModule],
@@ -9,45 +11,33 @@ import { CommonModule } from '@angular/common';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  footerSections = [
+  footerSections: { title: string; links: FooterLink[] }[] = [
     {
-      title: 'Information',
+      title: 'CUSTOMER CARE',
       links: [
         { label: 'About Us', route: ['/about-us'] },
-        { label: 'All Departments', route: ['shop'] },
-        { label: 'Customer Care', route: ['/help-centre'] },
-        { label: 'Fresh Guarantee', route: ['shop'] }
-      ]
-    },
-    {
-      title: 'Customer Support',
-      links: [
         { label: 'Help Centre', route: ['/help-centre'] },
-        { label: 'Special Offers', route: ['shop'] },
-        { label: 'Coupons & Savings', route: ['shop'] },
-        { label: 'Order History', route: ['/account/orders'] }
+        { label: 'Email Sign Up', route: ['/email-signup'] },
+        { label: 'Mobile App', route: ['/mobile-app'] }
       ]
     },
     {
-      title: 'My Account',
+      title: 'MY ACCOUNT',
       links: [
-        { label: 'My Account', route: ['account'] },
-        { label: 'Shopping Cart', route: ['cart'] },
-        { label: 'Wishlist', route: ['wishlist'] },
-        { label: 'Checkout', route: ['checkout'] }
+        { label: 'My Account', route: ['/account/details'] },
+        { label: 'Wishlist', route: ['/wishlist'] },
+        { label: 'Order History', route: ['/account/orders'] },
+        { label: 'Account Deletion Request', route: ['/account-deletion'] }
       ]
     },
     {
-      title: 'Fresh Hypermart',
+      title: 'DEPARTMENTS',
       links: [
-        { label: 'Dairy & Eggs', route: ['shop'] },
-        { label: 'Meat & Seafood', route: ['shop'] },
-        { label: 'Fresh Produce', route: ['shop'] },
-        { label: 'Bread & Bakery', route: ['shop'] },
-        { label: 'Pantry Staples', route: ['shop'] }
+        { label: 'Dairy & Eggs', route: ['/shop'], queryParams: { category: 'dairy' } },
+        { label: 'Fresh Produce', route: ['/shop'], queryParams: { category: 'vegetables' } },
+        { label: 'Frozen Food', route: ['/shop'], queryParams: { category: 'frozen' } },
+        { label: 'Pantry Staples', route: ['/shop'], queryParams: { category: 'pantry' } }
       ]
     }
   ];
 }
-
-

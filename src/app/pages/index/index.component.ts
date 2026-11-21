@@ -219,7 +219,7 @@ export class IndexComponent implements OnDestroy {
   products = LANDING_ESSENTIALS;
 
   productSlideConfig = {
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -249,7 +249,7 @@ export class IndexComponent implements OnDestroy {
       {
         breakpoint: 1199,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           arrows: false,
         }
       },
@@ -484,16 +484,20 @@ export class IndexComponent implements OnDestroy {
       {
         breakpoint: 1399,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           arrows: false,
         }
       },
       {
         breakpoint: 1199,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 4,
           arrows: false,
         }
+      },
+      {
+        breakpoint: 991,
+        settings: { slidesToShow: 2, arrows: false }
       },
       {
         breakpoint: 575,

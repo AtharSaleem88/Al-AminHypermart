@@ -274,9 +274,9 @@
     <div class="container container-lg">
         <div class="categories-heading-divider has-view-all"><h2 id="beverages-title" class="categories-heading-divider__title">Beverages &amp; Refreshments</h2><a [routerLink]="['/shop']" [queryParams]="{ category: 'drinks' }" class="section-view-all" aria-label="View all Beverages &amp; Refreshments">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
 
-        <div class="row g-12">
+        <div class="landing-product-rail" role="region" aria-labelledby="beverages-title" tabindex="0">
             @for (product of beverageProducts; track product.id) {
-                <div class="col-xxl-2 col-lg-3 col-sm-4 col-6" data-aos="fade-up" data-aos-duration="250">
+                <div class="landing-product-rail__item">
                     <app-product-card [product]="product"></app-product-card>
                 </div>
             }
@@ -286,8 +286,8 @@
 <!-- ========================= flash sales Start ================================ -->
 <section class="flash-sales pt-80 overflow-hidden">
     <div class="container container-lg">
-        <div class="row gy-4 arrow-style-two">
-            <div class="col-lg-6" *ngFor="let sale of flashSales" [attr.data-aos]="'fade-up'"
+        <div class="promo-banner-grid">
+            <div class="promo-banner-grid__item" *ngFor="let sale of flashSales" [attr.data-aos]="'fade-up'"
                 [attr.data-aos-duration]="sale.aosDuration">
                 <div
                     class="flash-sales-item rounded-16 overflow-hidden z-1 position-relative flex-align flex-0 justify-content-between gap-8"
@@ -359,9 +359,8 @@
 
         <div class="tab-content" id="pills-tabContent">
             <ng-template #recommendedCardGrid let-items>
-                <div class="row g-12">
-                    <div *ngFor="let product of items" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
-                        data-aos="fade-up" data-aos-duration="200">
+                <div class="landing-product-rail" role="region" aria-label="Recommended products" tabindex="0">
+                    <div *ngFor="let product of items" class="landing-product-rail__item">
                         <app-product-card [product]="catalogProduct(product.id)" [badge]="product.badge || ''" />
                     </div>
                 </div>
@@ -478,13 +477,12 @@
 <!-- ========================== Frozen Section Start ================================== -->
 <section class="frozen-section pt-64">
     <div class="container container-lg">
-        <div class="categories-heading-divider has-view-all"><h2 class="categories-heading-divider__title">Frozen &amp; Ready to Cook</h2><a [routerLink]="['shop']"
+        <div class="categories-heading-divider has-view-all"><h2 id="frozen-title" class="categories-heading-divider__title">Frozen &amp; Ready to Cook</h2><a [routerLink]="['/shop']" [queryParams]="{ category: 'frozen' }"
                         class="section-view-all" aria-label="View all Frozen &amp; Ready to Cook">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
 
 
-        <div class="row g-12">
-            <div *ngFor="let product of frozenProducts" class="col-xxl-2 col-lg-3 col-sm-4 col-6"
-                data-aos="fade-up" data-aos-duration="250">
+        <div class="landing-product-rail" role="region" aria-labelledby="frozen-title" tabindex="0">
+            <div *ngFor="let product of frozenProducts" class="landing-product-rail__item">
                 <app-product-card [product]="catalogProduct(product.id)" [badge]="product.badge || ''" />
             </div>
         </div>
@@ -495,7 +493,7 @@
 <!-- ============================== Brand Section Start =============================== -->
 <div class="brand py-80 overflow-hidden">
     <div class="container container-lg">
-        <div class="brand-inner p-24 rounded-16">
+        <div class="brand-inner rounded-16">
             <div class="categories-heading-divider has-view-all"><h2 class="categories-heading-divider__title">Shop by Brands</h2><a [routerLink]="['shop']"
                             class="section-view-all" aria-label="View all Shop by Brands">View All <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
         <div class="section-heading">

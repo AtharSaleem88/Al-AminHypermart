@@ -27,16 +27,13 @@
                     <a [routerLink]="['/']" [routerLinkActive]="'activePage'" [routerLinkActiveOptions]="{ exact: true }" class="nav-menu__link text-heading-two">Home</a>
                 </li>
                 <li class="nav-menu__item" (click)="closeMobileMenu()">
-                    <a [routerLink]="['/shop']" class="nav-menu__link text-heading-two">All Departments</a>
+                    <a [routerLink]="['/shop']" class="nav-menu__link text-heading-two">Categories</a>
                 </li>
                 <li class="nav-menu__item" (click)="closeMobileMenu()">
                     <a [routerLink]="['/shop']" [queryParams]="{ filter: 'offers' }" class="nav-menu__link text-heading-two d-flex align-items-center justify-content-between">
                         <span>Special Offers</span>
                         <span class="badge bg-main-two-600 text-white text-xs px-8 py-2 rounded-pill">Hot Deals</span>
                     </a>
-                </li>
-                <li class="nav-menu__item" (click)="closeMobileMenu()">
-                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'fresh' }" class="nav-menu__link text-heading-two">Fresh Guarantee</a>
                 </li>
                 <li class="nav-menu__item" (click)="closeMobileMenu()">
                     <a [routerLink]="['/about-us']" class="nav-menu__link text-heading-two">About Us</a>
@@ -104,11 +101,11 @@
                         Home
                     </a>
 
-                    <!-- All Departments Dropdown -->
+                    <!-- Categories Dropdown -->
                     <div class="position-relative category-dropdown-wrapper">
                         <button type="button" (click)="toggleCategoryDropdown()"
                             class="d-flex align-items-center gap-6 text-sm fw-semibold text-heading hover-text-main-600 bg-transparent border-0 p-0 transition-1">
-                            <span>All Departments</span>
+                            <span>Categories</span>
                             <i class="ph-bold ph-caret-down text-xs transition-2" [class.rotate-180]="categoryDropdownVisible"></i>
                         </button>
 
@@ -129,11 +126,6 @@
                         class="d-flex align-items-center gap-6 text-sm fw-semibold text-main-two-600 hover-text-main-two-700 transition-1">
                         <span>Special Offers</span>
                         <span class="badge bg-main-two-600 text-white text-xs px-8 py-2 rounded-pill">Hot Deals</span>
-                    </a>
-
-                    <a [routerLink]="['/shop']" [queryParams]="{ filter: 'fresh' }"
-                        class="text-sm fw-semibold text-heading hover-text-main-600 transition-1">
-                        Fresh Guarantee
                     </a>
 
                     <a [routerLink]="['/about-us']"
@@ -360,16 +352,10 @@
                 <span class="text-xs text-gray-600">Subtotal ({{ cartCount }} items):</span>
                 <span class="fw-bold text-heading text-base">{{ cartService.formatRs(cartSubtotal) }}</span>
             </div>
-            <div class="d-flex align-items-center justify-content-between mb-16">
-                <span class="text-xs text-gray-600">Minimum Order (Rs. 3,000):</span>
-                <span class="text-xs fw-bold" [ngClass]="cartService.isMinimumMet() ? 'text-success-600' : 'text-main-two-600'">
-                    {{ cartService.isMinimumMet() ? 'Reached — Ready!' : cartService.formatRs(cartService.remainingAmount()) + ' more needed' }}
-                </span>
-            </div>
             <div class="d-grid grid-cols-2 gap-10">
-                <a [routerLink]="['/cart']" (click)="closeCartSlider()"
+                <a [routerLink]="['/shop']" (click)="closeCartSlider()"
                     class="btn btn-main-two text-xs fw-semibold py-12 rounded-8 text-center flex-center">
-                    View Cart
+                    Continue Shopping
                 </a>
                 <a *ngIf="cartService.isMinimumMet()" [routerLink]="['/checkout']" (click)="closeCartSlider()"
                     class="btn btn-main text-xs fw-semibold py-12 rounded-8 text-center flex-center shadow-sm">

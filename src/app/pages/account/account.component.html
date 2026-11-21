@@ -1,38 +1,177 @@
-<section class="account-page">
+<section class="account-page" [class.account-page--auth]="!account.user()" [class.account-page--signed-in]="!!account.user()">
   <div class="container container-lg">
     @if (!account.ready()) {
       <div class="account-loading" role="status"><img src="assets/images/logo/brand-smile-clean.svg" alt="" /><p>Getting your account ready…</p></div>
     } @else if (!account.user()) {
       <div class="auth-shell">
-        <aside class="auth-story"><img class="auth-wordmark" src="assets/images/logo/logo-wordmark-white.png" alt="Al-Amin Hypermart" /><div class="auth-story__main"><img class="signature-smile" src="assets/images/logo/brand-smile-clean.svg" alt="" /><span class="eyebrow">YOUR EVERYDAY. A LITTLE EASIER.</span><h1>Life. Stocked.<br /><em>Just for you.</em></h1><p>One place for your everyday favourites, your order history, and the details that make shopping feel effortless.</p></div><div class="auth-promises"><span><i class="ph ph-basket" aria-hidden="true"></i> Everyday essentials</span><span><i class="ph ph-heart" aria-hidden="true"></i> A little more care</span></div></aside>
-        <div class="auth-content"><a routerLink="/" class="back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to shopping</a><nav class="auth-tabs" aria-label="Account access"><a routerLink="/login" [class.active]="!registering()" [attr.aria-current]="!registering() ? 'page' : null">Sign in</a><a routerLink="/create-account" [class.active]="registering()" [attr.aria-current]="registering() ? 'page' : null">Create account</a></nav><span class="eyebrow">{{ registering() ? 'A FRESH START' : 'GOOD TO SEE YOU AGAIN' }}</span><h2>{{ registering() ? 'Your next smile starts here.' : 'Welcome back.' }}</h2><p class="muted">{{ registering() ? 'Make room for an easier everyday shop.' : 'Sign in to see your orders and manage your details.' }}</p>
-          @if (!registering()) { <div class="demo-access"><strong>Try the demo account</strong><span>Email: {{ account.demoCredentials.email }}</span><span>Password: {{ account.demoCredentials.password }}</span><button type="button" (click)="authForm.patchValue(account.demoCredentials)">Use demo credentials <i class="ph ph-arrow-down" aria-hidden="true"></i></button></div> }
+        <aside class="auth-story">
+          <a routerLink="/" class="auth-brand-link"><img class="auth-wordmark" src="assets/images/logo/logo-wordmark-white.png" alt="Al-Amin Hypermart" /></a>
+          <div class="auth-story__main"><h1>Life. Stocked.<br /><em>With a smile.</em></h1></div>
+          <div class="auth-benefits" aria-label="The Al-Amin experience">
+            <div><i class="ph ph-plant" aria-hidden="true"></i><strong>Farm fresh</strong></div>
+            <div><img src="assets/images/logo/brand-smile-clean.svg" alt="" /><strong>Smile deals</strong></div>
+            <div><i class="ph ph-device-mobile" aria-hidden="true"></i><strong>On the go</strong></div>
+          </div>
+          <div class="auth-category-block"><h2>SHOP YOUR FAVOURITES</h2><nav class="auth-categories" aria-label="Popular categories">
+            <a routerLink="/shop" [queryParams]="{category:'pantry'}"><i class="ph ph-basket" aria-hidden="true"></i>Groceries</a>
+            <a routerLink="/shop" [queryParams]="{category:'drinks'}"><i class="ph ph-coffee" aria-hidden="true"></i>Beverages</a>
+            <a routerLink="/shop" [queryParams]="{category:'vegetables'}"><i class="ph ph-carrot" aria-hidden="true"></i>Fresh produce</a>
+            <a routerLink="/shop" [queryParams]="{category:'dairy'}"><i class="ph ph-drop" aria-hidden="true"></i>Dairy &amp; eggs</a>
+            <a routerLink="/shop" [queryParams]="{category:'frozen'}"><i class="ph ph-snowflake" aria-hidden="true"></i>Frozen food</a>
+            <a routerLink="/shop" [queryParams]="{category:'bakery'}"><i class="ph ph-bread" aria-hidden="true"></i>Bakery</a>
+          </nav></div>
+        </aside>
+        <div class="auth-content" [class.auth-content--register]="registering()">
+          <a routerLink="/" class="auth-form-logo"><img src="assets/images/logo/logo.png" alt="Al-Amin Hypermart" /></a>
+          <h2>{{ recovering() ? (resetting() ? 'Set a new password.' : 'Forgot password?') : registering() ? 'Create your account.' : 'Welcome back.' }}</h2>
+          @if (!registering() && !recovering()) { <p class="auth-intro">Sign in to access exclusive deals and track your orders</p> }
+          @if (recovering()) {
+            @if (recoverySuccess()) {
+              <div class="recovery-result" role="status"><img src="assets/images/logo/brand-smile-clean.svg" alt="" /><h3>{{ resetting() ? 'Password updated.' : 'Check your inbox.' }}</h3><p>{{ resetting() ? 'Your live Al-Amin account password has been updated.' : 'If an account is registered with that email, you will receive a password reset link. Check your spam folder too.' }}</p></div>
+            } @else {
+              <p class="recovery-caption">{{ resetting() ? 'Choose a new password for your live Al-Amin account.' : 'Enter your registered email to request a password reset link.' }}</p>
+              <form [formGroup]="recoveryForm" (ngSubmit)="recoverPassword()" novalidate>
+                <label for="recovery-email">Email address</label><input id="recovery-email" type="email" formControlName="email" autocomplete="email" placeholder="you@example.com" [readOnly]="resetting() && !!recoveryForm.controls.email.value" required />
+                @if (resetting()) {
+                  <label for="new-password">New password</label><input id="new-password" type="password" formControlName="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required />
+                  <label for="new-password-confirm">Confirm new password</label><input id="new-password-confirm" type="password" formControlName="confirm" autocomplete="new-password" placeholder="Re-enter your new password" required />
+                }
+                @if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> }
+                <button type="submit" class="primary-button" [disabled]="busy()">{{ busy() ? 'Please wait…' : resetting() ? 'Reset password' : 'Send reset link' }} <img src="assets/images/logo/brand-smile-clean.svg" alt="" /></button>
+              </form>
+            }
+            <p class="auth-switch"><a routerLink="/login">Back to sign in</a></p>
+          } @else {
           <form [formGroup]="authForm" (ngSubmit)="authenticate()" novalidate>
             @if (registering()) { <label for="account-name">Full name</label><input id="account-name" formControlName="name" autocomplete="name" placeholder="Your full name" [attr.aria-required]="true" /> }
-            <label for="account-email">Email address</label><input id="account-email" type="email" formControlName="email" autocomplete="email" placeholder="you@example.com" [attr.aria-invalid]="invalid('email')" required />
-            <label for="account-password">Password</label><div class="password-field"><input id="account-password" [type]="showPassword ? 'text' : 'password'" formControlName="password" [autocomplete]="registering() ? 'new-password' : 'current-password'" placeholder="At least 8 characters" [attr.aria-invalid]="invalid('password')" required /><button type="button" (click)="showPassword = !showPassword" [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"><i [class]="showPassword ? 'ph ph-eye-slash' : 'ph ph-eye'" aria-hidden="true"></i></button></div>
+            <label for="account-email"><i class="ph ph-envelope-simple" aria-hidden="true"></i> Email address</label><input id="account-email" type="email" formControlName="email" autocomplete="email" placeholder="you@example.com" [attr.aria-invalid]="invalid('email')" required />
+            <label for="account-password"><i class="ph ph-lock-key" aria-hidden="true"></i> Password</label><div class="password-field"><input id="account-password" [type]="showPassword ? 'text' : 'password'" formControlName="password" [autocomplete]="registering() ? 'new-password' : 'current-password'" placeholder="At least 8 characters" [attr.aria-invalid]="invalid('password')" required /><button type="button" (click)="showPassword = !showPassword" [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"><i [class]="showPassword ? 'ph ph-eye-slash' : 'ph ph-eye'" aria-hidden="true"></i></button></div>
             @if (registering()) { <label for="confirm-password">Confirm password</label><input id="confirm-password" [type]="showPassword ? 'text' : 'password'" formControlName="confirm" autocomplete="new-password" placeholder="Re-enter your password" aria-required="true" /> }
             @if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> }
+            @if (!registering()) { <a routerLink="/forgot-password" class="forgot-password-link">Forgot password?</a> }
             <button type="submit" class="primary-button" [disabled]="busy()">@if (busy()) { <span class="button-spinner" aria-hidden="true"></span> {{ registering() ? 'Creating your account…' : 'Signing you in…' }} } @else { {{ registering() ? 'Create my account' : 'Sign in' }} <img src="assets/images/logo/brand-smile-clean.svg" alt="" /> }</button>
+            @if (registering()) { <p class="auth-agreement">By creating an account, you agree to our <a href="https://al-aminhypermart.com/page/PrivacyPolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p> }
           </form>
-          <p class="auth-switch">{{ registering() ? 'Already part of the family?' : 'New to Al-Amin?' }} <a [routerLink]="registering() ? '/login' : '/create-account'">{{ registering() ? 'Sign in' : 'Create an account' }}</a></p><p class="preview-note"><i class="ph ph-info" aria-hidden="true"></i> Account preview: saved in this browser only. Use a demo password, not one you use elsewhere.</p>
+          <div class="auth-entry-switch"><div class="auth-divider"><span>{{ registering() ? 'Already member?' : 'New Customer?' }}</span></div><a class="auth-secondary-entry" [routerLink]="registering() ? '/login' : '/create-account'"><i [class]="registering() ? 'ph ph-sign-in' : 'ph ph-user-plus'" aria-hidden="true"></i>{{ registering() ? 'Sign in' : 'Create an account' }}</a>@if (!registering()) { <p>Join us and enjoy exclusive discounts, faster checkout &amp; more!</p> }</div>
+          }
         </div>
       </div>
     } @else {
-      <header class="account-heading"><div><span class="eyebrow">YOUR AL-AMIN</span><h1>Hello, {{ account.user()!.name.split(' ')[0] }}<span>.</span></h1><p>Your orders, your details, your everyday.</p></div><img src="assets/images/logo/brand-smile-clean.svg" alt="" /></header>
-      <div class="account-layout"><aside class="account-nav"><div class="profile-badge"><span>{{ account.user()!.name.charAt(0).toUpperCase() }}</span><div><strong>{{ account.user()!.name }}</strong><small>{{ account.user()!.email }}</small></div></div><nav aria-label="My account"><a routerLink="/account/orders" [class.active]="view() === 'orders'" [attr.aria-current]="view() === 'orders' ? 'page' : null"><i class="ph ph-package" aria-hidden="true"></i> Order history <span>{{ history().length }}</span></a><a routerLink="/account/details" [class.active]="view() === 'details'" [attr.aria-current]="view() === 'details' ? 'page' : null"><i class="ph ph-user-circle" aria-hidden="true"></i> Account settings</a><button type="button" (click)="logout()"><i class="ph ph-sign-out" aria-hidden="true"></i> Sign out</button></nav><p class="preview-note">Browser preview account. Orders here are demo receipts, not live fulfilment.</p></aside>
+      <nav aria-label="Breadcrumb" class="account-breadcrumb">
+        <a routerLink="/">Home</a> / <a routerLink="/account">Account</a> / {{ view() === 'orders' ? 'Order history' : 'Account settings' }}
+      </nav>
+      <header class="account-heading">
+        <div>
+          <h1>{{ view() === 'orders' ? 'MY ORDER HISTORY' : 'ACCOUNT SETTINGS' }}</h1>
+        </div>
+        <img src="assets/images/logo/brand-smile-clean.svg" alt="" />
+      </header>
+      <div class="account-layout">
+        <aside class="account-nav">
+          <div class="profile-badge">
+            <span>{{ account.user()!.name.charAt(0).toUpperCase() }}</span>
+            <div>
+              <strong>{{ account.user()!.name }}</strong>
+              <small>{{ account.user()!.email }}</small>
+            </div>
+          </div>
+          <nav aria-label="My account">
+            <a routerLink="/account/orders" [class.active]="view() === 'orders'" [attr.aria-current]="view() === 'orders' ? 'page' : null">
+              <i class="ph ph-package" aria-hidden="true"></i> Order history <span>{{ history().length }}</span>
+            </a>
+            <a routerLink="/account/details" [class.active]="view() === 'details'" [attr.aria-current]="view() === 'details' ? 'page' : null">
+              <i class="ph ph-user-circle" aria-hidden="true"></i> Account settings
+            </a>
+            <button type="button" (click)="logout()">
+              <i class="ph ph-sign-out" aria-hidden="true"></i> Sign out
+            </button>
+          </nav>
+        </aside>
         <main class="account-main">
           @if (view() === 'orders') {
-            <div class="section-heading"><div><span class="eyebrow">YOUR PAST SHOPS</span><h2>Order history</h2><p class="muted">Reorder available products at current prices. Items are added to your existing basket.</p></div><a routerLink="/shop" class="text-link">Shop again →</a></div>
-            @if (message()) { <div class="form-message success" role="status">{{ message() }} <a routerLink="/cart">View basket →</a></div> } @if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> } @if (!history().length) { <div class="empty-state"><img src="assets/images/logo/brand-smile-clean.svg" alt="" /><h3>Your next smile is waiting.</h3><p>No orders yet. Your first shop will have a home here.</p><a routerLink="/shop" class="primary-button">Start shopping <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div> }
-            @for (order of history(); track order.id) { <article class="order-card"><div class="order-card__heading"><div><span class="eyebrow">ORDER REFERENCE</span><h3>{{ order.id }}</h3><time [attr.datetime]="order.createdAt">{{ order.createdAt | date:'mediumDate' }} · {{ order.createdAt | date:'shortTime' }}</time></div><div><span class="order-status">Demo order saved</span><strong>Rs. {{ order.total | number:'1.0-0' }}</strong><button type="button" class="reorder-button" (click)="reorder(order)" [disabled]="reordered() === order.id">{{ reordered() === order.id ? 'Added to basket' : 'Reorder' }} <i class="ph ph-arrow-clockwise" aria-hidden="true"></i></button></div></div><details><summary>View order items <span>{{ order.items.length }} {{ order.items.length === 1 ? 'product' : 'products' }} <i class="ph ph-caret-down" aria-hidden="true"></i></span></summary><div class="order-lines">@for (item of order.items; track item.id) { <div class="order-line"><img [src]="item.image" [alt]="item.name" loading="lazy" /><div><strong>{{ item.name }}</strong><span>{{ item.quantity }} × Rs. {{ item.unitPrice | number:'1.0-0' }}</span></div><b>Rs. {{ item.unitPrice * item.quantity | number:'1.0-0' }}</b></div> }</div></details></article> }
+            <div class="section-heading">
+              <div>
+                <p role="status" class="order-count">{{ history().length }} past {{ history().length === 1 ? 'order' : 'orders' }}</p>
+              </div>
+              <a routerLink="/shop" class="text-link">Shop again →</a>
+            </div>
+            @if (message()) { <div class="form-message success" role="status">{{ message() }} <button type="button" (click)="openBasket()" class="basket-drawer-link">View basket →</button></div> }
+            @if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> }
+            @if (!history().length) {
+              <div class="empty-state">
+                <i class="ph ph-package" aria-hidden="true"></i>
+                <h2>No orders placed yet.</h2>
+                <a routerLink="/shop" class="shop-button">Start shopping</a>
+              </div>
+            }
+            @for (order of history(); track order.id) {
+              <article class="order-card">
+                <div class="order-card__heading">
+                  <div>
+                    <span class="eyebrow">ORDER REFERENCE</span>
+                    <h3>{{ order.id }}</h3>
+                    <time [attr.datetime]="order.createdAt">{{ order.createdAt | date:'mediumDate' }} · {{ order.createdAt | date:'shortTime' }}</time>
+                  </div>
+                  <div>
+                    <strong>Rs. {{ order.total | number:'1.0-0' }}</strong>
+                    <button type="button" class="reorder-button" (click)="reorder(order)" [disabled]="reordered() === order.id">
+                      {{ reordered() === order.id ? 'Added to basket' : 'Reorder' }} <i class="ph ph-arrow-clockwise" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+                <details>
+                  <summary>View order items <span>{{ order.items.length }} {{ order.items.length === 1 ? 'product' : 'products' }} <i class="ph ph-caret-down" aria-hidden="true"></i></span></summary>
+                  <div class="order-lines">
+                    @for (item of order.items; track item.id) {
+                      <div class="order-line">
+                        <img [src]="item.image" [alt]="item.name" loading="lazy" />
+                        <div>
+                          <strong>{{ item.name }}</strong>
+                          <span>{{ item.quantity }} × Rs. {{ item.unitPrice | number:'1.0-0' }}</span>
+                        </div>
+                        <b>Rs. {{ item.unitPrice * item.quantity | number:'1.0-0' }}</b>
+                      </div>
+                    }
+                  </div>
+                </details>
+              </article>
+            }
           } @else {
-            <div class="section-heading"><div><span class="eyebrow">MAKE YOURSELF AT HOME</span><h2>Account settings</h2><p class="muted">Update your personal details and saved address.</p></div></div><form class="profile-form" [formGroup]="profileForm" (ngSubmit)="saveDetails()" novalidate><div class="profile-grid"><div><label for="profile-name">Full name</label><input id="profile-name" formControlName="name" autocomplete="name" required /></div><div><label for="profile-email">Email address</label><input id="profile-email" type="email" formControlName="email" autocomplete="email" required /></div><div><label for="profile-phone">Phone number</label><input id="profile-phone" type="tel" formControlName="phone" autocomplete="tel" placeholder="03XX XXXXXXX" /></div><div><label for="profile-city">City</label><input id="profile-city" formControlName="city" autocomplete="address-level2" placeholder="Your city" /></div><div class="full-width"><label for="profile-address">Street address</label><textarea id="profile-address" formControlName="address" autocomplete="street-address" rows="3" placeholder="House number, street and area"></textarea></div></div><p class="muted">Changing your email also changes the email you use to sign in.</p>@if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> } @if (message()) { <p class="form-message success" role="status">{{ message() }}</p> }<button class="primary-button" type="submit">Save my details <i class="ph ph-check" aria-hidden="true"></i></button></form>
+            <div class="section-heading">
+              <div>
+                <p class="order-count">Personal profile &amp; address</p>
+              </div>
+            </div>
+            <form class="profile-form" [formGroup]="profileForm" (ngSubmit)="saveDetails()" novalidate>
+              <div class="profile-grid">
+                <div>
+                  <label for="profile-name">Full name</label>
+                  <input id="profile-name" formControlName="name" autocomplete="name" required />
+                </div>
+                <div>
+                  <label for="profile-email">Email address</label>
+                  <input id="profile-email" type="email" formControlName="email" autocomplete="email" required />
+                </div>
+                <div>
+                  <label for="profile-phone">Phone number</label>
+                  <input id="profile-phone" type="tel" formControlName="phone" autocomplete="tel" placeholder="03XX XXXXXXX" />
+                </div>
+                <div>
+                  <label for="profile-city">City</label>
+                  <input id="profile-city" formControlName="city" autocomplete="address-level2" placeholder="Your city" />
+                </div>
+                <div class="full-width">
+                  <label for="profile-address">Street address</label>
+                  <textarea id="profile-address" formControlName="address" autocomplete="street-address" rows="2" placeholder="House number, street and area"></textarea>
+                </div>
+              </div>
+              @if (error()) { <p class="form-message error" role="alert">{{ error() }}</p> }
+              @if (message()) { <p class="form-message success" role="status">{{ message() }}</p> }
+              <button class="primary-button" type="submit">Save my details <i class="ph ph-check" aria-hidden="true"></i></button>
+            </form>
           }
         </main>
       </div>
     }
   </div>
 </section>
-
-

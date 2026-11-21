@@ -1,7 +1,7 @@
 <section class="checkout-page">
   <div class="container container-lg">
-    @if (cartService.unavailableItems().length) { <div class="form-message error" role="alert">Some items are out of stock. <a routerLink="/cart">Choose alternatives in your basket →</a></div> }
-    <nav class="checkout-breadcrumb" aria-label="Breadcrumb"><a routerLink="/">Home</a><span aria-hidden="true">/</span><a routerLink="/cart">Your basket</a><span aria-hidden="true">/</span><span aria-current="page">Checkout</span></nav>
+    @if (cartService.unavailableItems().length) { <div class="form-message error" role="alert">Some items are out of stock. <button type="button" (click)="cartService.openDrawer()">Choose alternatives in your basket →</button></div> }
+    <nav class="checkout-breadcrumb" aria-label="Breadcrumb"><a routerLink="/">Home</a><span aria-hidden="true">/</span><button type="button" (click)="cartService.openDrawer()">Your basket</button><span aria-hidden="true">/</span><span aria-current="page">Checkout</span></nav>
     <div class="categories-heading-divider"><h1 class="categories-heading-divider__title">A few details. Then you're stocked.</h1></div>
     @if (placedOrder; as order) {
       <section class="order-confirmation" aria-labelledby="confirmation-title">
@@ -30,12 +30,11 @@
         <h2 id="review-title">Everything in one place.</h2><p class="review-intro">Check your delivery details and basket before ordering.</p>
         <div class="review-grid"><div><h3>Deliver to</h3><strong>{{ details.firstName }} {{ details.lastName }}</strong><p>{{ details.address }}<br />@if (details.apartment) { {{ details.apartment }}<br /> }{{ details.city }}, {{ details.province }} {{ details.postalCode }}<br />Pakistan</p><p>{{ details.phone }}<br />{{ details.email }}</p>@if (details.notes) { <h3>Delivery notes</h3><p>{{ details.notes }}</p> }</div><div><h3>Your basket</h3>@for (item of reviewItems; track item.id) { <div class="review-product"><span>{{ item.quantity }} × {{ item.name }}</span><strong>{{ cartService.formatRs(item.unitPrice * item.quantity) }}</strong></div> }<div class="review-total"><span>Items total</span><strong>{{ cartService.formatRs(reviewTotal) }}</strong></div><p>Payment preference: cash on delivery.</p></div></div>
         <div class="review-notice"><i class="ph ph-info" aria-hidden="true"></i><span>This is a demo checkout. Place Order saves a confirmation in this browser session; it does not send an order or collect payment.</span></div>
-        <div class="review-actions"><button type="button" class="checkout-primary place-order-button" [disabled]="placingOrder" (click)="placeOrder()">{{ placingOrder ? 'Placing order…' : 'Place order · ' + cartService.formatRs(reviewTotal) }} <img src="assets/images/logo/brand-smile.png" alt="" /></button><button type="button" class="checkout-secondary" [disabled]="placingOrder" (click)="reviewReady = false">Edit delivery details</button></div>@if (orderError) { <p class="checkout-error" role="alert">{{ orderError }}</p><a routerLink="/cart" class="browse-basket">Return to basket</a> }
+        <div class="review-actions"><button type="button" class="checkout-primary place-order-button" [disabled]="placingOrder" (click)="placeOrder()">{{ placingOrder ? 'Placing order…' : 'Place order · ' + cartService.formatRs(reviewTotal) }} <img src="assets/images/logo/brand-smile.png" alt="" /></button><button type="button" class="checkout-secondary" [disabled]="placingOrder" (click)="reviewReady = false">Edit delivery details</button></div>@if (orderError) { <p class="checkout-error" role="alert">{{ orderError }}</p><button type="button" (click)="cartService.openDrawer()" class="browse-basket">Return to basket</button> }
       </section>
     } @else if (!cartService.items().length) {
       <div class="checkout-empty"><img src="assets/images/logo/brand-smile.png" alt="" /><h2>Your basket is waiting for its favourites.</h2><p>Add your everyday essentials before heading to checkout.</p><a routerLink="/shop" class="checkout-primary">Explore the shop <i class="ph ph-arrow-right" aria-hidden="true"></i></a></div>
     } @else {
-      <div class="checkout-intro"><span>Fresh favourites. A little closer to your door.</span><a routerLink="/cart"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to basket</a></div>
       <div class="checkout-layout">
         <form id="checkout-form" class="delivery-form" [formGroup]="form" (ngSubmit)="reviewOrder()" novalidate>
           <section class="checkout-panel" aria-labelledby="contact-title"><div class="panel-heading"><span class="step-number">1</span><div><h2 id="contact-title">Your contact details</h2><p>So we can keep you in the loop about your order.</p></div></div>
@@ -57,19 +56,18 @@
               <div class="checkout-field field-full"><label for="delivery-notes">Delivery notes <small>(optional)</small></label><textarea id="delivery-notes" rows="3" formControlName="notes" placeholder="Anything that will help us find your door?"></textarea></div>
             </div>
           </section>
-          <section class="checkout-panel" aria-labelledby="payment-title"><div class="panel-heading"><span class="step-number">3</span><div><h2 id="payment-title">Payment preference</h2><p>Choose how you'd like to pay.</p></div></div><label class="payment-option"><input type="radio" formControlName="payment" value="cod" /><i class="ph ph-money" aria-hidden="true"></i><span><strong>Cash on delivery</strong><small>Pay when your groceries arrive.</small></span><i class="ph-fill ph-check-circle payment-check" aria-hidden="true"></i></label></section>
+          <section class="checkout-panel" aria-labelledby="payment-title"><div class="panel-heading"><span class="step-number">3</span><div><h2 id="payment-title">Payment preference</h2></div></div><label class="payment-option"><input type="radio" formControlName="payment" value="cod" /><i class="ph ph-money" aria-hidden="true"></i><span><strong>Cash on delivery</strong><small>Pay when your groceries arrive.</small></span><i class="ph-fill ph-check-circle payment-check" aria-hidden="true"></i></label></section>
           @if (attempted && form.invalid) { <p class="checkout-error" role="alert">Please check the highlighted fields before reviewing your order.</p> }
         </form>
         <aside class="checkout-summary" aria-labelledby="order-title">
-          <div class="summary-heading"><h2 id="order-title">Your basket</h2><a routerLink="/cart">Edit</a></div><span class="summary-count">{{ cartService.itemCount() }} items, picked by you.</span>
+          <div class="summary-heading"><h2 id="order-title">Your basket</h2><button type="button" (click)="cartService.openDrawer()">Edit</button></div><span class="summary-count">{{ cartService.itemCount() }} items, picked by you.</span>
           <div class="checkout-order-items">@for (item of cartService.items(); track item.id) { <article class="checkout-order-item"><img [src]="item.image" [alt]="item.name" /><div><h3>{{ item.name }}</h3><span>Qty {{ item.quantity }}</span></div><strong>{{ cartService.formatRs(item.unitPrice * item.quantity) }}</strong></article> }</div>
           <div class="checkout-progress"><app-min-order-progress [compact]="true" /></div>
           <div class="summary-line"><span>Subtotal</span><strong>{{ cartService.formatRs(cartService.subtotal()) }}</strong></div>
           <div class="summary-total"><span>Items total</span><strong>{{ cartService.formatRs(cartService.subtotal()) }}</strong></div>
           <button type="submit" form="checkout-form" class="checkout-primary" [disabled]="!cartService.isMinimumMet()">Review order <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
           @if (!cartService.isMinimumMet()) { <p class="minimum-help" role="status">Add {{ cartService.formatRs(cartService.remainingAmount()) }} more to reach the minimum order.</p> }
-          <a routerLink="/cart" class="checkout-secondary">Return to basket</a>
-          <p class="checkout-note">Review your delivery details before ordering. No payment is collected here.</p>
+          <button type="button" (click)="cartService.openDrawer()" class="checkout-secondary">Return to basket</button>
         </aside>
       </div>
     }

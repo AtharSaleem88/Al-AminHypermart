@@ -11,6 +11,7 @@ import { SmileAddBtnComponent } from '../smile-add-btn/smile-add-btn.component';
   imports: [WishlistButtonComponent, RouterLink, SmileAddBtnComponent],
   template: `
     <article class="catalog-card" [class.is-unavailable]="product.inStock === false">
+      <a class="catalog-card__link" [routerLink]="['/shop/product', product.id]" tabindex="-1" aria-hidden="true"></a>
       @if (badge && product.inStock !== false) { <span class="product-badge">{{ badge }}</span> }
       <app-wishlist-button [itemId]="product.id" [itemName]="product.title" />
       <a class="catalog-card__image" [routerLink]="['/shop/product', product.id]" [attr.aria-label]="product.title">
