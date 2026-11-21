@@ -357,15 +357,10 @@
                     class="btn btn-main-two text-xs fw-semibold py-12 rounded-8 text-center flex-center">
                     Continue Shopping
                 </a>
-                <a *ngIf="cartService.isMinimumMet()" [routerLink]="['/checkout']" (click)="closeCartSlider()"
+                <a [routerLink]="['/checkout']" (click)="closeCartSlider()"
                     class="btn btn-main text-xs fw-semibold py-12 rounded-8 text-center flex-center shadow-sm">
-                    Checkout Now
+                    Proceed to Checkout <i class="ph ph-arrow-right ms-6"></i>
                 </a>
-                <button *ngIf="!cartService.isMinimumMet()" type="button" disabled
-                    [title]="'Spend ' + cartService.formatRs(cartService.remainingAmount()) + ' more to reach the Rs. 3,000 minimum order'"
-                    class="btn btn-main text-xs fw-semibold py-12 rounded-8 text-center flex-center opacity-50">
-                    Min. Rs. 3,000
-                </button>
             </div>
         </div>
 
